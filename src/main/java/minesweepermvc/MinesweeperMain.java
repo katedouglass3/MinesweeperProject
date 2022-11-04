@@ -1,0 +1,31 @@
+/* *****************************************
+ * CSCI205 - Software Engineering and Design
+ * Fall2022
+ * Instructor: Prof. Brian King
+ *
+ * Name:
+ * Section:
+ * Date: 11/4/2022
+ * Time: 9:27 AM
+ *
+ * Project: csci205_final_project
+ * Package: minesweepermvc
+ * Class: MinesweeperMain
+ *
+ * Description:
+ *
+ * ****************************************
+ */
+
+package minesweepermvc;
+
+import javafx.application.Application;
+import javafx.stage.Stage;
+
+public class MinesweeperMain extends Application {
+
+    @Override
+    public void start(Stage primaryStage) throws Exception {
+
+    }
+}

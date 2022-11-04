@@ -3,8 +3,7 @@
  * Fall2022
  * Instructor: Prof. Brian King
  *
- * Name:
- * Section:
+ * Team: Team 4
  * Date: 11/4/2022
  * Time: 9:27 AM
  *
@@ -12,7 +11,8 @@
  * Package: minesweepermvc
  * Class: MinesweeperMain
  *
- * Description:
+ * Description: The main class for our Minesweeper app.
+ * This is where the app is run.
  *
  * ****************************************
  */
@@ -22,6 +22,9 @@ package minesweepermvc;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
+/**
+ * The main class for our Minesweeper app. This is where the app is run.
+ */
 public class MinesweeperMain extends Application {
 
     @Override

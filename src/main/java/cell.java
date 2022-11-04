@@ -3,20 +3,26 @@
  * Fall2022
  * Instructor: Prof. Brian King
  *
- * Name:
- * Section:
+ * Team: Team 4
  * Date: 11/4/2022
- * Time: 9:37 AM
+ * Time: 9:27 AM
  *
  * Project: csci205_final_project
- * Package: PACKAGE_NAME
- * Class: cell
+ * Package: minesweepermvc
+ * Class: MinesweeperMain
  *
- * Description:
+ * Description: A class that creates and holds the values for individual cells.
+ * They each hold the location on the board, the value or whether it's a bomb,
+ * and how the user has interacted with it.
  *
  * ****************************************
  */
 
+/**
+ * A class that creates and holds the values for individual cells.
+ * They each hold the location on the board, the value or whether it's a bomb,
+ * and how the user has interacted with it.
+ */
 public class cell {
     private int x;
     private int y;

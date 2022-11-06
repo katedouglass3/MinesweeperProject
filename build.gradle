@@ -34,7 +34,7 @@ test {
 
 // Needs to be 17, ideally, it should match your JDK
 javafx {
-    version = "17"
+    version = "19"
     modules = [ 'javafx.controls', 'javafx.fxml' ]
 }
 

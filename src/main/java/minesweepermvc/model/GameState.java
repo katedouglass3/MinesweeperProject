@@ -1,4 +1,4 @@
-/* *****************************************
+package minesweepermvc.model;/* *****************************************
  * CSCI205 - Software Engineering and Design
  * Fall2022
  * Instructor: Prof. Brian King
@@ -22,4 +22,8 @@
  * These include NEW_GAME, IN_PROGRESS, WIN, and GAME_OVER.
  */
 public enum GameState {
+    NEW_GAME,
+    IN_PROGRESS,
+    WIN,
+    GAME_OVER
 }

@@ -5,4 +5,7 @@ module csci205_final_project {
     requires javafx.graphics;
     requires javafx.controls;
     requires javafx.fxml;
+
+    exports minesweepermvc;
+    opens minesweepermvc to javafx.fxml;
 }

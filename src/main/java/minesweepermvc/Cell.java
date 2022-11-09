@@ -1,4 +1,4 @@
-package minesweepermvc.model;/* *****************************************
+package minesweepermvc;/* *****************************************
  * CSCI205 - Software Engineering and Design
  * Fall2022
  * Instructor: Prof. Brian King
@@ -18,7 +18,9 @@ package minesweepermvc.model;/* *****************************************
  * ****************************************
  */
 
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.scene.image.Image;
+import javafx.scene.paint.Color;
 
 /**
  * A class that creates and holds the values for individual cells.
@@ -32,13 +34,18 @@ public class Cell {
     private boolean isFlag;
     // Image of the cell (eg: number 1, 2, 3, 4, flag, bomb)
     private Image image;
-    private double size;   // depends on total number of cells of board
+    private SimpleObjectProperty<Color> currentColor;
+    public final Color lightGreen = Color.web("#9CD375");
+    public final Color darkGreen = Color.web("#668A4D");
+    public final Color lightBrown = Color.web("#D1BA50");
+    public final Color darkBrown = Color.web("#9B7D0A");
 
     public Cell(){
         this.isBomb = false;
         this.isOpen = false;
         this.isFlag = false;
         this.image = null;
+        this.currentColor = new SimpleObjectProperty<>();
     }
 
     public boolean isBomb() {
@@ -81,11 +88,27 @@ public class Cell {
         this.value = value;
     }
 
-    public void setSize(double size) {
-        this.size = size;
+    public Color getCurrentColor() {
+        return currentColor.get();
     }
 
-    public void click() {
+    public SimpleObjectProperty<Color> currentColorProperty() {
+        return currentColor;
+    }
 
+    public void setCurrentColor(Color currentColor) {
+        this.currentColor.set(currentColor);
+    }
+
+    // Change color and state of a cell when it is open
+    public void openCell() {
+        isOpen = true;
+        if (!isBomb) {
+            if (getCurrentColor() == lightGreen) {
+                this.currentColor.set(lightBrown);
+            } else {
+                this.currentColor.set(darkBrown);
+            }
+        }
     }
 }

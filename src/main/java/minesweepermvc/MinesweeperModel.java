@@ -18,11 +18,8 @@
  * ****************************************
  */
 
-package minesweepermvc.model;
+package minesweepermvc;
 
-import minesweepermvc.model.Cell;
-
-import java.util.Arrays;
 import java.util.Random;
 
 /**
@@ -135,7 +132,7 @@ public class MinesweeperModel {
         if (rowPosition == 0) upperMostPosition = 0;
         else upperMostPosition = rowPosition - 1;
 
-        if (rowPosition == columnNumber - 1) bottomMostPosition = rowPosition;
+        if (rowPosition == rowNumber - 1) bottomMostPosition = rowPosition;
         else bottomMostPosition = rowPosition + 1;
 
         if (columnPosition == 0) leftMostPosition = 0;
@@ -159,6 +156,12 @@ public class MinesweeperModel {
     // TODO: A function so that when we click on a blank cell (i.e no bombs around), the program will
     // automatically open other cells as far as possible until we met a numbered cell or a bomb
     // (try the online game)
+
+    // Generate a complete model after all bombs and numbered cells are filled correctly
+    public void createCompleteModel() {
+        this.generateBombAtRandomPosition();
+        this.fillRemainingCells();
+    }
 
     public static void main(String[] args) {
         MinesweeperModel model = new MinesweeperModel(6, 6, 8);

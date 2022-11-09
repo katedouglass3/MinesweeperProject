@@ -24,8 +24,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import minesweepermvc.controller.MinesweeperController;
-import minesweepermvc.model.MinesweeperModel;
 
 import java.io.IOException;
 
@@ -38,16 +36,9 @@ public class MinesweeperMain extends Application {
     private MinesweeperView theView;
     private MinesweeperController theController;
 
-//    @Override
-//    public void init() throws Exception {
-//        super.init();
-//        this.theModel = new MinesweeperModel(6, 6, 8);
-//        this.theView = new MinesweeperView(this.theModel);
-//    }
-
     @Override
     public void start(Stage primaryStage) throws IOException {
-//        theModel = new MinesweeperModel(10, 15, 20);
+        initModel();
 
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("/minesweepermvc.fxml"));
@@ -58,8 +49,15 @@ public class MinesweeperMain extends Application {
         // Set up our stage
         primaryStage.setTitle("Minesweeper Game");
         primaryStage.setScene(new Scene(root));
+        primaryStage.setResizable(false);
         primaryStage.sizeToScene();
         primaryStage.show();
+    }
+
+    // A separate function to initialize the model only
+    public void initModel() {
+        theModel = new MinesweeperModel(10, 15, 20);
+        theModel.createCompleteModel();
     }
 
     public static void main(String[] args) {

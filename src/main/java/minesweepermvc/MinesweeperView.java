@@ -22,15 +22,17 @@ package minesweepermvc;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
+import javafx.geometry.Pos;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.layout.HBox;
-import javafx.scene.paint.Color;
-import minesweepermvc.model.MinesweeperModel;
+import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
+import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Text;
 
 public class MinesweeperView {
     private MinesweeperModel theModel;
-    private GraphicsContext gc;
 
     @FXML
     private ResourceBundle resources;
@@ -39,39 +41,79 @@ public class MinesweeperView {
     private URL location;
 
     @FXML
-    private Canvas canvas;
+    private VBox root;
 
     @FXML
     private HBox topPane;
 
+    // An array of Rectangles, each rectangle represents a cell in the board
+    private Rectangle[][] cells;
+
+    // An array of StackPanes, each StackPane represents contain a Rectangle and the text
+    // representing its value
+    private StackPane[][] cellContainers;
+
+    public StackPane[][] getCellContainers() {
+        return cellContainers;
+    }
+
+    public Rectangle[][] getCells() {
+        return cells;
+    }
+
     public void setModel(MinesweeperModel theModel) {
         this.theModel = theModel;
+        initBoardPane();
     }
 
     @FXML
     void initialize() {
-        assert canvas != null : "fx:id=\"canvas\" was not injected: check your FXML file 'minesweepermvc.fxml'.";
+        assert root != null : "fx:id=\"root\" was not injected: check your FXML file 'minesweepermvc.fxml'.";
         assert topPane != null : "fx:id=\"topPane\" was not injected: check your FXML file 'minesweepermvc.fxml'.";
-
-        this.gc = canvas.getGraphicsContext2D();
-
-        theModel = new MinesweeperModel(10, 15, 20);
-//        double width = canvas.getWidth() / theModel.getRowNumber();
-//        double height = canvas.getHeight() / theModel.getColumnNumber();
-        double size = 20;
-        this.canvas.setWidth(theModel.getColumnNumber() * size);
-        this.canvas.setHeight(theModel.getRowNumber() * size);
-        for (int i = 0; i < theModel.getRowNumber(); i++){
-            for (int j = 0; j < theModel.getColumnNumber(); j++) {
-                gc.setFill(Color.BLACK);
-                gc.fillRect(i * size, j * size, size, size);
-                gc.setFill(Color.GREEN);
-                gc.fillRect(i * size, j * size, size - 2, size - 2);
-            }
-        }
 
     }
 
+    // Set up the board pane, which contains all the cells
+    public void initBoardPane() {
+        cells = new Rectangle[theModel.getRowNumber()][theModel.getColumnNumber()];
+        cellContainers = new StackPane[theModel.getRowNumber()][theModel.getColumnNumber()];
+        // Set the size of each square
+        double size = 40;
+        for (int i = 0; i < theModel.getRowNumber(); i++) {
+            for (int j = 0; j < theModel.getColumnNumber(); j++) {
+                Cell cellModel = theModel.getBoard()[i][j];
+                Rectangle cellView = new Rectangle(i * size, j * size, size, size);
+                // Set the color of each cell based on its position
+                if ((i + j) % 2 == 0) {
+                    cellModel.setCurrentColor(cellModel.lightGreen);
+                }
+                else {
+                    cellModel.setCurrentColor(cellModel.darkGreen);
+                }
 
+                // Color each Rectangle and add it to the array of Rectangles
+                cellView.setFill(cellModel.getCurrentColor());
+                cells[i][j] =  cellView;
+                // For each cell, we set up a StackPane that wraps the Rectangle and the text inside
+                // that rectangle
+                StackPane cellContainer = new StackPane();
+                Text value = new Text(cellModel.getValue());
+                // Add Rectangle and the text to cellContainer
+                cellContainer.getChildren().add(cellView);
+                cellContainer.setAlignment(cellView, Pos.CENTER);
+                cellContainer.getChildren().add(value);
+                StackPane.setAlignment(value, Pos.CENTER);
+                cellContainers[i][j] = cellContainer;
+            }
+        }
+
+        for (int i = 0; i < cellContainers.length; i++) {
+            HBox row = new HBox();
+            for (int j = 0; j < cellContainers[i].length; j++) {
+                row.getChildren().add(cellContainers[i][j]);
+            }
+            root.getChildren().add(row);
+        }
+    }
 
 }

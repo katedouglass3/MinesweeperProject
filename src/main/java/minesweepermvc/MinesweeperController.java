@@ -19,13 +19,7 @@
  * ****************************************
  */
 
-package minesweepermvc.controller;
-
-import javafx.scene.effect.Light;
-import javafx.scene.shape.Circle;
-import minesweepermvc.MinesweeperView;
-import minesweepermvc.model.Cell;
-import minesweepermvc.model.MinesweeperModel;
+package minesweepermvc;
 
 /**
  * This is the MVC controller class

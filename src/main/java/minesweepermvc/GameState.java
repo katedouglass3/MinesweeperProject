@@ -1,4 +1,4 @@
-package minesweepermvc.model;/* *****************************************
+package minesweepermvc;/* *****************************************
  * CSCI205 - Software Engineering and Design
  * Fall2022
  * Instructor: Prof. Brian King

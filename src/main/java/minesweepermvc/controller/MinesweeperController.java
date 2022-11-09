@@ -21,6 +21,12 @@
 
 package minesweepermvc.controller;
 
+import javafx.scene.effect.Light;
+import javafx.scene.shape.Circle;
+import minesweepermvc.MinesweeperView;
+import minesweepermvc.model.Cell;
+import minesweepermvc.model.MinesweeperModel;
+
 /**
  * This is the MVC controller class
  * for our Minesweeper app. It contains any necessary
@@ -28,4 +34,35 @@ package minesweepermvc.controller;
  * selections of drop-downs and play again choices.
  */
 public class MinesweeperController {
+
+    /** The view which sets up the scene graph for our application */
+    private MinesweeperView theView;
+
+    /** The model that contains the data and logic for our application */
+    private MinesweeperModel theModel;
+
+    public MinesweeperController(MinesweeperView theView, MinesweeperModel theModel) {
+        this.theView = theView;
+        this.theModel = theModel;
+
+        initBindings();
+    }
+
+    private void initBindings() {
+
+//        // Bind the color of the light in the view to the model light color
+//        for (int i = 0; i < theModel.getCells().size(); i++) {
+//            Light lightModel = theModel.getLight(i);
+//            Cell cellView = theView.getCell(i);
+//
+//            // Set up an event if the user clicks on a light
+//            cellView.onMouseClickedProperty().setValue(event -> {
+//                lightModel.toggle();
+//                if (theModel.isIsAutoOff()) {
+//                    lightModel.turnOffForMs(1000);
+//                }
+//            });
+//        }
+
+    }
 }

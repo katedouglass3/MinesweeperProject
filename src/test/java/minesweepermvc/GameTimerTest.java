@@ -23,6 +23,12 @@ class GameTimerTest {
         gameTimer = new GameTimer();
     }
 
+    /**
+     * A test method for getBestTime. It runs the timer different times and checks that the
+     * bestTime is updated as it should be
+     *
+     * @throws InterruptedException throws if the sleep is interrupter (this should not happen)
+     */
     @Test
     void getBestTime() throws InterruptedException {
         // Test that the original best time is 0
@@ -77,6 +83,12 @@ class GameTimerTest {
         assertEquals(5, gameTimer.getBestTime());
     }
 
+    /**
+     * A test method for getElapsedTime. It runs the timer and gets the elapsed time after
+     * different intervals and checks that the elapsedTime is as it should be.
+     *
+     * @throws InterruptedException throws if the sleep is interrupter (this should not happen)
+     */
     @Test
     void getElapsedTime() throws InterruptedException {
         // Start the timer

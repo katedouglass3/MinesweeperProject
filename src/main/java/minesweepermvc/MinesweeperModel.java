@@ -59,6 +59,10 @@ public class MinesweeperModel {
         return columnNumber;
     }
 
+    public GameState getState() {
+        return state;
+    }
+
     /**
      * Initializes our model
      * @param rowNumber - the number of rows in the board
@@ -73,6 +77,7 @@ public class MinesweeperModel {
         this.bombNumber = bombNumber;
         this.board = new Cell[this.rowNumber][this.columnNumber];
         this.openCellNumber = 0;
+        this.state = GameState.NEW_GAME;
         generateBlankBoard();
     }
 
@@ -194,9 +199,9 @@ public class MinesweeperModel {
     }
 
     /**
-     * This function will repeatedly check the entire board
-     * to see whether the game has been won or lost, or still
-     * in progress. Updates the game state accordingly.
+     * This function will check the status of all the cells on
+     * the board to see whether the game has been won or lost,
+     * or is still in progress. Updates the game state accordingly.
      */
     public void checkIfGameOver() {
         boolean allCellsOpened = true;

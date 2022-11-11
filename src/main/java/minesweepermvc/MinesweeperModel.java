@@ -9,7 +9,7 @@
  *
  * Project: csci205_final_project
  * Package: minesweepermvc
- * Class: MinesweeperMain
+ * Class: MinesweeperModel
  *
  * Description: This is the "model" for our Minesweeper app. It creates
  * a board of a certain size that holds cells. It also creates the different
@@ -28,16 +28,24 @@ import java.util.Random;
  * interface options availale to the user.
  */
 public class MinesweeperModel {
+
+    /** The number of rows on our board */
     private int rowNumber;
+
+    /** The number of columns on our board */
     private int columnNumber;
-    private int totalCellNumber;
+
+    /** The number of bombs on our board */
     private int bombNumber;
 
-    // A 2D array with each element being a Cell object
+    /** A 2D array of Cell objects to represent our board */
     private Cell[][] board;
 
-    // Number of cells already open
+    /** Number of open cells */
     private int openCellNumber;
+
+    /** The current state of the game */
+    private GameState state;
 
     public Cell[][] getBoard() {
         return board;
@@ -51,17 +59,26 @@ public class MinesweeperModel {
         return columnNumber;
     }
 
-    // Create a new model with specific number of rows, columns and bombs
+    /**
+     * Initializes our model
+     * @param rowNumber - the number of rows in the board
+     * @param columnNumber - the number of columns in the board
+     * @param bombNumber - the number of bombs
+     */
     public MinesweeperModel(int rowNumber, int columnNumber, int bombNumber) {
         this.rowNumber = rowNumber;
         this.columnNumber = columnNumber;
+        // TODO: calculate bomb number based on board size so that it is not required as
+        // a parameter.
         this.bombNumber = bombNumber;
-        this.totalCellNumber = this.rowNumber * this.columnNumber;
         this.board = new Cell[this.rowNumber][this.columnNumber];
         this.openCellNumber = 0;
         generateBlankBoard();
     }
 
+    /**
+     * Creates an empty board of our specified dimensions.
+     */
     private void generateBlankBoard() {
         for (int i = 0; i < rowNumber; i++) {
             for (int j = 0; j < columnNumber; j++) {
@@ -70,7 +87,10 @@ public class MinesweeperModel {
         }
     }
 
-    // Generate bombs at random positions on the board
+    /**
+     * Sets the specified number of bombs for our game in random
+     * positions on the board.
+     */
     private void generateBombAtRandomPosition() {
         Random rand = new Random();
         for (int i = 0; i <= bombNumber; i++) {
@@ -86,8 +106,11 @@ public class MinesweeperModel {
         }
     }
 
-    // For cells that are not a bomb, we look at all the cells adjacent to it and count how many of them
-    // are bombs. Set that number to be the value of the cell
+    /**
+     * For cells that are not a bomb, we look at all the cells adjacent
+     * to it and count how many of them are bombs. Set that number to
+     * be the value of the cell.
+     */
     private void fillRemainingCells() {
         for (int i = 0; i < rowNumber; i++) {
             for (int j = 0; j < columnNumber; j++) {
@@ -144,6 +167,10 @@ public class MinesweeperModel {
         return new int[]{upperMostPosition, bottomMostPosition, leftMostPosition, rightMostPosition};
     }
 
+    /**
+     * Prints the value of each cell to the screen in a board
+     * arrangement
+     */
     private void displayBoard() {
         for (int i = 0; i < rowNumber; i++) {
             for (int j = 0; j < columnNumber; j++) {
@@ -157,12 +184,44 @@ public class MinesweeperModel {
     // automatically open other cells as far as possible until we met a numbered cell or a bomb
     // (try the online game)
 
-    // Generate a complete model after all bombs and numbered cells are filled correctly
+    /**
+     * Generate a complete model after all bombs and numbered cells
+     * are filled correctly
+     */
     public void createCompleteModel() {
         this.generateBombAtRandomPosition();
         this.fillRemainingCells();
     }
 
+    /**
+     * This function will repeatedly check the entire board
+     * to see whether the game has been won or lost, or still
+     * in progress. Updates the game state accordingly.
+     */
+    public void checkIfGameOver() {
+        boolean allCellsOpened = true;
+        for (Cell[] row : board) {
+            for (Cell cell : row) {
+                // If a bomb is opened, the game has been lost
+                if (cell.isOpen() && cell.isBomb()) {
+                    state = GameState.GAME_LOST;
+                }
+                // If any non-bomb cell has not been opened, the game is not done
+                else if (!cell.isOpen() && !cell.isBomb()) {
+                    allCellsOpened = false;
+                }
+            }
+        }
+        if (allCellsOpened) {
+            state = GameState.GAME_WON;
+        }
+    }
+
+    /**
+     * A main method to set up our model
+     *
+     * @param args args
+     */
     public static void main(String[] args) {
         MinesweeperModel model = new MinesweeperModel(6, 6, 8);
         model.generateBombAtRandomPosition();

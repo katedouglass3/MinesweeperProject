@@ -21,6 +21,9 @@
 
 package minesweepermvc;
 
+import javafx.scene.shape.Circle;
+import javafx.scene.shape.Rectangle;
+
 /**
  * This is the MVC controller class
  * for our Minesweeper app. It contains any necessary
@@ -34,12 +37,14 @@ public class MinesweeperController {
 
     /** The model that contains the data and logic for our application */
     private MinesweeperModel theModel;
+    private Cell[][] board;
 
     public MinesweeperController(MinesweeperView theView, MinesweeperModel theModel) {
         this.theView = theView;
         this.theModel = theModel;
 
         initBindings();
+        initEventHandlers();
     }
 
     private void initBindings() {
@@ -58,5 +63,41 @@ public class MinesweeperController {
 //            });
 //        }
 
+    }
+
+    /**
+     * A method that handles left and right clicks for all cells
+     */
+    private void initEventHandlers() {
+        board = MinesweeperModel.getBoard();
+        // For loop allows this eventHandler to function for all cells
+        // For each row of cells
+        for (Cell[] cellRow : board) {
+            // For each cell in a row
+            for (Cell cell : cellRow) {
+                // Handles Clicking
+                cell.onMouseClickedProperty().setValue(event ->
+                {
+                    // left click calls click method in Cell
+                    if (event.isPrimaryButtonDown()) {
+                        cell.click();
+                    }
+                    // right click calls rightClick() method in Cell
+                    if (event.isSecondaryButtonDown()) {
+                        cell.rightClick();
+                    }
+                });
+
+                // Handles Hovering over Cell
+                cell.setOnMouseEntered(event -> {
+                    cell.setCurrentColor(cell.getCurrentColor().brighter());
+                });
+
+
+
+
+
+            }
+        }
     }
 }

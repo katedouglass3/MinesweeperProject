@@ -34,12 +34,12 @@ public class MinesweeperModel {
     private int bombNumber;
 
     // A 2D array with each element being a Cell object
-    private Cell[][] board;
+    private static Cell[][] board;
 
     // Number of cells already open
     private int openCellNumber;
 
-    public Cell[][] getBoard() {
+    public static Cell[][] getBoard() {
         return board;
     }
 

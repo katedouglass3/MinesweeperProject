@@ -46,6 +46,8 @@ public class MinesweeperMain extends Application {
         this.theView = loader.getController();
         this.theView.setModel(theModel);
 
+        this.theController = new MinesweeperController(this.theView, this.theModel);
+
         // Set up our stage
         primaryStage.setTitle("Minesweeper Game");
         primaryStage.setScene(new Scene(root));

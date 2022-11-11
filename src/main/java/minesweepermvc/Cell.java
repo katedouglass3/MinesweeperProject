@@ -22,13 +22,14 @@ package minesweepermvc;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 
 /**
  * A class that creates and holds the values for individual cells.
  * They each hold the location on the board, the value or whether it's a bomb,
  * and how the user has interacted with it.
  */
-public class Cell {
+public class Cell extends Rectangle {
     private String value;
     private boolean isBomb;
     private boolean isOpen;

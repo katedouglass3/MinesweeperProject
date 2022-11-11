@@ -98,4 +98,6 @@ public class GameTimer {
         // Return the elapsed time converted to seconds
         return (int) (elapsedNanos / NANOS_TO_SECONDS);
     }
+
+    //test comment
 }

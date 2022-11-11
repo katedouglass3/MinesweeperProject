@@ -99,5 +99,4 @@ public class GameTimer {
         return (int) (elapsedNanos / NANOS_TO_SECONDS);
     }
 
-    //test comment
 }

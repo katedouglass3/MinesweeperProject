@@ -24,6 +24,6 @@ package minesweepermvc;/* *****************************************
 public enum GameState {
     NEW_GAME,
     IN_PROGRESS,
-    WIN,
-    GAME_OVER
+    GAME_WON,
+    GAME_LOST
 }

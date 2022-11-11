@@ -9,7 +9,7 @@
  *
  * Project: csci205_final_project
  * Package: minesweepermvc
- * Class: MinesweeperModel
+ * Class: MinesweeperMain
  *
  * Description: This is the "model" for our Minesweeper app. It creates
  * a board of a certain size that holds cells. It also creates the different
@@ -39,7 +39,7 @@ public class MinesweeperModel {
     private int bombNumber;
 
     /** A 2D array of Cell objects to represent our board */
-    private Cell[][] board;
+    private static Cell[][] board;
 
     /** Number of open cells */
     private int openCellNumber;
@@ -47,7 +47,7 @@ public class MinesweeperModel {
     /** The current state of the game */
     private GameState state;
 
-    public Cell[][] getBoard() {
+    public static Cell[][] getBoard() {
         return board;
     }
 

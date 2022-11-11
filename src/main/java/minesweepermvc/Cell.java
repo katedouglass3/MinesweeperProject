@@ -1,4 +1,4 @@
-package minesweepermvc;/* *****************************************
+/* *****************************************
  * CSCI205 - Software Engineering and Design
  * Fall2022
  * Instructor: Prof. Brian King
@@ -9,14 +9,15 @@ package minesweepermvc;/* *****************************************
  *
  * Project: csci205_final_project
  * Package: minesweepermvc
- * Class: MinesweeperMain
+ * Class: Cell
  *
- * Description: A class that creates and holds the values for individual cells.
- * They each hold the location on the board, the value or whether it's a bomb,
- * and how the user has interacted with it.
+ * Description: A class to represent a single cell. They each hold their
+ * value and whether they are a bomb, opened, or flagged.
  *
  * ****************************************
  */
+
+package minesweepermvc;
 
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.scene.image.Image;
@@ -39,6 +40,7 @@ public class Cell {
     public final Color darkGreen = Color.web("#668A4D");
     public final Color lightBrown = Color.web("#D1BA50");
     public final Color darkBrown = Color.web("#9B7D0A");
+    public final Color red = Color.RED;
 
     public Cell(){
         this.isBomb = false;
@@ -100,14 +102,36 @@ public class Cell {
         this.currentColor.set(currentColor);
     }
 
-    // Change color and state of a cell when it is open
-    public void openCell() {
+    /**
+     * When a cell is clicked, it becomes open. If it is not a bomb,
+     * the current color is set to dark green upon being opened. If it
+     * is a bomb, the color is set to dark brown.
+     */
+    public void click() {
         isOpen = true;
         if (!isBomb) {
-            if (getCurrentColor() == lightGreen) {
-                this.currentColor.set(lightBrown);
+            this.currentColor.set(darkGreen);
+        }
+        else {
+            this.currentColor.set(darkBrown);
+        }
+    }
+
+    /**
+     * When a cell is right-clicked, a flag is added or removed.
+     * We will represent a flag being added by changing the color
+     * of the cell to red. If a flag is being removed, the color is
+     * changed back to light green. If the cell has already been
+     * opened, nothing happens.
+     */
+    public void rightClick() {
+        if (!isOpen) {
+            if (isFlag) {
+                isFlag = false;
+                this.currentColor.set(lightGreen);
             } else {
-                this.currentColor.set(darkBrown);
+                isFlag = true;
+                this.currentColor.set(red);
             }
         }
     }

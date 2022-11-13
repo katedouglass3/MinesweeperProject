@@ -223,6 +223,25 @@ public class MinesweeperModel {
     }
 
     /**
+     * A method that computes the number of flags remaining to be displayed. Can be negative.
+     *
+     * @return an int representing the number of flags left to be placed
+     */
+    public int flagsRemaining() {
+        int flagsPlaced = 0;
+        // Check each cell if a flag is placed, and if so add to total flagsPlaced
+        for (Cell[] row : board) {
+            for (Cell cell : row) {
+                if (cell.isFlag()){
+                    flagsPlaced ++;
+                }
+            }
+        }
+
+        return (bombNumber - flagsPlaced);
+    }
+
+    /**
      * A main method to set up our model
      *
      * @param args args

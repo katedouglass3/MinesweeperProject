@@ -97,7 +97,7 @@ public class MinesweeperView {
                 // For each cell, we set up a StackPane that wraps the Rectangle and the text inside
                 // that rectangle
                 StackPane cellContainer = new StackPane();
-                Text value = new Text(cellModel.getValue());
+                Text value = new Text(cellModel.getDisplayValue());
                 // Add Rectangle and the text to cellContainer
                 cellContainer.getChildren().add(cellView);
                 cellContainer.setAlignment(cellView, Pos.CENTER);

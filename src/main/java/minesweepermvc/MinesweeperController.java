@@ -21,8 +21,12 @@
 
 package minesweepermvc;
 
+import javafx.scene.Node;
+import javafx.scene.input.MouseButton;
+import javafx.scene.layout.StackPane;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Text;
 
 /**
  * This is the MVC controller class
@@ -48,21 +52,33 @@ public class MinesweeperController {
     }
 
     private void initBindings() {
+        // Update the color and value displayed on a cell whenever it is clicked
+        StackPane[][] cellContainers = theView.getCellContainers();
+        Cell[][] cellModels = theModel.getBoard();
+        for (int i = 0; i < cellContainers.length; i++) {
+            for (int j = 0; j < cellContainers[i].length; j++) {
+                StackPane cellContainer = cellContainers[i][j];
+                Cell cellModel = cellModels[i][j];
 
-//        // Bind the color of the light in the view to the model light color
-//        for (int i = 0; i < theModel.getCells().size(); i++) {
-//            Light lightModel = theModel.getLight(i);
-//            Cell cellView = theView.getCell(i);
-//
-//            // Set up an event if the user clicks on a light
-//            cellView.onMouseClickedProperty().setValue(event -> {
-//                lightModel.toggle();
-//                if (theModel.isIsAutoOff()) {
-//                    lightModel.turnOffForMs(1000);
-//                }
-//            });
-//        }
+                for (Node child : cellContainer.getChildren()) {
+                    if (child instanceof Rectangle) {
+                        Rectangle cellView = (Rectangle) child;
+                        cellView.fillProperty().bind(cellModel.currentColorProperty());
+                    } else if (child instanceof Text) {
+                        Text value = (Text) child;
+                        value.textProperty().bind(cellModel.displayValueProperty());
+                    }
+                }
 
+                cellContainer.onMouseClickedProperty().setValue(event -> {
+                    if (event.getButton() == MouseButton.PRIMARY) {
+
+                        cellModel.leftClick();
+                    } else if (event.getButton() == MouseButton.SECONDARY)
+                        cellModel.rightClick();
+                });
+            }
+        }
     }
 
     /**
@@ -80,7 +96,7 @@ public class MinesweeperController {
                 {
                     // left click calls click method in Cell
                     if (event.isPrimaryButtonDown()) {
-                        cell.click();
+                        cell.leftClick();
                     }
                     // right click calls rightClick() method in Cell
                     if (event.isSecondaryButtonDown()) {

@@ -54,6 +54,9 @@ public class MinesweeperMain extends Application {
         primaryStage.setResizable(false);
         primaryStage.sizeToScene();
         primaryStage.show();
+
+        // Print key in the console
+        theModel.displayBoard();
     }
 
     // A separate function to initialize the model only

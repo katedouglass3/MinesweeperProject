@@ -105,7 +105,7 @@ public class MinesweeperModel {
             int columnPosition = rand.nextInt(columnNumber);
             // Create a Cell at previous coordinates and set it to be a bomb
             Cell cell = new Cell();
-            cell.setValue("*");  // "*" represents a bomb
+            cell.setHiddenValue("*");  // "*" represents a bomb
             cell.setBomb(true);
             board[rowPosition][columnPosition] = cell;
         }
@@ -128,7 +128,7 @@ public class MinesweeperModel {
                             if (board[x][y].isBomb())   numberOfBombNeighbors++;
                         }
                     }
-                    board[i][j].setValue(numberOfBombNeighbors + "");
+                    board[i][j].setHiddenValue(numberOfBombNeighbors + "");
                 }
 
             }
@@ -176,10 +176,10 @@ public class MinesweeperModel {
      * Prints the value of each cell to the screen in a board
      * arrangement
      */
-    private void displayBoard() {
+    public void displayBoard() {
         for (int i = 0; i < rowNumber; i++) {
             for (int j = 0; j < columnNumber; j++) {
-                System.out.printf("%2s ", board[i][j].getValue());
+                System.out.printf("%2s ", board[i][j].getHiddenValue());
             }
             System.out.println();
         }

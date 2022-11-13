@@ -214,8 +214,12 @@ public class MinesweeperModel {
                     state = GameState.GAME_LOST;
                 }
                 // If any non-bomb cell has not been opened, the game is not done
-                else if (!cell.isOpen() && !cell.isBomb()) {
+                if (!cell.isOpen() && !cell.isBomb()) {
                     allCellsOpened = false;
+                }
+                // If any cell is opened, this is not a new game anymore
+                if (cell.isOpen() && state.equals(GameState.NEW_GAME)) {
+                    state = GameState.IN_PROGRESS;
                 }
             }
         }

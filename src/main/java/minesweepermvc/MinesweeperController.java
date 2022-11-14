@@ -23,6 +23,7 @@ package minesweepermvc;
 
 import javafx.scene.Node;
 import javafx.scene.control.Alert;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.StackPane;
 import javafx.scene.shape.Rectangle;
@@ -75,6 +76,7 @@ public class MinesweeperController {
             for (int j = 0; j < cellContainers[i].length; j++) {
                 StackPane cellContainer = cellContainers[i][j];
                 Cell cellModel = cellModels[i][j];
+                cellContainer.getChildren().add(new ImageView());
 
                 for (Node child : cellContainer.getChildren()) {
                     if (child instanceof Rectangle) {
@@ -83,6 +85,11 @@ public class MinesweeperController {
                     } else if (child instanceof Text) {
                         Text value = (Text) child;
                         value.textProperty().bind(cellModel.displayValueProperty());
+                    } else if (child instanceof ImageView) {
+                        ImageView imageView = (ImageView) child;
+                        imageView.imageProperty().bind(cellModel.imageValueProperty());
+                        imageView.fitHeightProperty().bind(cellContainer.heightProperty());
+                        imageView.fitWidthProperty().bind(cellContainer.widthProperty());
                     }
                 }
             }

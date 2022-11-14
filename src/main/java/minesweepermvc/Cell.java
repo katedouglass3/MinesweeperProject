@@ -34,29 +34,41 @@ public class Cell extends Rectangle {
     private boolean isBomb;
     private boolean isOpen;
     private boolean isFlag;
+
+    private int rowNumber;
+    private int columnNumber;
+
     // Image of the cell (eg: number 1, 2, 3, 4, flag, bomb)
-    private Image image;
+    private final Image flagImage = new Image("redFlag.png");
+    private final Image bombImage = new Image("bomb.png");
     private SimpleObjectProperty<Color> currentColor;
     private SimpleObjectProperty<String> displayValue;
-    private int cellRowNumber;
-    private int cellColumnNumber;
 
+    private SimpleObjectProperty<Image> imageValue;
     public final Color lightGreen = Color.web("#9CD375");
     public final Color darkGreen = Color.web("#668A4D");
     public final Color lightBrown = Color.web("#D1BA50");
     public final Color darkBrown = Color.web("#9B7D0A");
-    public final Color red = Color.RED;
 
-    public Cell(int row, int column){
+
+    public Cell(int row, int col) {
+        this.rowNumber = row;
+        this.columnNumber = col;
         this.isBomb = false;
         this.isOpen = false;
         this.isFlag = false;
-        this.image = null;
         this.currentColor = new SimpleObjectProperty<>();
         this.displayValue = new SimpleObjectProperty<>("");
-        this.cellRowNumber = row;
-        this.cellColumnNumber = column;
+        this.imageValue = new SimpleObjectProperty<>();
+    }
 
+    public Cell() {
+        this.isBomb = false;
+        this.isOpen = false;
+        this.isFlag = false;
+        this.currentColor = new SimpleObjectProperty<>();
+        this.displayValue = new SimpleObjectProperty<>("");
+        this.imageValue = new SimpleObjectProperty<>();
     }
 
     public boolean isBomb() {
@@ -83,14 +95,6 @@ public class Cell extends Rectangle {
         isFlag = flag;
     }
 
-    public Image getImage() {
-        return image;
-    }
-
-    public void setImage(Image image) {
-        this.image = image;
-    }
-
     public String getHiddenValue() {
         return hiddenValue;
     }
@@ -110,6 +114,7 @@ public class Cell extends Rectangle {
     public void setCurrentColor(Color currentColor) {
         this.currentColor.set(currentColor);
     }
+
     public String getDisplayValue() {
         return displayValue.get();
     }
@@ -122,12 +127,12 @@ public class Cell extends Rectangle {
         this.displayValue.set(displayValue);
     }
 
-    public int getCellRowNumber() {
-        return cellRowNumber;
+    public Image getImageValue() {
+        return imageValue.get();
     }
 
-    public int getCellColumnNumber() {
-        return cellColumnNumber;
+    public SimpleObjectProperty<Image> imageValueProperty() {
+        return imageValue;
     }
 
     /**
@@ -135,16 +140,6 @@ public class Cell extends Rectangle {
      * the current color is set to dark green upon being opened. If it
      * is a bomb, the color is set to dark brown.
      */
-//    public void click() {
-//        isOpen = true;
-//        if (!isBomb) {
-//            this.currentColor.set(darkGreen);
-//        }
-//        else {
-//            this.currentColor.set(darkBrown);
-//        }
-//    }
-
     public void leftClick() {
         if (!isOpen && !isFlag) {
             isOpen = true;
@@ -153,7 +148,11 @@ public class Cell extends Rectangle {
             } else {
                 this.currentColor.set(darkBrown);
             }
-            this.displayValue.setValue(this.hiddenValue);
+            if (!isBomb) {
+                this.displayValue.setValue(this.hiddenValue);
+            } else {
+                this.imageValue.setValue(bombImage);
+            }
         }
     }
 
@@ -164,30 +163,27 @@ public class Cell extends Rectangle {
      * changed back to light green. If the cell has already been
      * opened, nothing happens.
      */
-//    public void rightClick() {
-//        if (!isOpen) {
-//            if (isFlag) {
-//                isFlag = false;
-//                this.currentColor.set(lightGreen);
-//            } else {
-//                isFlag = true;
-//                this.currentColor.set(red);
-//            }
-//        }
-//    }
-
     public void rightClick() {
         if (!isOpen) {
             // If the cell is having a flag, remove the flag
             if (isFlag) {
                 this.displayValue.setValue("");
+                this.imageValue.setValue(null);
             }
 
             // If the cell is blank, add a flag
             else {
-                this.displayValue.setValue("F");
+                this.imageValue.setValue(flagImage);
             }
             isFlag = !isFlag;
         }
+    }
+
+    public int getCellRowNumber() {
+        return rowNumber;
+    }
+
+    public int getCellColumnNumber() {
+        return columnNumber;
     }
 }

@@ -117,7 +117,7 @@ public class MinesweeperModel {
      * to it and count how many of them are bombs. Set that number to
      * be the value of the cell.
      */
-    private void fillRemainingCells() {
+    public void fillRemainingCells() {
         for (int i = 0; i < rowNumber; i++) {
             for (int j = 0; j < columnNumber; j++) {
                 // We only find value of cells that are not a bomb
@@ -206,6 +206,7 @@ public class MinesweeperModel {
      */
     public void checkIfGameOver() {
         boolean allCellsOpened = true;
+        state = GameState.IN_PROGRESS;
         for (Cell[] row : board) {
             for (Cell cell : row) {
                 // If a bomb is opened, the game has been lost
@@ -308,7 +309,7 @@ public class MinesweeperModel {
         MinesweeperModel model = new MinesweeperModel(6, 6, 8);
         model.generateBombAtRandomPosition();
         // TODO: check if something should be here
-        model.fillRemainingCells();
+//        model.fillRemainingCells();
         model.displayBoard();
 
 //        System.out.println(Arrays.toString(model.rangeOfNeighbors(0, 2)));   //0, 1, 1, 3

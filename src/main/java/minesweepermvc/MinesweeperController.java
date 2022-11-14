@@ -113,7 +113,9 @@ public class MinesweeperController {
                         // If it is the first click of the game
                         if (theModel.getState() == GameState.NEW_GAME) {
                             // Move bombs so the first click is on a zero cell
-                            // theModel.regenerateAdjacentBombs(cellModel.getCellRowNumber(), cellModel.getCellColumnNumber());
+                            theModel.regenerateAdjacentBombs(cellModel.getCellRowNumber(), cellModel.getCellColumnNumber());
+                            // Add numbers to the cells without bombs
+                            theModel.fillRemainingCells();
                             // Start the timer
                             gameTimer.startTimer();
                         }
@@ -135,16 +137,16 @@ public class MinesweeperController {
                         cellModel.rightClick();
                     }
                 });
-//
-//                // Handles Hovering over Cell
-//                // If the mouse enters a cell, make it brighter
-//                cellContainer.setOnMouseEntered(event -> {
-//                    cellModel.setCurrentColor(cellModel.getCurrentColor().brighter());
-//                });
-//                // If a mouse leaves a cell, make it darker
-//                cellContainer.setOnMouseExited(event -> {
-//                    cellModel.setCurrentColor(cellModel.getCurrentColor().darker());
-//                });
+
+                // Handles Hovering over Cell
+                // If the mouse enters a cell, make it brighter
+                cellContainer.setOnMouseEntered(event -> {
+                    cellModel.setCurrentColor(cellModel.getCurrentColor().brighter());
+                });
+                // If a mouse leaves a cell, make it darker
+                cellContainer.setOnMouseExited(event -> {
+                    cellModel.setCurrentColor(cellModel.getCurrentColor().darker());
+                });
             }
         }
 

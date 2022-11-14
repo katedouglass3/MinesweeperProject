@@ -37,7 +37,7 @@ class CellTest {
      */
     @BeforeEach
     void setUp() {
-        cell = new Cell();
+        cell = new Cell(0, 0);
     }
 
     /**
@@ -47,7 +47,7 @@ class CellTest {
     @Test
     void click() {
         assertFalse(cell.isOpen());
-        cell.click();
+        cell.leftClick();
         assertEquals(Color.web("#668A4D"), cell.getCurrentColor());
         assertTrue(cell.isOpen());
     }
@@ -59,7 +59,7 @@ class CellTest {
     @Test
     void clickForBomb() {
         cell.setBomb(true);
-        cell.click();
+        cell.leftClick();
         assertEquals(Color.web("#9B7D0A"), cell.getCurrentColor());
         assertTrue(cell.isOpen());
     }

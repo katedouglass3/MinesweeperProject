@@ -38,19 +38,25 @@ public class Cell extends Rectangle {
     private Image image;
     private SimpleObjectProperty<Color> currentColor;
     private SimpleObjectProperty<String> displayValue;
+    private int cellRowNumber;
+    private int cellColumnNumber;
+
     public final Color lightGreen = Color.web("#9CD375");
     public final Color darkGreen = Color.web("#668A4D");
     public final Color lightBrown = Color.web("#D1BA50");
     public final Color darkBrown = Color.web("#9B7D0A");
     public final Color red = Color.RED;
 
-    public Cell(){
+    public Cell(int row, int column){
         this.isBomb = false;
         this.isOpen = false;
         this.isFlag = false;
         this.image = null;
         this.currentColor = new SimpleObjectProperty<>();
         this.displayValue = new SimpleObjectProperty<>("");
+        this.cellRowNumber = row;
+        this.cellColumnNumber = column;
+
     }
 
     public boolean isBomb() {
@@ -114,6 +120,14 @@ public class Cell extends Rectangle {
 
     public void setDisplayValue(String displayValue) {
         this.displayValue.set(displayValue);
+    }
+
+    public int getCellRowNumber() {
+        return cellRowNumber;
+    }
+
+    public int getCellColumnNumber() {
+        return cellColumnNumber;
     }
 
     /**

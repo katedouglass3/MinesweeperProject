@@ -113,7 +113,7 @@ public class MinesweeperController {
                         // If it is the first click of the game
                         if (theModel.getState() == GameState.NEW_GAME) {
                             // Move bombs so the first click is on a zero cell
-                            // theModel.regenerateAdjacentBombs(i, j);
+                            theModel.regenerateAdjacentBombs(cellModel.getCellRowNumber(), cellModel.getCellColumnNumber());
                             // Start the timer
                             gameTimer.startTimer();
                         }

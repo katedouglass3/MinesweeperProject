@@ -88,7 +88,7 @@ public class MinesweeperModel {
     private void generateBlankBoard() {
         for (int i = 0; i < rowNumber; i++) {
             for (int j = 0; j < columnNumber; j++) {
-                board[i][j] = new Cell();
+                board[i][j] = new Cell(i, j);
             }
         }
     }
@@ -99,13 +99,13 @@ public class MinesweeperModel {
      */
     private void generateBombAtRandomPosition() {
         Random rand = new Random();
-        for (int i = 0; i <= bombNumber; i++) {
+        for (int i = 0; i < bombNumber; i++) {
             // Generate a random row position
             int rowPosition = rand.nextInt(rowNumber);
             // Generate a random column position
             int columnPosition = rand.nextInt(columnNumber);
             // Create a Cell at previous coordinates and set it to be a bomb
-            Cell cell = new Cell();
+            Cell cell = new Cell(rowPosition, columnPosition);
             cell.setHiddenValue("*");  // "*" represents a bomb
             cell.setBomb(true);
             board[rowPosition][columnPosition] = cell;
@@ -292,6 +292,11 @@ public class MinesweeperModel {
                     board[x][y].setBomb(false);
             }
         }
+
+        // Display Board for testing
+        System.out.println();
+        System.out.println();
+        displayBoard();
     }
 
     /**

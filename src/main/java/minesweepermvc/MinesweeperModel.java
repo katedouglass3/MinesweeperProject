@@ -39,7 +39,7 @@ public class MinesweeperModel {
     private int bombNumber;
 
     /** A 2D array of Cell objects to represent our board */
-    private static Cell[][] board;
+    private Cell[][] board;
 
     /** Number of open cells */
     private int openCellNumber;
@@ -47,7 +47,7 @@ public class MinesweeperModel {
     /** The current state of the game */
     private GameState state;
 
-    public static Cell[][] getBoard() {
+    public Cell[][] getBoard() {
         return board;
     }
 

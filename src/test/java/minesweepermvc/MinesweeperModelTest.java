@@ -49,7 +49,7 @@ class MinesweeperModelTest {
         for (Cell[] row : model.getBoard()) {
             for (Cell cell : row) {
                 if (!cell.isBomb()) {
-                    cell.click();
+                    cell.leftClick();
                 }
             }
         }
@@ -66,7 +66,7 @@ class MinesweeperModelTest {
         for (Cell[] row : model.getBoard()) {
             for (Cell cell : row) {
                 if (cell.isBomb()) {
-                    cell.click();
+                    cell.leftClick();
                 }
             }
         }

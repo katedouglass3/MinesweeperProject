@@ -89,6 +89,14 @@ public class GameTimer {
     }
 
     /**
+     * A getter method for currentTime
+     * @return currentTime - an int holding the time for the last board completion
+     */
+    public int getCurrentTime() {
+        return (int) currentTime;
+    }
+
+    /**
      * A getter method for the elapsed time
      * @return the time between the actual time and the start time
      */

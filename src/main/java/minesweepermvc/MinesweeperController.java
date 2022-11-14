@@ -113,7 +113,7 @@ public class MinesweeperController {
                         // If it is the first click of the game
                         if (theModel.getState() == GameState.NEW_GAME) {
                             // Move bombs so the first click is on a zero cell
-                            theModel.regenerateAdjacentBombs(cellModel.getCellRowNumber(), cellModel.getCellColumnNumber());
+                            // theModel.regenerateAdjacentBombs(cellModel.getCellRowNumber(), cellModel.getCellColumnNumber());
                             // Start the timer
                             gameTimer.startTimer();
                         }
@@ -123,7 +123,7 @@ public class MinesweeperController {
                         theModel.checkIfGameOver();
                         // If the game is won or lost, create an appropriate popup
                         if (theModel.getState() == GameState.GAME_WON || theModel.getState() == GameState.GAME_LOST) {
-                            Alert alert = new Alert(Alert.AlertType.NONE);
+                            Alert alert = new Alert(Alert.AlertType.INFORMATION);
                             alert.setTitle("Game Over");
                             alert.setHeaderText(" " + theModel.getState());
                             alert.show();

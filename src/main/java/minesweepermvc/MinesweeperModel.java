@@ -20,6 +20,7 @@
 
 package minesweepermvc;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 /**
@@ -136,7 +137,7 @@ public class MinesweeperModel {
     }
 
     /**
-     * This is a helper function for fillRemainingCells()
+     * This is a helper function for fillRemainingCells() and regenerateAdjacentBombs()
      *
      * This function looks at a cell and determine the upperMostPosition, bottomMostPosition,
      * leftMostPosition, rightMostPosition of its neighbors.
@@ -242,6 +243,58 @@ public class MinesweeperModel {
     }
 
     /**
+     * A method that regenerates any bombs on or adjacent to the initial cell clicked on.
+     *
+     * @param row - the row of the cell clicked on
+     * @param column - the column of the cell clicked on
+     */
+    public void regenerateAdjacentBombs(int row, int column){
+        ArrayList<Integer> rows = new ArrayList<>();
+        ArrayList<Integer> columns = new ArrayList<>();
+        int numBombsToBeReadded = 0;
+        int[] adjacentRange = rangeOfNeighbors(row, column);  // returns an array with upperMost, bottomMost, leftMost, and rightMostPos
+
+        // Go through all the adjacent cells and the clicked cell and count num of bombs in them
+        for (int x = adjacentRange[0]; x <= adjacentRange[1]; x++) {
+            for (int y = adjacentRange[2]; y <= adjacentRange[3]; y++) {
+                // If the cell contains a bomb, add to number to be readded (remove it later so not readded to it)
+                if (board[x][y].isBomb()){
+                    numBombsToBeReadded ++;
+                }
+            }
+        }
+
+        // If there are bombs that need to be regenerated, do so
+        if (numBombsToBeReadded > 0){
+            // For each bomb to be readded
+            for (int i = 0; i <= numBombsToBeReadded; i++){
+                // Create a list of empty cells that bomb could be placed in
+                ArrayList<Cell> emptyCells = new ArrayList<>();
+                for (Cell[] cellRow : board) {
+                    for (Cell cell : cellRow) {
+                        if (!cell.isBomb()){
+                            emptyCells.add(cell);
+                        }
+                    }
+                }
+                // Pick a random empty cell to add bomb to
+                int rnd = new Random().nextInt(emptyCells.size());
+                Cell cellToBeAdded = emptyCells.get(rnd);
+                // Add bomb to empty cell
+                cellToBeAdded.setBomb(true);
+            }
+        }
+
+        // Remove bombs from clicked and adjacent cells
+        for (int x = adjacentRange[0]; x <= adjacentRange[1]; x++) {
+            for (int y = adjacentRange[2]; y <= adjacentRange[3]; y++) {
+                // Remove bombs from these cells
+                    board[x][y].setBomb(false);
+            }
+        }
+    }
+
+    /**
      * A main method to set up our model
      *
      * @param args args
@@ -249,6 +302,7 @@ public class MinesweeperModel {
     public static void main(String[] args) {
         MinesweeperModel model = new MinesweeperModel(6, 6, 8);
         model.generateBombAtRandomPosition();
+        // TODO: check if something should be here
         model.fillRemainingCells();
         model.displayBoard();
 

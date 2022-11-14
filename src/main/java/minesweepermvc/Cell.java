@@ -36,6 +36,7 @@ public class Cell extends Rectangle {
     private boolean isFlag;
     // Image of the cell (eg: number 1, 2, 3, 4, flag, bomb)
     private final Image flagImage = new Image("redFlag.png");
+    private final Image bombImage = new Image("bomb.png");
     private SimpleObjectProperty<Color> currentColor;
     private SimpleObjectProperty<String> displayValue;
 
@@ -131,7 +132,11 @@ public class Cell extends Rectangle {
             } else {
                 this.currentColor.set(darkBrown);
             }
-            this.displayValue.setValue(this.hiddenValue);
+            if (!isBomb) {
+                this.displayValue.setValue(this.hiddenValue);
+            } else {
+                this.imageValue.setValue(bombImage);
+            }
         }
     }
 

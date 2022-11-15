@@ -108,12 +108,15 @@ public class Cell extends Rectangle {
      */
     public void leftClick() {
         if (!isOpen && !isFlag) {
+            // Open the cell
             isOpen = true;
+            // Change the color
             if (getCurrentColor() == lightGreen) {
                 this.currentColor.set(lightBrown);
             } else {
                 this.currentColor.set(darkBrown);
             }
+            // Set the visual to be displayed (either a number or a bomb)
             if (!isBomb) {
                 this.displayValue.setValue(this.hiddenValue);
             } else {
@@ -128,16 +131,15 @@ public class Cell extends Rectangle {
      */
     public void rightClick() {
         if (!isOpen) {
-            // If the cell is having a flag, remove the flag
+            // If the cell is marked with a flag, remove the flag
             if (isFlag) {
-                this.displayValue.setValue("");
                 this.imageValue.setValue(null);
             }
-
             // If the cell is blank, add a flag
             else {
                 this.imageValue.setValue(flagImage);
             }
+            // Toggle whether of not the cell has a flag
             isFlag = !isFlag;
         }
     }

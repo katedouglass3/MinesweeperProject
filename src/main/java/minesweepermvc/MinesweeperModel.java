@@ -48,24 +48,45 @@ public class MinesweeperModel {
     /** The current state of the game */
     private GameState state;
 
+    /**
+     * A getter method that returns the double array representing the board of Cells
+     *
+     * @return - the double array representing the board of Cells
+     */
     public Cell[][] getBoard() {
         return board;
     }
 
+    /**
+     * A getter method that returns the number of rows in the board
+     *
+     * @return - the int for the number of rows in the board
+     */
     public int getRowNumber() {
         return rowNumber;
     }
 
+    /**
+     * A getter method that returns the number of columns in the board
+     *
+     * @return - the int for the number of columns in the board
+     */
     public int getColumnNumber() {
         return columnNumber;
     }
 
+    /**
+     * A getter method that returns the state that the game is in
+     *
+     * @return - the enum for the game state
+     */
     public GameState getState() {
         return state;
     }
 
     /**
      * Initializes our model
+     *
      * @param rowNumber - the number of rows in the board
      * @param columnNumber - the number of columns in the board
      * @param bombNumber - the number of bombs
@@ -118,17 +139,21 @@ public class MinesweeperModel {
      * be the value of the cell.
      */
     public void fillRemainingCells() {
+        // For each cell in the board
         for (int i = 0; i < rowNumber; i++) {
             for (int j = 0; j < columnNumber; j++) {
                 // We only find value of cells that are not a bomb
                 if (!board[i][j].isBomb()) {
                     int numberOfBombNeighbors = 0;
                     int[] range = rangeOfNeighbors(i, j);
+                    // For each of the neighbors, check if it is a bomb
                     for (int x = range[0]; x <= range[1]; x++) {
                         for (int y = range[2]; y <= range[3]; y++) {
+                            // If a neighbor is a bomb, add to the numberOfBombNeighbors
                             if (board[x][y].isBomb())   numberOfBombNeighbors++;
                         }
                     }
+                    // Set the number display value to be the numberOfBombNeighbors
                     board[i][j].setHiddenValue(numberOfBombNeighbors + "");
                 }
 
@@ -174,12 +199,13 @@ public class MinesweeperModel {
     }
 
     /**
-     * Prints the value of each cell to the screen in a board
-     * arrangement
+     * Prints the value of each cell to the console in a board arrangement
      */
     public void displayBoard() {
+        // For each cell in the board
         for (int i = 0; i < rowNumber; i++) {
             for (int j = 0; j < columnNumber; j++) {
+                // Print the hidden value (number or bomb) to console
                 System.out.printf("%2s ", board[i][j].getHiddenValue());
             }
             System.out.println();
@@ -187,8 +213,8 @@ public class MinesweeperModel {
     }
 
     // TODO: A function so that when we click on a blank cell (i.e no bombs around), the program will
-    // automatically open other cells as far as possible until we met a numbered cell or a bomb
-    // (try the online game)
+    //  automatically open other cells as far as possible until we met a numbered cell or a bomb
+    //  (try the online game)
 
     /**
      * Generate a complete model after all bombs and numbered cells
@@ -217,6 +243,7 @@ public class MinesweeperModel {
                 if (!cell.isOpen() && !cell.isBomb()) {
                     allCellsOpened = false;
                 }
+                // TODO: do we still need this since it is set at the beginning?
                 // If any cell is opened, this is not a new game anymore
                 if (cell.isOpen() && state.equals(GameState.NEW_GAME)) {
                     state = GameState.IN_PROGRESS;
@@ -307,15 +334,11 @@ public class MinesweeperModel {
     /**
      * A main method to set up our model
      *
-     * @param args args
+     * @param args - the command line prompts
      */
     public static void main(String[] args) {
         MinesweeperModel model = new MinesweeperModel(6, 6, 8);
         model.generateBombAtRandomPosition();
-        // TODO: check if something should be here
-//        model.fillRemainingCells();
         model.displayBoard();
-
-//        System.out.println(Arrays.toString(model.rangeOfNeighbors(0, 2)));   //0, 1, 1, 3
     }
 }

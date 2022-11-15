@@ -31,41 +31,72 @@ import javafx.scene.layout.VBox;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 
+/**
+ * This is the "view" in the MVC design for our Minesweeper app. The view class
+ * initializes all nodes for the scene graph to display for a good GUI design
+ */
 public class MinesweeperView {
+
+    /** An instance of MinesweeperModel */
     private MinesweeperModel theModel;
 
+    /** FXML instance of ResourceBundle */
     @FXML
     private ResourceBundle resources;
 
+    /** FXML instance of URL */
     @FXML
     private URL location;
 
+    /** FXML instance of VBox */
     @FXML
     private VBox root;
 
+    /** FXML instance of HBox */
     @FXML
     private HBox topPane;
 
-    // An array of Rectangles, each rectangle represents a cell in the board
+    /** A double array of Rectangles, each rectangle represents a cell in the board */
     private Rectangle[][] cells;
 
-    // An array of StackPanes, each StackPane represents contain a Rectangle and the text
-    // representing its value
+    /**
+     * A double array of StackPanes, each StackPane represents contain a Rectangle and the text
+     * representing its value
+     */
     private StackPane[][] cellContainers;
 
+    /**
+     * A getter method that returns the double array of StackPanes that holds the Cells from view
+     *
+     * @return - a double array of StackPanes
+     */
     public StackPane[][] getCellContainers() {
         return cellContainers;
     }
 
+    /**
+     * A getter method that returns a double array of Rectangles (cells)
+     *
+     * @return - a double array of Rectangles (cells)
+     */
     public Rectangle[][] getCells() {
         return cells;
     }
 
+    /**
+     * A setter method that sets theModel instance variable to the MinesweeperModel instance
+     * and sets up the board of cells
+     *
+     * @param theModel - the instance of MinesweeperModel in the View class
+     */
     public void setModel(MinesweeperModel theModel) {
         this.theModel = theModel;
         initBoardPane();
     }
 
+    /**
+     * Called to initialize a controller after its root element has been completely processed
+     */
     @FXML
     void initialize() {
         assert root != null : "fx:id=\"root\" was not injected: check your FXML file 'minesweepermvc.fxml'.";
@@ -73,7 +104,9 @@ public class MinesweeperView {
 
     }
 
-    // Set up the board pane, which contains all the cells
+    /**
+     * Set up the board pane, which contains all the cells
+     */
     public void initBoardPane() {
         cells = new Rectangle[theModel.getRowNumber()][theModel.getColumnNumber()];
         cellContainers = new StackPane[theModel.getRowNumber()][theModel.getColumnNumber()];

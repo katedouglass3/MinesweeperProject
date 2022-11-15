@@ -32,10 +32,18 @@ import java.io.IOException;
  */
 public class MinesweeperMain extends Application {
 
+    /** An instance of MinesweeperModel */
     private MinesweeperModel theModel;
+    /** An instance of MinesweeperView */
     private MinesweeperView theView;
+    /** An instance of MinesweeperController */
     private MinesweeperController theController;
 
+    /**
+     * The main entry point for all JavaFX applications.
+     * The start method is called after the init method has returned,
+     * and after the system is ready for the application to begin running.
+     */
     @Override
     public void start(Stage primaryStage) throws IOException {
         initModel();
@@ -59,12 +67,22 @@ public class MinesweeperMain extends Application {
         theModel.displayBoard();
     }
 
+    /**
+     * The application initialization method. This method is called immediately
+     * after the Application class is loaded and constructed, but before the
+     * start() method is invoked.
+     */
     // A separate function to initialize the model only
     public void initModel() {
         theModel = new MinesweeperModel(10, 15, 20);
         theModel.createCompleteModel();
     }
 
+    /**
+     * Our standard main program for a JavaFX application
+     *
+     * @param args - the command line prompts
+     */
     public static void main(String[] args) {
         launch(args);
     }

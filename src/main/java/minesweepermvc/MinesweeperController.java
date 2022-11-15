@@ -9,12 +9,11 @@
  *
  * Project: csci205_final_project
  * Package: minesweepermvc
- * Class: MinesweeperMain
+ * Class: MinesweeperController
  *
- * Description: This is the MVC controller class
- * for our Minesweeper app. It contains any necessary
- * event handlers for right clicks, left clicks, and user
- * selections of drop-downs and play again choices.
+ * Description: This is the MVC controller class for our Minesweeper app.
+ * It contains any necessary event handlers for right clicks, left clicks,
+ * and user selections of drop-downs and play again choices.
  *
  * ****************************************
  */
@@ -32,10 +31,9 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 
 /**
- * This is the MVC controller class
- * for our Minesweeper app. It contains any necessary
- * event handlers for right clicks, left clicks, and user
- * selections of drop-downs and play again choices.
+ * This is the MVC controller class for our Minesweeper app. It contains any
+ * necessary event handlers for right clicks, left clicks, and user selections
+ * of drop-downs and play again choices.
  */
 public class MinesweeperController {
 
@@ -52,8 +50,8 @@ public class MinesweeperController {
     private GameTimer gameTimer;
 
     /**
-     * The constructor for the controller class that creates instances of theModel and theView
-     * and calls initBindings and initEventHandlers
+     * The constructor for the controller class that passes in instances of theModel
+     * and theView and calls initBindings and initEventHandlers
      *
      * @param theView an instance of the minesweeper view class
      * @param theModel an instance of the minesweeper model class
@@ -71,18 +69,20 @@ public class MinesweeperController {
      * A method that creates bindings between the model cells and the view cells
      */
     private void initBindings() {
-        // Update the color and value displayed on a cell whenever it is clicked
+        // TODO: Update the color and value displayed on a cell whenever it is clicked
+
         // Create an instance of the view cell containers
         StackPane[][] cellContainers = theView.getCellContainers();
         // Create an instance of the model board
         Cell[][] cellModels = theModel.getBoard();
+
         // Loop through every row of cells
         for (int i = 0; i < cellContainers.length; i++) {
             // Loop through every cell in each row
             for (int j = 0; j < cellContainers[i].length; j++) {
-                // Set the cell container to the cell in the correct row/column of the view
+                // Set the cell container to the cell in the correct row/column of the VIEW
                 StackPane cellContainer = cellContainers[i][j];
-                // Set the cell model to the cell in the correct row/column of the model
+                // Set the cell model to the cell in the correct row/column of the MODEL
                 Cell cellModel = cellModels[i][j];
                 // Add an ImageView to the cell container
                 cellContainer.getChildren().add(new ImageView());
@@ -99,6 +99,7 @@ public class MinesweeperController {
                         Text value = (Text) child;
                         value.textProperty().bind(cellModel.displayValueProperty());
                     }
+                    // TODO: finish commenting here
                     // If the child is an ImageView, bind it ???
                     else if (child instanceof ImageView) {
                         ImageView imageView = (ImageView) child;
@@ -112,13 +113,14 @@ public class MinesweeperController {
     }
 
     /**
-     * A method that handles left and right clicks for all cells and hovering  over cells
+     * A method that handles left and right clicks for all cells and hovering over cells
      */
     private void initEventHandlers() {
         // Create an instance of the view cell containers
         StackPane[][] cellContainers = theView.getCellContainers();
         // Create an instance of the model board
         Cell[][] cellModels = theModel.getBoard();
+
         // Loop through every row of cells
         for (int i = 0; i < cellContainers.length; i++) {
             // Loop through every cell in each row
@@ -141,7 +143,7 @@ public class MinesweeperController {
                             // Start the timer
                             gameTimer.startTimer();
                         }
-                        // Call the left click model in Cell
+                        // Call the left click method in Cell
                         cellModel.leftClick();
                         // Update the game state
                         theModel.checkIfGameOver();
@@ -157,6 +159,7 @@ public class MinesweeperController {
                             displayAlert();
                         }
                     }
+
                     // If it is a right click
                     else if (event.getButton() == MouseButton.SECONDARY) {
                         // Call the right click method in Cell
@@ -179,9 +182,9 @@ public class MinesweeperController {
     }
 
     /**
-     * A method that creates an alert and displays it when called.
-     * It then either resets the board or terminates the program based on
-     * the user's response
+     * A method that creates an alert for either winning or losing the game and
+     * displays it when called. It then either resets the board or terminates the
+     * program based on user input
      */
     private void displayAlert() {
         // Create a play again button
@@ -198,6 +201,7 @@ public class MinesweeperController {
         alert.showAndWait().ifPresent(response -> {
             // If the play again button is pressed, reset the board
             if (response.equals(playAgainBtn)) {
+                // TODO: actually reset the board
                 System.out.println("reset board");
             }
             // If exit is pressed, terminate the program

@@ -10,6 +10,7 @@
  * Project: csci205_final_project
  * Package: minesweepermvc
  * Class: GameTimer
+ *
  * Description: This class controls the timing mechanism of the
  * minesweeper app. It is not dependent on any other classes.
  * The class starts and ends a timer and stores the current time

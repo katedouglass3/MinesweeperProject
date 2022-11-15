@@ -9,7 +9,7 @@ package minesweepermvc;/* *****************************************
  *
  * Project: csci205_final_project
  * Package: minesweepermvc
- * Class: MinesweeperMain
+ * Class: GameState
  *
  * Description: The different game states for our minesweeper app.
  * These include NEW_GAME, IN_PROGRESS, WIN, and GAME_OVER.

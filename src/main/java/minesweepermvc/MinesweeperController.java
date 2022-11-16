@@ -30,6 +30,10 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
+
 /**
  * This is the MVC controller class for our Minesweeper app. It contains any
  * necessary event handlers for right clicks, left clicks, and user selections
@@ -156,6 +160,22 @@ public class MinesweeperController {
                         else if (theModel.getState() == GameState.GAME_LOST) {
                             // End the timer with game lost
                             gameTimer.endTimer(false);
+                            // When the game is lost, reveal each bomb one at a time
+                            Runnable r = new Runnable() {
+                                @Override
+                                public void run() {
+                                    for (Cell[] row : cellModels) {
+                                        for (Cell cell : row) {
+                                            if (!cell.isOpen() && cell.isBomb()) {
+                                                cell.leftClick();
+                                                return;
+                                                } }
+                                        } } };
+                            // Reveal a bomb every second
+                            // TODO make this faster?
+                            ScheduledExecutorService executor = Executors.newScheduledThreadPool(1);
+                            executor.scheduleAtFixedRate(r, 0, 1, TimeUnit.SECONDS);
+
                             displayAlert();
                         }
                     }

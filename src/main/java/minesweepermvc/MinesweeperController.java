@@ -190,11 +190,13 @@ public class MinesweeperController {
                 // Handles Hovering over Cell
                 // If the mouse enters a cell, make it brighter
                 cellContainer.setOnMouseEntered(event -> {
-                    cellModel.setCurrentColor(cellModel.getCurrentColor().brighter());
-                });
-                // If a mouse leaves a cell, make it darker
+                    if (!cellModel.isOpen())    // Only brighten cells that haven't been opened because only those can be clicked
+                        cellModel.setCurrentColor(cellModel.getOriginalColor().brighter()); }
+                );
+                // If a mouse leaves a cell, set back to original color
                 cellContainer.setOnMouseExited(event -> {
-                    cellModel.setCurrentColor(cellModel.getCurrentColor().darker());
+                    if (!cellModel.isOpen())    // We don't want to revert any opened cells back to their unopened color
+                        cellModel.setCurrentColor(cellModel.getOriginalColor());
                 });
             }
         }

@@ -31,37 +31,64 @@ import javafx.scene.shape.Rectangle;
  */
 public class Cell extends Rectangle {
 
-    /** The value of the cell, not shown until the cell is clicked on */
+    /**
+     * The value of the cell, not shown until the cell is clicked on
+     */
     private String hiddenValue;
 
-    /** A boolean value for if a cell contains a bomb or not */
+    /**
+     * A boolean value for if a cell contains a bomb or not
+     */
     private boolean isBomb;
 
-    /** A boolean value for if a cell is open (has been clicked on) or not */
+    /**
+     * A boolean value for if a cell is open (has been clicked on) or not
+     */
     private boolean isOpen;
 
-    /** A boolean value for is a cell is marked with a flag or not */
+    /**
+     * A boolean value for is a cell is marked with a flag or not
+     */
     private boolean isFlag;
 
-    /** The row that a cell is located in */
+    /**
+     * The row that a cell is located in
+     */
     private int rowNumber;
 
-    /** The column that a cell is located in */
+    /**
+     * The column that a cell is located in
+     */
     private int columnNumber;
 
-    /** Flag image for the cell if isFlag is true */
+    /**
+     * Flag image for the cell if isFlag is true
+     */
     private final Image flagImage = new Image("redFlag.png");
 
-    /** Bomb image for the cell if isFlag is true */
+    /**
+     * Bomb image for the cell if isFlag is true
+     */
     private final Image bombImage = new Image("bomb.png");
 
-    /** The color displayed in the cell */
+    /**
+     * The color currently displayed in the cell
+     */
     private SimpleObjectProperty<Color> currentColor;
 
-    /** The text to be displayed in the cell */
+    /**
+     * The original color of the cell
+     */
+    private SimpleObjectProperty<Color> originalColor;
+
+    /**
+     * The text to be displayed in the cell
+     */
     private SimpleObjectProperty<String> displayValue;
 
-    /** The image to be displayed in the cell */
+    /**
+     * The image to be displayed in the cell
+     */
     private SimpleObjectProperty<Image> imageValue;
 
     /**
@@ -87,6 +114,7 @@ public class Cell extends Rectangle {
         this.isOpen = false;
         this.isFlag = false;
         this.currentColor = new SimpleObjectProperty<>();
+        this.originalColor = new SimpleObjectProperty<>();
         this.displayValue = new SimpleObjectProperty<>("");
         this.imageValue = new SimpleObjectProperty<>();
         this.theModel = theModel;
@@ -100,6 +128,7 @@ public class Cell extends Rectangle {
         this.isOpen = false;
         this.isFlag = false;
         this.currentColor = new SimpleObjectProperty<>();
+        this.originalColor = this.currentColor;
         this.displayValue = new SimpleObjectProperty<>("");
         this.imageValue = new SimpleObjectProperty<>();
     }
@@ -113,7 +142,7 @@ public class Cell extends Rectangle {
             // Open the cell
             isOpen = true;
             // Change the color
-            if (getCurrentColor() == lightGreen) {
+            if (getOriginalColor() == lightGreen) {
                 this.currentColor.set(lightBrown);
             } else {
                 this.currentColor.set(darkBrown);
@@ -246,6 +275,18 @@ public class Cell extends Rectangle {
      */
     public void setCurrentColor(Color currentColor) {
         this.currentColor.set(currentColor);
+    }
+
+    public Color getOriginalColor() {
+        return originalColor.get();
+    }
+
+    public SimpleObjectProperty<Color> originalColorProperty() {
+        return originalColor;
+    }
+
+    public void setOriginalColor(Color originalColor) {
+        this.originalColor.set(originalColor);
     }
 
     /**

@@ -119,9 +119,11 @@ public class MinesweeperView {
                 // Set the color of each cell based on its position
                 if ((i + j) % 2 == 0) {
                     cellModel.setCurrentColor(cellModel.lightGreen);
+                    cellModel.setOriginalColor(cellModel.lightGreen);
                 }
                 else {
                     cellModel.setCurrentColor(cellModel.darkGreen);
+                    cellModel.setOriginalColor(cellModel.darkGreen);
                 }
 
                 // Color each Rectangle and add it to the array of Rectangles

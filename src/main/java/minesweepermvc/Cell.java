@@ -75,10 +75,11 @@ public class Cell extends Rectangle {
 
 
     /**
-     * Constructor for a Cell instance with row and column params
+     * Constructor for a Cell instance with row, column, and model params
      *
      * @param row - the row that a cell is located in
      * @param col - the column that a cell is located in
+     * @param theModel - the model that holds the cell
      */
     public Cell(int row, int col, MinesweeperModel theModel) {
         this.rowNumber = row;
@@ -90,6 +91,23 @@ public class Cell extends Rectangle {
         this.displayValue = new SimpleObjectProperty<>("");
         this.imageValue = new SimpleObjectProperty<>();
         this.theModel = theModel;
+    }
+
+    /**
+     * Constructor for a Cell instance with row and column params - for testing
+     *
+     * @param row - the row that a cell is located in
+     * @param col - the column that a cell is located in
+     */
+    public Cell(int row, int col) {
+        this.rowNumber = row;
+        this.columnNumber = col;
+        this.isBomb = false;
+        this.isOpen = false;
+        this.isFlag = false;
+        this.currentColor = new SimpleObjectProperty<>();
+        this.displayValue = new SimpleObjectProperty<>("");
+        this.imageValue = new SimpleObjectProperty<>();
     }
 
     /**

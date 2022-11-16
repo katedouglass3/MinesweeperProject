@@ -109,7 +109,7 @@ public class MinesweeperModel {
     private void generateBlankBoard() {
         for (int i = 0; i < rowNumber; i++) {
             for (int j = 0; j < columnNumber; j++) {
-                board[i][j] = new Cell(i, j);
+                board[i][j] = new Cell(i, j, this);
             }
         }
     }
@@ -121,15 +121,17 @@ public class MinesweeperModel {
     private void generateBombAtRandomPosition() {
         Random rand = new Random();
         for (int i = 0; i < bombNumber; i++) {
-            // Generate a random row position
-            int rowPosition = rand.nextInt(rowNumber);
-            // Generate a random column position
-            int columnPosition = rand.nextInt(columnNumber);
-            // Create a Cell at previous coordinates and set it to be a bomb
-            Cell cell = new Cell(rowPosition, columnPosition);
-            cell.setHiddenValue("*");  // "*" represents a bomb
-            cell.setBomb(true);
-            board[rowPosition][columnPosition] = cell;
+            int rowPosition, columnPosition;
+            do {
+                // Generate a random row position
+                rowPosition = rand.nextInt(rowNumber);
+                // Generate a random column position
+                columnPosition = rand.nextInt(columnNumber);
+            }
+            while (board[rowPosition][columnPosition].getHiddenValue() != null);
+            // Create a cell at previous coordinates and set it to be a bomb
+            board[rowPosition][columnPosition].setHiddenValue("*");  // "*" represents a bomb
+            board[rowPosition][columnPosition].setBomb(true);
         }
     }
 
@@ -329,6 +331,41 @@ public class MinesweeperModel {
         System.out.println();
         System.out.println();
         displayBoard();
+    }
+
+    // A function so that when we click on a blank cell (i.e no bombs around), the program will
+    // automatically open other cells as far as possible until we meet a numbered cell or a bomb
+    public void autoExtendCells(int x, int y) {
+        int[][] adjacentDirections = {{-1, 0}, {0, -1}, {0, 1}, {1, 0}};
+        int[][] allDirections = {{-1, -1}, {-1, 0}, {-1, 1}, {0, -1}, {0, 1}, {1, -1}, {1, 0}, {1, 1}};
+
+        for (int[] aroundDirection : allDirections) {
+            int aroundX = x + aroundDirection[0];
+            int aroundY = y + aroundDirection[1];
+            if (isInsideBoard(aroundX, aroundY)) {
+                Cell aroundCell = this.board[aroundX][aroundY];
+                if (!aroundCell.isOpen() && !aroundCell.isBomb() &&
+                        !aroundCell.getHiddenValue().equals("0")) {
+                    aroundCell.leftClick();
+                }
+            }
+        }
+
+        for (int[] adjacentDirection : adjacentDirections) {
+            int adjacentX = x + adjacentDirection[0];
+            int adjacentY = y + adjacentDirection[1];
+            if (isInsideBoard(adjacentX, adjacentY)) {
+                Cell adjacentCell = this.board[adjacentX][adjacentY];
+                if (!adjacentCell.isOpen() && adjacentCell.getHiddenValue().equals("0")) {
+                    adjacentCell.leftClick();
+                    autoExtendCells(adjacentX, adjacentY);
+                }
+            }
+        }
+    }
+
+    public boolean isInsideBoard(int x, int y) {
+        return x >= 0 && x < this.rowNumber && y >= 0 && y < this.columnNumber;
     }
 
     /**

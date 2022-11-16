@@ -71,6 +71,7 @@ public class Cell extends Rectangle {
     public final Color darkGreen = Color.web("#668A4D");
     public final Color lightBrown = Color.web("#D1BA50");
     public final Color darkBrown = Color.web("#9B7D0A");
+    private MinesweeperModel theModel;
 
 
     /**
@@ -79,7 +80,7 @@ public class Cell extends Rectangle {
      * @param row - the row that a cell is located in
      * @param col - the column that a cell is located in
      */
-    public Cell(int row, int col) {
+    public Cell(int row, int col, MinesweeperModel theModel) {
         this.rowNumber = row;
         this.columnNumber = col;
         this.isBomb = false;
@@ -88,6 +89,7 @@ public class Cell extends Rectangle {
         this.currentColor = new SimpleObjectProperty<>();
         this.displayValue = new SimpleObjectProperty<>("");
         this.imageValue = new SimpleObjectProperty<>();
+        this.theModel = theModel;
     }
 
     /**
@@ -119,6 +121,9 @@ public class Cell extends Rectangle {
             // Set the visual to be displayed (either a number or a bomb)
             if (!isBomb) {
                 this.displayValue.setValue(this.hiddenValue);
+                if (this.hiddenValue.equals("0")) {
+                    theModel.autoExtendCells(this.rowNumber, this.columnNumber);
+                }
             } else {
                 this.imageValue.setValue(bombImage);
             }

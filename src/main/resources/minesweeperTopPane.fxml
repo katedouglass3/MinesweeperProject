@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="500.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="minesweepermvc.MinesweeperView">
+   <children>
+      <VBox fx:id="root" prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <HBox fx:id="topPane" prefHeight="100.0" prefWidth="600.0" style="-fx-background-color: #989895;">
+               <children>
+                  <VBox prefHeight="100.0" prefWidth="101.0" style="-fx-background-color: #989895;">
+                     <children>
+                        <ImageView fitHeight="19.0" fitWidth="98.0" pickOnBounds="true" preserveRatio="true" />
+                        <HBox prefHeight="34.0" prefWidth="98.0">
+                           <children>
+                              <ImageView fitHeight="28.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true" />
+                              <ChoiceBox fx:id="choiceChallengeLevel" prefHeight="28.0" prefWidth="71.0" style="-fx-background-color: #668A4D;" />
+                           </children>
+                        </HBox>
+                        <ImageView fitHeight="6.0" fitWidth="92.0" pickOnBounds="true" preserveRatio="true" />
+                        <HBox prefHeight="10.0" prefWidth="98.0">
+                           <children>
+                              <ImageView fitHeight="31.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true" />
+                              <Button fx:id="buttonQuit" minWidth="47.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="54.0" style="-fx-background-radius: 60; -fx-background-color: #668A4D;" text="Quit" />
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+                  <VBox prefHeight="100.0" prefWidth="426.0" style="-fx-background-color: #989895;">
+                     <children>
+                        <Label fx:id="labelTitle" alignment="CENTER" contentDisplay="CENTER" prefHeight="41.0" prefWidth="379.0" text="Minesweeper" textFill="#5f8147">
+                           <font>
+                              <Font name="MS Outlook" size="42.0" />
+                           </font>
+                        </Label>
+                        <HBox prefHeight="100.0" prefWidth="200.0" style="-fx-background-color: #989895;">
+                           <children>
+                              <HBox prefHeight="46.0" prefWidth="82.0" />
+                              <ImageView fx:id="imageTimer" fitHeight="40.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@clock.png" />
+                                 </image>
+                              </ImageView>
+                              <Label fx:id="labelTimer" alignment="CENTER" contentDisplay="CENTER" prefHeight="38.0" prefWidth="78.0" text="000" textAlignment="CENTER">
+                                 <font>
+                                    <Font name="FontAwesome" size="26.0" />
+                                 </font>
+                                 <opaqueInsets>
+                                    <Insets />
+                                 </opaqueInsets>
+                              </Label>
+                              <ImageView fitHeight="42.0" fitWidth="21.0" pickOnBounds="true" preserveRatio="true" />
+                              <ImageView fx:id="imageFlag" fitHeight="45.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@redFlag.png" />
+                                 </image>
+                              </ImageView>
+                              <Label fx:id="labelFlagsLeft" alignment="CENTER" contentDisplay="CENTER" prefHeight="38.0" prefWidth="41.0" text="0" textAlignment="CENTER">
+                                 <font>
+                                    <Font name="FontAwesome" size="26.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+                  <VBox prefHeight="100.0" prefWidth="178.0" style="-fx-background-color: #989895;">
+                     <children>
+                        <HBox prefHeight="18.0" prefWidth="123.0" />
+                        <ChoiceBox fx:id="choiceColorMode" prefHeight="28.0" prefWidth="111.0" style="-fx-background-color: #668A4D;" />
+                        <ImageView fitHeight="15.0" fitWidth="116.0" pickOnBounds="true" preserveRatio="true" />
+                        <HBox prefHeight="40.0" prefWidth="123.0">
+                           <children>
+                              <ImageView fitHeight="24.0" fitWidth="29.0" pickOnBounds="true" preserveRatio="true" />
+                              <Button fx:id="buttonInfo" minHeight="20.0" minWidth="38.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="38.0" style="-fx-background-radius: 999; -fx-background-color: #668A4D;" text="?" />
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+               </children></HBox>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

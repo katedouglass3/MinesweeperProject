@@ -21,15 +21,18 @@ package minesweepermvc;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
-import javafx.scene.canvas.Canvas;
-import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
+import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.Label;
+import javafx.scene.image.ImageView;
 
 /**
  * This is the "view" in the MVC design for our Minesweeper app. The view class
@@ -65,6 +68,42 @@ public class MinesweeperView {
      */
     private StackPane[][] cellContainers;
 
+    /** A button the user can press to get the game's instructions */
+    @FXML
+    private Button buttonInfo;
+
+    /** A button the user can press to quit the game */
+    @FXML
+    private Button buttonQuit;
+
+    /** A choice box of which the user can change the challenge level */
+    @FXML
+    private ChoiceBox<String> choiceChallengeLevel;
+
+    /** A choice box of which the user can change the color mode */
+    @FXML
+    private ChoiceBox<String> choiceColorMode;
+
+    /** The image of the flag to signify the number of flags left */
+    @FXML
+    private ImageView imageFlag;
+
+    /** The image of the timer to signify the duration of gameplay */
+    @FXML
+    private ImageView imageTimer;
+
+    /** A Label that shows the number of flags left */
+    @FXML
+    private Label labelFlagsLeft;
+
+    /** A label that shows the number of seconds since the game has started */
+    @FXML
+    private Label labelTimer;
+
+    /** A label that says "Minesweeper" */
+    @FXML
+    private Label labelTitle;
+
     /**
      * A getter method that returns the double array of StackPanes that holds the Cells from view
      *
@@ -85,13 +124,14 @@ public class MinesweeperView {
 
     /**
      * A setter method that sets theModel instance variable to the MinesweeperModel instance
-     * and sets up the board of cells
+     * and sets up the board of cells and the top pane's drop-downs
      *
      * @param theModel - the instance of MinesweeperModel in the View class
      */
     public void setModel(MinesweeperModel theModel) {
         this.theModel = theModel;
         initBoardPane();
+        initChoiceBoxes();
     }
 
     /**
@@ -101,7 +141,37 @@ public class MinesweeperView {
     void initialize() {
         assert root != null : "fx:id=\"root\" was not injected: check your FXML file 'minesweepermvc.fxml'.";
         assert topPane != null : "fx:id=\"topPane\" was not injected: check your FXML file 'minesweepermvc.fxml'.";
+        assert buttonInfo != null : "fx:id=\"buttonInfo\" was not injected: check your FXML file 'minesweepermvc.fxml'.";
+        assert buttonQuit != null : "fx:id=\"buttonQuit\" was not injected: check your FXML file 'minesweepermvc.fxml'.";
+        assert choiceChallengeLevel != null : "fx:id=\"choiceChallengeLevel\" was not injected: check your FXML file 'minesweepermvc.fxml'.";
+        assert choiceColorMode != null : "fx:id=\"choiceColorMode\" was not injected: check your FXML file 'minesweepermvc.fxml'.";
+        assert imageFlag != null : "fx:id=\"imageFlag\" was not injected: check your FXML file 'minesweepermvc.fxml'.";
+        assert imageTimer != null : "fx:id=\"imageTimer\" was not injected: check your FXML file 'minesweepermvc.fxml'.";
+        assert labelFlagsLeft != null : "fx:id=\"labelFlagsLeft\" was not injected: check your FXML file 'minesweepermvc.fxml'.";
+        assert labelTimer != null : "fx:id=\"labelTimer\" was not injected: check your FXML file 'minesweepermvc.fxml'.";
+        assert labelTitle != null : "fx:id=\"labelTitle\" was not injected: check your FXML file 'minesweepermvc.fxml'.";
 
+    }
+
+    /**
+     * Sets up the choice boxes with the different options
+     * for color modes and challenge levels
+     */
+    public void initChoiceBoxes(){
+        //fills the choice box with the challenge levels
+        choiceChallengeLevel.getItems().add("Easy");
+        choiceChallengeLevel.getItems().add("Regular");
+        choiceChallengeLevel.getItems().add("Hard");
+        //sets the initial value of the box to regular
+        choiceChallengeLevel.setValue("Regular");
+
+        //fills the choice box with the different color modes
+        //TODO- add more color modes
+        choiceColorMode.getItems().add("Natural Mode");
+        choiceColorMode.getItems().add("Dark Mode");
+        choiceColorMode.getItems().add("Light Mode");
+        //sets the initial value of the box to natural
+        choiceColorMode.setValue("Natural Mode");
     }
 
     /**

@@ -50,6 +50,7 @@ public class MinesweeperMain extends Application {
 
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("/minesweepermvc.fxml"));
+        loader.setLocation(getClass().getResource("/minesweeperTopPane.fxml"));
         Parent root = loader.load();
         this.theView = loader.getController();
         this.theView.setModel(theModel);

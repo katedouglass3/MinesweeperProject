@@ -54,6 +54,7 @@ public class MinesweeperMain extends Application {
         Parent root = loader.load();
         this.theView = loader.getController();
         this.theView.setModel(theModel);
+        this.theView.setTopPane();
 
         this.theController = new MinesweeperController(this.theView, this.theModel);
 

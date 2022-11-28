@@ -149,6 +149,13 @@ public class MinesweeperView {
     public void setModel(MinesweeperModel theModel) {
         this.theModel = theModel;
         initBoardPane();
+    }
+
+    /**
+     * A setter method that sets the top[ pane by adding all the different features created
+     * in initChoiceBoxes
+     */
+    public void setTopPane() {
         initChoiceBoxes();
     }
 

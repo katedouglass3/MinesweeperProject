@@ -175,10 +175,9 @@ public class MinesweeperController {
                                             return;
                                             } }
                                     } };
-                            // Reveal a bomb every second
-                            // TODO make this faster?
+                            // Reveal 4 bombs every second (1 bomb every 250 ms)
                             ScheduledExecutorService executor = Executors.newScheduledThreadPool(1);
-                            executor.scheduleAtFixedRate(r, 0, 1, TimeUnit.SECONDS);
+                            executor.scheduleAtFixedRate(r, 0, 250, TimeUnit.MILLISECONDS);
 
                             displayAlert();
                         }
@@ -220,6 +219,7 @@ public class MinesweeperController {
         alert.setTitle("Game Over");
         // Set the header to game lost or game won
         alert.setHeaderText(" " + theModel.getState());
+
         // Display the time and the best overall time
         alert.setContentText("Time: " + gameTimer.getCurrentTime() + "\nBest Time: " + gameTimer.getBestTime());
         // Display the alert and get the result of the button pushed
@@ -227,13 +227,30 @@ public class MinesweeperController {
         alert.showAndWait().ifPresent(response -> {
             // If the play again button is pressed, reset the board
             if (response.equals(playAgainBtn)) {
-                // TODO: actually reset the board
-                System.out.println("reset board");
+                resetGame();
             }
             // If exit is pressed, terminate the program
             else {
                 System.exit(0);
             }
         });
+    }
+
+    /**
+     * A method that resets the game play for when the user hits
+     * play again
+     */
+    private void resetGame() {
+        // Reset the model
+        theModel.resetBoard();
+        // Clear the view
+        theView.getRoot().getChildren().clear();
+        // Add the top pane back to the root
+        theView.getRoot().getChildren().add(theView.getTopPane());
+        // Add the new model to the view
+        theView.setModel(theModel);
+        // Set the controls for the new view
+        initBindings();
+        initEventHandlers();
     }
 }

@@ -76,6 +76,15 @@ public class MinesweeperModel {
     }
 
     /**
+     * A getter method that returns the number of bombs in the board
+     *
+     * @return - the int for the number of bombs in the board
+     */
+    public int getBombNumber() {
+        return bombNumber;
+    }
+
+    /**
      * A getter method that returns the state that the game is in
      *
      * @return - the enum for the game state
@@ -366,6 +375,24 @@ public class MinesweeperModel {
 
     public boolean isInsideBoard(int x, int y) {
         return x >= 0 && x < this.rowNumber && y >= 0 && y < this.columnNumber;
+    }
+
+    /**
+     * A method that resets the board to a new game for when the user wants to play again.
+     */
+    public void resetBoard() {
+        // Set the board to a new board with the same dimensions
+        this.board = new Cell[this.rowNumber][this.columnNumber];
+        // Reset the openCellNumber to 0
+        this.openCellNumber = 0;
+        // Reset the state to New Game
+        this.state = GameState.NEW_GAME;
+        // Generate a new blank board
+        generateBlankBoard();
+        // Generate bombs randomly
+        generateBombAtRandomPosition();
+        // Create the complete model
+        createCompleteModel();
     }
 
     /**

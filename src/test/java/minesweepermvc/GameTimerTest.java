@@ -31,8 +31,8 @@ class GameTimerTest {
      */
     @Test
     void getBestTime() throws InterruptedException {
-        // Test that the original best time is 0
-        assertEquals(0, gameTimer.getBestTime());
+        // Test that the original best time is ---
+        assertEquals("---", gameTimer.getBestTime());
 
         // Start the timer
         gameTimer.startTimer();
@@ -44,7 +44,7 @@ class GameTimerTest {
         gameTimer.endTimer(true);
 
         // Test that the best time is now 10
-        assertEquals(10, gameTimer.getBestTime());
+        assertEquals("10", gameTimer.getBestTime());
 
         // Start a new timer
         gameTimer.startTimer();
@@ -56,7 +56,7 @@ class GameTimerTest {
         gameTimer.endTimer(true);
 
         // Test that the best time is still 10
-        assertEquals(10, gameTimer.getBestTime());
+        assertEquals("10", gameTimer.getBestTime());
 
         // Start a new timer
         gameTimer.startTimer();
@@ -68,19 +68,79 @@ class GameTimerTest {
         gameTimer.endTimer(true);
 
         // Test that the best time is now 5
-        assertEquals(5, gameTimer.getBestTime());
+        assertEquals("5", gameTimer.getBestTime());
 
         // Start a new timer
         gameTimer.startTimer();
 
         // Wait 3 seconds
-        TimeUnit.SECONDS.sleep(15);
+        TimeUnit.SECONDS.sleep(3);
 
         // End the timer with won lost
         gameTimer.endTimer(false);
 
         // Test that the best time is still 5
-        assertEquals(5, gameTimer.getBestTime());
+        assertEquals("5", gameTimer.getBestTime());
+    }
+
+    /**
+     * A test method for getCurrentTime. It runs the timer different times and checks that the
+     * currentTime is updated as it should be
+     *
+     * @throws InterruptedException throws if the sleep is interrupter (this should not happen)
+     */
+    @Test
+    void getCurrentTime() throws InterruptedException {
+        // Test that the original current time is ---
+        assertEquals("---", gameTimer.getCurrentTime());
+
+        // Start the timer
+        gameTimer.startTimer();
+
+        // Wait 10 seconds
+        TimeUnit.SECONDS.sleep(10);
+
+        // End the timer with won game
+        gameTimer.endTimer(true);
+
+        // Test that the current time is now 10
+        assertEquals("10", gameTimer.getCurrentTime());
+
+        // Start a new timer
+        gameTimer.startTimer();
+
+        // Wait 15 seconds
+        TimeUnit.SECONDS.sleep(15);
+
+        // End the timer with won game
+        gameTimer.endTimer(true);
+
+        // Test that the current time is now 15
+        assertEquals("15", gameTimer.getCurrentTime());
+
+        // Start a new timer
+        gameTimer.startTimer();
+
+        // Wait 5 seconds
+        TimeUnit.SECONDS.sleep(5);
+
+        // End the timer with won game
+        gameTimer.endTimer(true);
+
+        // Test that the current time is now 5
+        assertEquals("5", gameTimer.getCurrentTime());
+
+        // Start a new timer
+        gameTimer.startTimer();
+
+        // Wait 3 seconds
+        TimeUnit.SECONDS.sleep(3);
+
+        // End the timer with won lost
+        gameTimer.endTimer(false);
+
+        // Test that the current time is now ---
+        assertEquals("---", gameTimer.getCurrentTime());
     }
 
     /**

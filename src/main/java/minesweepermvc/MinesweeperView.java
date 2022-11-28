@@ -114,6 +114,24 @@ public class MinesweeperView {
     }
 
     /**
+     * A getter method for root that returns the VBox that holds the root
+     *
+     * @return root - a VBox holding all the cells
+     */
+    public VBox getRoot() {
+        return root;
+    }
+
+    /**
+     * A getter method for the topPane that returns the HBox that holds the topPane
+     *
+     * @return topPane - a HBox holding the top display bar
+     */
+    public HBox getTopPane() {
+        return topPane;
+    }
+
+    /**
      * A getter method that returns a double array of Rectangles (cells)
      *
      * @return - a double array of Rectangles (cells)

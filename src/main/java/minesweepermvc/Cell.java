@@ -370,4 +370,14 @@ public class Cell extends Rectangle {
         return columnNumber;
     }
 
+    public void resetCell() {
+        this.isBomb = false;
+        this.isOpen = false;
+        this.isFlag = false;
+        this.currentColor = new SimpleObjectProperty<>();
+        this.originalColor = new SimpleObjectProperty<>();
+        this.displayValue = new SimpleObjectProperty<>("");
+        this.imageValue = new SimpleObjectProperty<>();
+    }
+
 }

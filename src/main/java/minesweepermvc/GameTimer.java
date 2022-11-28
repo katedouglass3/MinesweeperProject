@@ -83,18 +83,28 @@ public class GameTimer {
 
     /**
      * A getter method for bestTime
-     * @return bestTime - an int holding the best time in seconds
+     * @returna string holding the overall best time or dashes if no games have been won
      */
-    public int getBestTime() {
-        return bestTime;
+    public String getBestTime() {
+        // If no games have been won, display dashes
+        if (bestTime == 0) {
+            return "---";
+        }
+        // Otherwise, return the best time as a string
+        return "" + bestTime;
     }
 
     /**
      * A getter method for currentTime
-     * @return currentTime - an int holding the time for the last board completion
+     * @return a string holding the time for the last board completion, or dashes if the game was lost
      */
-    public int getCurrentTime() {
-        return (int) currentTime;
+    public String getCurrentTime() {
+        // If the game was lost, display dashes
+        if (currentTime == 0) {
+            return "---";
+        }
+        // Otherwise, return the current time as a string
+        return "" + currentTime;
     }
 
     /**

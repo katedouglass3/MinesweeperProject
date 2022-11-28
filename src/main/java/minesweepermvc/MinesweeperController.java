@@ -20,16 +20,20 @@
 
 package minesweepermvc;
 
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.StackPane;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 
+import java.util.Arrays;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
@@ -175,7 +179,7 @@ public class MinesweeperController {
                             // Reveal a bomb every second
                             // TODO make this faster?
                             ScheduledExecutorService executor = Executors.newScheduledThreadPool(1);
-                            executor.scheduleAtFixedRate(r, 0, 1, TimeUnit.SECONDS);
+                            executor.scheduleAtFixedRate(r, 0, 1, TimeUnit.MILLISECONDS);
 
                             displayAlert();
                         }
@@ -191,11 +195,13 @@ public class MinesweeperController {
                 // Handles Hovering over Cell
                 // If the mouse enters a cell, make it brighter
                 cellContainer.setOnMouseEntered(event -> {
-                    cellModel.setCurrentColor(cellModel.getCurrentColor().brighter());
+                    if (!cellModel.isOpen())    // Only brighten cells that haven't been opened because only those can be clicked
+                        cellModel.setCurrentColor(cellModel.getOriginalColor().brighter());
                 });
-                // If a mouse leaves a cell, make it darker
+                // If a mouse leaves a cell, set back to original color
                 cellContainer.setOnMouseExited(event -> {
-                    cellModel.setCurrentColor(cellModel.getCurrentColor().darker());
+                    if (!cellModel.isOpen())    // We don't want to revert any opened cells back to their unopened color
+                        cellModel.setCurrentColor(cellModel.getOriginalColor());
                 });
             }
         }
@@ -215,20 +221,38 @@ public class MinesweeperController {
         alert.setTitle("Game Over");
         // Set the header to game lost or game won
         alert.setHeaderText(" " + theModel.getState());
+
         // Display the time and the best overall time
         alert.setContentText("Time: " + gameTimer.getCurrentTime() + "\nBest Time: " + gameTimer.getBestTime());
         // Display the alert and get the result of the button pushed
         // https://docs.oracle.com/javase/8/javafx/api/javafx/scene/control/Alert.html
         alert.showAndWait().ifPresent(response -> {
-            // If the play again button is pressed, reset the board
+            // If the play again button is pressed, reset the game
             if (response.equals(playAgainBtn)) {
-                // TODO: actually reset the board
-                System.out.println("reset board");
+                resetGame();
             }
             // If exit is pressed, terminate the program
             else {
                 System.exit(0);
             }
         });
+    }
+
+    /**
+     * A method that resets the game play for when the user hits
+     * play again
+     */
+    private void resetGame() {
+        // Reset the model
+        theModel.resetBoard();
+        // Clear the view
+        theView.getRoot().getChildren().clear();
+        // Add the top pane back to the root
+        theView.getRoot().getChildren().add(theView.getTopPane());
+        // Add the new model to the view
+        theView.setModel(theModel);
+        // Set the controls for the new view
+        initBindings();
+        initEventHandlers();
     }
 }

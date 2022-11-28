@@ -91,45 +91,38 @@ public class Cell extends Rectangle {
      */
     private SimpleObjectProperty<Image> imageValue;
 
-    /**
-     * Colors to be used for the cell colors
-     */
-    public final Color lightGreen = Color.web("#9CD375");
-    public final Color darkGreen = Color.web("#668A4D");
-    public final Color lightBrown = Color.web("#D1BA50");
-    public final Color darkBrown = Color.web("#9B7D0A");
 
-    /** The model which contains this cell */
-    private MinesweeperModel theModel;
+    private ColorMode colorMode;
+
+//    /**
+//     * Colors to be used for the cell colors
+//     */
+//    public final Color lightGreen = Color.web("#9CD375");
+//    public final Color darkGreen = Color.web("#668A4D");
+//    public final Color lightBrown = Color.web("#D1BA50");
+//    public final Color darkBrown = Color.web("#9B7D0A");
+//    private MinesweeperModel theModel;
 
 
-    /**
-<<<<<<< HEAD
-     * Constructor for a Cell instance with row, column and model params
-     *
-     * @param row - the row that a cell is located in
-     * @param col - the column that a cell is located in
-     * @param theModel - the model that this cell belongs to
-=======
-     * Constructor for a Cell instance with row, column, and model params
-     *
-     * @param row - the row that a cell is located in
-     * @param col - the column that a cell is located in
-     * @param theModel - the model that holds the cell
->>>>>>> b7d37447854a4bd5599f4ac5b1bbb5a1dd40c186
-     */
-    public Cell(int row, int col, MinesweeperModel theModel) {
-        this.rowNumber = row;
-        this.columnNumber = col;
-        this.isBomb = false;
-        this.isOpen = false;
-        this.isFlag = false;
-        this.currentColor = new SimpleObjectProperty<>();
-        this.originalColor = new SimpleObjectProperty<>();
-        this.displayValue = new SimpleObjectProperty<>("");
-        this.imageValue = new SimpleObjectProperty<>();
-        this.theModel = theModel;
-    }
+//    /**
+//     * Constructor for a Cell instance with row, column, and model params
+//     *
+//     * @param row - the row that a cell is located in
+//     * @param col - the column that a cell is located in
+//     * @param theModel - the model that holds the cell
+//     */
+//    public Cell(int row, int col, MinesweeperModel theModel) {
+//        this.rowNumber = row;
+//        this.columnNumber = col;
+//        this.isBomb = false;
+//        this.isOpen = false;
+//        this.isFlag = false;
+//        this.currentColor = new SimpleObjectProperty<>();
+//        this.originalColor = new SimpleObjectProperty<>();
+//        this.displayValue = new SimpleObjectProperty<>("");
+//        this.imageValue = new SimpleObjectProperty<>();
+//        this.theModel = theModel;
+//    }
 
     /**
      * Constructor for a Cell instance with row and column params - for testing
@@ -144,8 +137,10 @@ public class Cell extends Rectangle {
         this.isOpen = false;
         this.isFlag = false;
         this.currentColor = new SimpleObjectProperty<>();
+        this.originalColor = new SimpleObjectProperty<>();
         this.displayValue = new SimpleObjectProperty<>("");
         this.imageValue = new SimpleObjectProperty<>();
+        this.colorMode = ColorMode.ORIGINAL;
     }
 
     /**
@@ -156,7 +151,7 @@ public class Cell extends Rectangle {
         this.isOpen = false;
         this.isFlag = false;
         this.currentColor = new SimpleObjectProperty<>();
-        this.originalColor = this.currentColor;
+        this.originalColor = new SimpleObjectProperty<>();
         this.displayValue = new SimpleObjectProperty<>("");
         this.imageValue = new SimpleObjectProperty<>();
     }
@@ -170,17 +165,17 @@ public class Cell extends Rectangle {
             // Open the cell
             isOpen = true;
             // Change the color
-            if (getOriginalColor() == lightGreen) {
-                this.currentColor.set(lightBrown);
+            if (getOriginalColor().equals(colorMode.getLightUnopened())) {
+                this.currentColor.set(colorMode.getLightOpened());
             } else {
-                this.currentColor.set(darkBrown);
+                this.currentColor.set(colorMode.getDarkOpened());
             }
             // Set the visual to be displayed (either a number or a bomb)
             if (!isBomb) {
                 this.displayValue.setValue(this.hiddenValue);
-                if (this.hiddenValue.equals("0")) {
-                    theModel.autoExtendCells(this.rowNumber, this.columnNumber);
-                }
+//                if (this.hiddenValue.equals("0")) {
+//                    theModel.autoExtendCells(this.rowNumber, this.columnNumber);
+//                }
             } else {
                 this.imageValue.setValue(bombImage);
             }
@@ -380,14 +375,11 @@ public class Cell extends Rectangle {
         return columnNumber;
     }
 
-    public void resetCell() {
-        this.isBomb = false;
-        this.isOpen = false;
-        this.isFlag = false;
-        this.currentColor = new SimpleObjectProperty<>();
-        this.originalColor = new SimpleObjectProperty<>();
-        this.displayValue = new SimpleObjectProperty<>("");
-        this.imageValue = new SimpleObjectProperty<>();
+    public ColorMode getColorMode() {
+        return colorMode;
     }
 
+    public void setColorMode(ColorMode colorMode) {
+        this.colorMode = colorMode;
+    }
 }

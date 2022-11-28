@@ -118,7 +118,7 @@ public class MinesweeperModel {
     private void generateBlankBoard() {
         for (int i = 0; i < rowNumber; i++) {
             for (int j = 0; j < columnNumber; j++) {
-                board[i][j] = new Cell(i, j, this);
+                board[i][j] = new Cell(i, j);
             }
         }
     }

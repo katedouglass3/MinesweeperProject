@@ -206,12 +206,12 @@ public class MinesweeperView {
                 Rectangle cellView = new Rectangle(i * size, j * size, size, size);
                 // Set the color of each cell based on its position
                 if ((i + j) % 2 == 0) {
-                    cellModel.setCurrentColor(cellModel.lightGreen);
-                    cellModel.setOriginalColor(cellModel.lightGreen);
+                    cellModel.setCurrentColor(cellModel.getColorMode().getLightUnopened());
+                    cellModel.setOriginalColor(cellModel.getColorMode().getLightUnopened());
                 }
                 else {
-                    cellModel.setCurrentColor(cellModel.darkGreen);
-                    cellModel.setOriginalColor(cellModel.darkGreen);
+                    cellModel.setCurrentColor(cellModel.getColorMode().getDarkUnopened());
+                    cellModel.setOriginalColor(cellModel.getColorMode().getDarkUnopened());
                 }
 
                 // Color each Rectangle and add it to the array of Rectangles

@@ -93,12 +93,13 @@ public class MinesweeperController {
 
                 // Loop through every child node in cell container
                 for (Node child : cellContainer.getChildren()) {
-                    // If the child is an empty cell, bind it to the color of the cell
+                    // If the child is a rectangle, update its background color whenever there is a change
                     if (child instanceof Rectangle) {
                         Rectangle cellView = (Rectangle) child;
                         cellView.fillProperty().bind(cellModel.currentColorProperty());
                     }
-                    // If the child has a number value, bind it to the cell's value
+                    // If the child is the text displayed on top of the rectangle, updates
+                    // its value whenever there is a change
                     else if (child instanceof Text) {
                         Text value = (Text) child;
                         value.textProperty().bind(cellModel.displayValueProperty());

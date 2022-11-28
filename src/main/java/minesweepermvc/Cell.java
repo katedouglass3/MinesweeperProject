@@ -71,14 +71,17 @@ public class Cell extends Rectangle {
     public final Color darkGreen = Color.web("#668A4D");
     public final Color lightBrown = Color.web("#D1BA50");
     public final Color darkBrown = Color.web("#9B7D0A");
+
+    /** The model which contains this cell */
     private MinesweeperModel theModel;
 
 
     /**
-     * Constructor for a Cell instance with row and column params
+     * Constructor for a Cell instance with row, column and model params
      *
      * @param row - the row that a cell is located in
      * @param col - the column that a cell is located in
+     * @param theModel - the model that this cell belongs to
      */
     public Cell(int row, int col, MinesweeperModel theModel) {
         this.rowNumber = row;

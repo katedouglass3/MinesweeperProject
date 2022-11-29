@@ -15,9 +15,9 @@
    <children>
       <VBox fx:id="root" prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <HBox fx:id="topPane" prefHeight="100.0" prefWidth="600.0" style="-fx-background-color: #989895;">
+            <HBox fx:id="topPane" prefHeight="100.0" prefWidth="600.0" style="-fx-background-color: #e3e3de;">
                <children>
-                  <VBox prefHeight="100.0" prefWidth="101.0" style="-fx-background-color: #989895;">
+                  <VBox prefHeight="100.0" prefWidth="101.0" style="-fx-background-color: #e3e3de;">
                      <children>
                         <ImageView fitHeight="19.0" fitWidth="98.0" pickOnBounds="true" preserveRatio="true" />
                         <HBox prefHeight="34.0" prefWidth="98.0">
@@ -35,14 +35,14 @@
                         </HBox>
                      </children>
                   </VBox>
-                  <VBox prefHeight="100.0" prefWidth="426.0" style="-fx-background-color: #989895;">
+                  <VBox prefHeight="100.0" prefWidth="426.0" style="-fx-background-color: #e3e3de;">
                      <children>
                         <Label fx:id="labelTitle" alignment="CENTER" contentDisplay="CENTER" prefHeight="41.0" prefWidth="379.0" text="Minesweeper" textFill="#5f8147">
                            <font>
                               <Font name="MS Outlook" size="42.0" />
                            </font>
                         </Label>
-                        <HBox prefHeight="100.0" prefWidth="200.0" style="-fx-background-color: #989895;">
+                        <HBox prefHeight="100.0" prefWidth="200.0" style="-fx-background-color: #e3e3de;">
                            <children>
                               <HBox prefHeight="46.0" prefWidth="82.0" />
                               <ImageView fx:id="imageTimer" fitHeight="40.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true">
@@ -73,7 +73,7 @@
                         </HBox>
                      </children>
                   </VBox>
-                  <VBox prefHeight="100.0" prefWidth="178.0" style="-fx-background-color: #989895;">
+                  <VBox prefHeight="100.0" prefWidth="178.0" style="-fx-background-color: #e3e3de;">
                      <children>
                         <HBox prefHeight="18.0" prefWidth="123.0" />
                         <ChoiceBox fx:id="choiceColorMode" prefHeight="28.0" prefWidth="111.0" style="-fx-background-color: #668A4D;" />

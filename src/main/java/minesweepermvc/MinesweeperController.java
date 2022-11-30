@@ -90,14 +90,6 @@ public class MinesweeperController {
                 // Add an ImageView to the cell container
                 cellContainer.getChildren().add(new ImageView());
 
-                // https://www.tutorialspoint.com/example-to-set-action-listeners-behavior-to-a-choicebox-in-javafx
-                theView.getChoiceColorMode().getSelectionModel().selectedIndexProperty().addListener(
-                        (ov, old_val, new_val) -> {
-                            cellModel.setColorMode(stringToColorMode(new_val.toString()));
-                        });
-
-//                cellModel.colorModeProperty().bind()
-
 
                 // Loop through every child node in cell container
                 for (Node child : cellContainer.getChildren()) {
@@ -128,12 +120,12 @@ public class MinesweeperController {
     }
 
     private ColorMode stringToColorMode(String str) {
-        if (str.equals("Original Mode"))
+        if (str.equals("0"))
             return ColorMode.ORIGINAL;
-        if (str.equals("Grayscale Mode"))
-            return ColorMode.GRAYSCALE;
-        else
+        if (str.equals("1"))
             return ColorMode.PINK;
+        else
+            return ColorMode.GRAYSCALE;
     }
 
     /**
@@ -145,6 +137,16 @@ public class MinesweeperController {
         // Create an instance of the model board
         Cell[][] cellModels = theModel.getBoard();
 
+        // https://www.tutorialspoint.com/example-to-set-action-listeners-behavior-to-a-choicebox-in-javafx
+        theView.getChoiceColorMode().getSelectionModel().selectedIndexProperty().addListener(
+                (ov, old_val, new_val) -> {
+                    for (int i = 0; i < cellContainers.length; i++) {
+                        for (int j = 0; j < cellContainers[i].length; j++) {
+                            cellModels[i][j].setColorMode(stringToColorMode(new_val.toString()));
+                        }
+                    }
+                });
+
         // Loop through every row of cells
         for (int i = 0; i < cellContainers.length; i++) {
             // Loop through every cell in each row
@@ -153,6 +155,23 @@ public class MinesweeperController {
                 StackPane cellContainer = cellContainers[i][j];
                 // Set the cell model to the cell in the correct row/column of the model
                 Cell cellModel = cellModels[i][j];
+
+                // Make sure the cell color is updated according to the color mode
+                cellModel.colorModeProperty().addListener(
+                        (ov, old_val, new_val) -> {
+                            if (cellModel.getCurrentColor().equals(old_val.getLightUnopened())) {
+                                cellModel.setCurrentColor(new_val.getLightUnopened());
+                                cellModel.setOriginalColor(new_val.getLightUnopened());
+                            }
+                            else if (cellModel.getCurrentColor().equals(old_val.getDarkUnopened())) {
+                                cellModel.setCurrentColor(new_val.getDarkUnopened());
+                                cellModel.setOriginalColor(new_val.getDarkUnopened());
+                            }
+                            else if (cellModel.getCurrentColor().equals(old_val.getLightOpened()))
+                                cellModel.setCurrentColor(new_val.getLightOpened());
+                            else if (cellModel.getCurrentColor().equals(old_val.getDarkOpened()))
+                                cellModel.setCurrentColor(new_val.getDarkOpened());
+                        });
 
                 // When a cell is clicked
                 int finalI = i;

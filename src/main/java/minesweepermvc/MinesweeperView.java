@@ -201,6 +201,10 @@ public class MinesweeperView {
         this.labelFlagsLeft.setText("" + theModel.flagsRemaining());
     }
 
+    public ChoiceBox<String> getChoiceColorMode() {
+        return choiceColorMode;
+    }
+
     /**
      * Called to initialize a controller after its root element has been completely processed
      */

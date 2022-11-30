@@ -21,6 +21,7 @@
 package minesweepermvc;
 
 import javafx.application.Platform;
+import javafx.beans.value.ObservableValue;
 import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
@@ -89,6 +90,14 @@ public class MinesweeperController {
                 // Add an ImageView to the cell container
                 cellContainer.getChildren().add(new ImageView());
 
+                // https://www.tutorialspoint.com/example-to-set-action-listeners-behavior-to-a-choicebox-in-javafx
+                theView.getChoiceColorMode().getSelectionModel().selectedIndexProperty().addListener(
+                        (ov, old_val, new_val) -> {
+                            cellModel.setColorMode(stringToColorMode(new_val.toString()));
+                        });
+
+
+
                 // Loop through every child node in cell container
                 for (Node child : cellContainer.getChildren()) {
                     // If the child is a rectangle, update its background color whenever there is a change
@@ -115,6 +124,15 @@ public class MinesweeperController {
         }
 //        // Bind the timer label in the view to the elapsed time
 //        theView.getLabelTimer().textProperty().bind(theModel.getGameTimer().getSOPElapsedTime().asString());
+    }
+
+    private ColorMode stringToColorMode(String str) {
+        if (str.equals("Original Mode"))
+            return ColorMode.ORIGINAL;
+        if (str.equals("Grayscale Mode"))
+            return ColorMode.GRAYSCALE;
+        else
+            return ColorMode.PINK;
     }
 
     /**

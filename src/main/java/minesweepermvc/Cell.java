@@ -91,7 +91,9 @@ public class Cell extends Rectangle {
      */
     private SimpleObjectProperty<Image> imageValue;
 
-
+    /**
+     * The colorMode selected by the user
+     */
     private ColorMode colorMode;
 
 //    /**
@@ -300,14 +302,30 @@ public class Cell extends Rectangle {
         this.currentColor.set(currentColor);
     }
 
+    /**
+     * A getter method that returns the original color of the cell
+     *
+     * @return - the Color that the cell was originally set to
+     */
     public Color getOriginalColor() {
         return originalColor.get();
     }
 
+    /**
+     * A getter method that returns the SimpleObjectProperty<Color> of the original cell color
+     *
+     * @return - the SimpleObjectProperty<Color> of the original cell color
+     */
     public SimpleObjectProperty<Color> originalColorProperty() {
         return originalColor;
     }
 
+    /**
+     * A setter method that sets the original color of the cell to the correct original color
+     * based on the theme
+     *
+     * @param originalColor - the correct original color based on the theme
+     */
     public void setOriginalColor(Color originalColor) {
         this.originalColor.set(originalColor);
     }
@@ -375,10 +393,20 @@ public class Cell extends Rectangle {
         return columnNumber;
     }
 
+    /**
+     * A getter method that returns the colorMode selected
+     *
+     * @return - the colorMode selected for the theme by the user
+     */
     public ColorMode getColorMode() {
         return colorMode;
     }
 
+    /**
+     * A setter method that sets the colorMode theme
+     *
+     * @param colorMode - the color theme that the user selects
+     */
     public void setColorMode(ColorMode colorMode) {
         this.colorMode = colorMode;
     }

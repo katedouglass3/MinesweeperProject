@@ -1,0 +1,5 @@
+.tooltip {
+    -fx-background-color: salmon;
+    -fx-border-color: black;
+    -fx-font-style: gray;
+}

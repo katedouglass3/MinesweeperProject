@@ -156,7 +156,49 @@ public class MinesweeperView {
      * in initChoiceBoxes
      */
     public void setTopPane() {
+        setLabelFlagsLeft();
         initChoiceBoxes();
+    }
+
+    /**
+     * A setter method sets the view of labelTimer to match the current time elapsed of the
+     * game in progress
+     */
+    public void setLabelTimer() {
+        this.labelTimer.setText("" + theModel.getGameTimer().getElapsedTime());
+    }
+
+    /**
+     *
+     * @return
+     */
+    public Label getLabelTimer() {
+        return labelTimer;
+    }
+
+    /**
+     * A getter method for the quit button
+     *
+     * @return the instance of the quit Button
+     */
+    public Button getButtonQuit() {
+        return buttonQuit;
+    }
+
+    /**
+     * A getter method for the info button
+     *
+     * @return the instance of the info button
+     */
+    public Button getButtonInfo() {
+        return buttonInfo;
+    }
+
+    /**
+     * A setter method that sets the flags remaining label to the number of flags remaining
+     */
+    public void setLabelFlagsLeft() {
+        this.labelFlagsLeft.setText("" + theModel.flagsRemaining());
     }
 
     /**

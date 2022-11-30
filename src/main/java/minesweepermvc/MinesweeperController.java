@@ -20,16 +20,18 @@
 
 package minesweepermvc;
 
+import javafx.application.Platform;
 import javafx.scene.Node;
 import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.Tooltip;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.StackPane;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 
+import javax.swing.*;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
@@ -50,9 +52,6 @@ public class MinesweeperController {
     /** A double array of cells representing the board */
     private Cell[][] board;
 
-    /** An instance of GameTimer */
-    private GameTimer gameTimer;
-
     /**
      * The constructor for the controller class that passes in instances of theModel
      * and theView and calls initBindings and initEventHandlers
@@ -63,7 +62,6 @@ public class MinesweeperController {
     public MinesweeperController(MinesweeperView theView, MinesweeperModel theModel) {
         this.theView = theView;
         this.theModel = theModel;
-        this.gameTimer = new GameTimer();
 
         initEventHandlers();
         initBindings();
@@ -115,6 +113,8 @@ public class MinesweeperController {
                 }
             }
         }
+//        // Bind the timer label in the view to the elapsed time
+//        theView.getLabelTimer().textProperty().bind(theModel.getGameTimer().getSOPElapsedTime().asString());
     }
 
     /**
@@ -148,7 +148,10 @@ public class MinesweeperController {
                             // Add numbers to the cells without bombs
                             theModel.fillRemainingCells();
                             // Start the timer
-                            gameTimer.startTimer();
+                            theModel.getGameTimer().startTimer();
+                            // Display the timer on the view
+//                            ScheduledExecutorService executor = Executors.newScheduledThreadPool(1);
+//                            executor.scheduleAtFixedRate(() -> theView.setLabelTimer(), 0, 1, TimeUnit.SECONDS);
                         }
                         // Call the left click method in Cell
                         cellModel.leftClick();
@@ -157,15 +160,18 @@ public class MinesweeperController {
                             theModel.autoExtendCells(finalI, finalJ);
                         // Update the game state
                         theModel.checkIfGameOver();
+
+                        // theView.setLabelTimer();
+
                         // If the game is won or lost, create an appropriate popup
                         if (theModel.getState() == GameState.GAME_WON) {
                             // End the timer with game won
-                            gameTimer.endTimer(true);
+                            theModel.getGameTimer().endTimer(true);
                             displayAlert();
                         }
                         else if (theModel.getState() == GameState.GAME_LOST) {
                             // End the timer with game lost
-                            gameTimer.endTimer(false);
+                            theModel.getGameTimer().endTimer(false);
                             // When the game is lost, reveal each bomb one at a time
                             Runnable r = () -> {
                                 for (Cell[] row : cellModels) {
@@ -187,6 +193,7 @@ public class MinesweeperController {
                     else if (event.getButton() == MouseButton.SECONDARY) {
                         // Call the right click method in Cell
                         cellModel.rightClick();
+                        theView.setLabelFlagsLeft();
                     }
                 });
 
@@ -203,6 +210,14 @@ public class MinesweeperController {
                 });
             }
         }
+        // Create a tooltip for the instructions when the question mark is hovered over
+        Tooltip.install(theView.getButtonInfo(), new Tooltip("Instructions"));
+
+        // End the game and have the display bar pop up when the exit button is pressed
+        theView.getButtonQuit().onMouseClickedProperty().setValue(event -> {
+            theModel.setState(GameState.GAME_LOST);
+            displayAlert();
+        });
 
     }
 
@@ -221,7 +236,7 @@ public class MinesweeperController {
         alert.setHeaderText(" " + theModel.getState());
 
         // Display the time and the best overall time
-        alert.setContentText("Time: " + gameTimer.getCurrentTime() + "\nBest Time: " + gameTimer.getBestTime());
+        alert.setContentText("Time: " + theModel.getGameTimer().getCurrentTime() + "\nBest Time: " + theModel.getGameTimer().getBestTime());
         // Display the alert and get the result of the button pushed
         // https://docs.oracle.com/javase/8/javafx/api/javafx/scene/control/Alert.html
         alert.showAndWait().ifPresent(response -> {
@@ -237,8 +252,7 @@ public class MinesweeperController {
     }
 
     /**
-     * A method that resets the game play for when the user hits
-     * play again
+     * A method that resets the game play for when the user hits play again
      */
     private void resetGame() {
         // Reset the model
@@ -249,6 +263,8 @@ public class MinesweeperController {
         theView.getRoot().getChildren().add(theView.getTopPane());
         // Add the new model to the view
         theView.setModel(theModel);
+        // Reset the flags remaining text
+        theView.setLabelFlagsLeft();
         // Set the controls for the new view
         initBindings();
         initEventHandlers();

@@ -58,12 +58,20 @@ public class MinesweeperMain extends Application {
 
         this.theController = new MinesweeperController(this.theView, this.theModel);
 
+        // Create the scene and add styling in CSS
+        Scene scene = new Scene(root);
+//        // Use CSS to style the instructions
+//        scene.getStylesheets().add(
+//                getClass().getResource("instructions.css").toExternalForm()
+//        );
+
         // Set up our stage
         primaryStage.setTitle("Minesweeper Game");
-        primaryStage.setScene(new Scene(root));
+        primaryStage.setScene(scene);
         primaryStage.setResizable(false);
         primaryStage.sizeToScene();
         primaryStage.show();
+
 
         // Print key in the console
         theModel.displayBoard();

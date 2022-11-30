@@ -29,6 +29,8 @@ import java.util.Random;
  * interface options availale to the user.
  */
 public class MinesweeperModel {
+    /** An instance of the game timer */
+    private final GameTimer gameTimer;
 
     /** The number of rows on our board */
     private int rowNumber;
@@ -94,6 +96,15 @@ public class MinesweeperModel {
     }
 
     /**
+     * A setter method for state that sets the game state to the given state
+     *
+     * @param gameState the game state for the state to be set to
+     */
+    public void setState(GameState gameState) {
+        state = gameState;
+    }
+
+    /**
      * Initializes our model
      *
      * @param rowNumber - the number of rows in the board
@@ -109,6 +120,7 @@ public class MinesweeperModel {
         this.board = new Cell[this.rowNumber][this.columnNumber];
         this.openCellNumber = 0;
         this.state = GameState.NEW_GAME;
+        this.gameTimer = new GameTimer();
         generateBlankBoard();
     }
 
@@ -222,10 +234,6 @@ public class MinesweeperModel {
             System.out.println();
         }
     }
-
-    // TODO: A function so that when we click on a blank cell (i.e no bombs around), the program will
-    //  automatically open other cells as far as possible until we met a numbered cell or a bomb
-    //  (try the online game)
 
     /**
      * Generate a complete model after all bombs and numbered cells
@@ -342,12 +350,18 @@ public class MinesweeperModel {
         displayBoard();
     }
 
-    // A function so that when we click on a blank cell (i.e no bombs around), the program will
-    // automatically open other cells as far as possible until we meet a numbered cell or a bomb
+    /**
+     * A function so that when we click on a blank cell (i.e. no bombs around), the program will
+     * automatically open other cells as far as possible until we meet a numbered cell or a bomb
+     *
+     * @param x - the x coordinate of the cell to extend around
+     * @param y - the y coordinate of the cell to extend around
+     */
     public void autoExtendCells(int x, int y) {
         int[][] adjacentDirections = {{-1, 0}, {0, -1}, {0, 1}, {1, 0}};
         int[][] allDirections = {{-1, -1}, {-1, 0}, {-1, 1}, {0, -1}, {0, 1}, {1, -1}, {1, 0}, {1, 1}};
 
+        // Check the immediate cells around it for 0s
         for (int[] aroundDirection : allDirections) {
             int aroundX = x + aroundDirection[0];
             int aroundY = y + aroundDirection[1];
@@ -360,6 +374,7 @@ public class MinesweeperModel {
             }
         }
 
+        // Check any adjacent cells that were 0 for neighboring 0s
         for (int[] adjacentDirection : adjacentDirections) {
             int adjacentX = x + adjacentDirection[0];
             int adjacentY = y + adjacentDirection[1];
@@ -373,6 +388,13 @@ public class MinesweeperModel {
         }
     }
 
+    /**
+     * Check if the coordinates are within the range of the board
+     *
+     * @param x - the x coordinate to be checked
+     * @param y - the y coordinate to be checked
+     * @return - a boolean representing whether the coordinate is in the board range
+     */
     public boolean isInsideBoard(int x, int y) {
         return x >= 0 && x < this.rowNumber && y >= 0 && y < this.columnNumber;
     }
@@ -393,6 +415,15 @@ public class MinesweeperModel {
         generateBombAtRandomPosition();
         // Create the complete model
         createCompleteModel();
+    }
+
+    /**
+     * A getter method for gameTimer
+     *
+     * @return gameTimer the instance of the current timer
+     */
+    public GameTimer getGameTimer() {
+        return gameTimer;
     }
 
     /**

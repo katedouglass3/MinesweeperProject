@@ -233,10 +233,9 @@ public class MinesweeperView {
         choiceChallengeLevel.setValue("Regular");
 
         //fills the choice box with the different color modes
-        //TODO- add more color modes
         choiceColorMode.getItems().add("Natural Mode");
-        choiceColorMode.getItems().add("Dark Mode");
-        choiceColorMode.getItems().add("Light Mode");
+        choiceColorMode.getItems().add("Pink Mode");
+        choiceColorMode.getItems().add("Grayscale Mode");
         //sets the initial value of the box to natural
         choiceColorMode.setValue("Natural Mode");
     }

@@ -96,6 +96,7 @@ public class MinesweeperController {
                             cellModel.setColorMode(stringToColorMode(new_val.toString()));
                         });
 
+//                cellModel.colorModeProperty().bind()
 
 
                 // Loop through every child node in cell container

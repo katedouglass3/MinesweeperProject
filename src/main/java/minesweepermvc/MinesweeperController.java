@@ -52,6 +52,9 @@ public class MinesweeperController {
     /** A double array of cells representing the board */
     private Cell[][] board;
 
+    /** A scheduled executor service for the timer thread */
+    private ScheduledExecutorService timerThread;
+
     /**
      * The constructor for the controller class that passes in instances of theModel
      * and theView and calls initBindings and initEventHandlers
@@ -113,8 +116,6 @@ public class MinesweeperController {
                 }
             }
         }
-//        // Bind the timer label in the view to the elapsed time
-//        theView.getLabelTimer().textProperty().bind(theModel.getGameTimer().getSOPElapsedTime().asString());
     }
 
     /**
@@ -150,8 +151,8 @@ public class MinesweeperController {
                             // Start the timer
                             theModel.getGameTimer().startTimer();
                             // Display the timer on the view
-//                            ScheduledExecutorService executor = Executors.newScheduledThreadPool(1);
-//                            executor.scheduleAtFixedRate(() -> theView.setLabelTimer(), 0, 1, TimeUnit.SECONDS);
+                            timerThread = Executors.newScheduledThreadPool(1);
+                            timerThread.scheduleAtFixedRate(() -> theView.setLabelTimer(), 0, 1, TimeUnit.SECONDS);
                         }
                         // Call the left click method in Cell
                         cellModel.leftClick();
@@ -161,17 +162,17 @@ public class MinesweeperController {
                         // Update the game state
                         theModel.checkIfGameOver();
 
-                        // theView.setLabelTimer();
-
                         // If the game is won or lost, create an appropriate popup
                         if (theModel.getState() == GameState.GAME_WON) {
                             // End the timer with game won
                             theModel.getGameTimer().endTimer(true);
+                            timerThread.shutdown();
                             displayAlert();
                         }
                         else if (theModel.getState() == GameState.GAME_LOST) {
                             // End the timer with game lost
                             theModel.getGameTimer().endTimer(false);
+                            timerThread.shutdown();
                             // When the game is lost, reveal each bomb one at a time
                             Runnable r = () -> {
                                 for (Cell[] row : cellModels) {
@@ -211,7 +212,15 @@ public class MinesweeperController {
             }
         }
         // Create a tooltip for the instructions when the question mark is hovered over
-        Tooltip.install(theView.getButtonInfo(), new Tooltip("Instructions"));
+        String instructions = "Minesweeper Instructions:\n\nGoal: Flag all of the bombs in the minefield\n\nHow To Play: " +
+                "\n\t1.  Click anywhere on the board to start gameplay. " +
+                "\n\t2.  Left click to open a cell, revealing the number of bombs it is touching, but be cautious because it could be a bomb! " +
+                "\n\t3.  Right click to add a flag to cells you believe have bombs (right click again to remove the flag). At the top you can see how many flags are remaining! " +
+                "\n\t4.  At the top of the screen you can see the elapsed time on the timer, so you can compete with yourself and others! " +
+                "\n\t5.  You can also use the dropdowns to change the challenge level as well as the color scheme to your preference. " +
+                "\n\nGood luck finding the bombs!";
+
+        Tooltip.install(theView.getButtonInfo(), new Tooltip(instructions));
 
         // End the game and have the display bar pop up when the exit button is pressed
         theView.getButtonQuit().onMouseClickedProperty().setValue(event -> {
@@ -265,8 +274,14 @@ public class MinesweeperController {
         theView.setModel(theModel);
         // Reset the flags remaining text
         theView.setLabelFlagsLeft();
+        // Reset the game timer text
+        theView.getLabelTimer().setText("0");
         // Set the controls for the new view
         initBindings();
         initEventHandlers();
+
+        // Display the new board
+        System.out.println();
+        theModel.displayBoard();
     }
 }

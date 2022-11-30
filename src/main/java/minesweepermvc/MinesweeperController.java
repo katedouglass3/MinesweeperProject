@@ -55,6 +55,9 @@ public class MinesweeperController {
     /** A scheduled executor service for the timer thread */
     private ScheduledExecutorService timerThread;
 
+    /** A scheduled executor service for displaying the bombs when the game is lost */
+    private ScheduledExecutorService bombExecutor;
+
     /**
      * The constructor for the controller class that passes in instances of theModel
      * and theView and calls initBindings and initEventHandlers
@@ -183,8 +186,8 @@ public class MinesweeperController {
                                             } }
                                     } };
                             // Reveal 4 bombs every second (1 bomb every 250 ms)
-                            ScheduledExecutorService executor = Executors.newScheduledThreadPool(1);
-                            executor.scheduleAtFixedRate(r, 0, 250, TimeUnit.MILLISECONDS);
+                            bombExecutor = Executors.newScheduledThreadPool(1);
+                            bombExecutor.scheduleAtFixedRate(r, 0, 250, TimeUnit.MILLISECONDS);
 
                             displayAlert();
                         }
@@ -251,6 +254,7 @@ public class MinesweeperController {
         alert.showAndWait().ifPresent(response -> {
             // If the play again button is pressed, reset the board
             if (response.equals(playAgainBtn)) {
+                bombExecutor.shutdown();
                 resetGame();
             }
             // If exit is pressed, terminate the program

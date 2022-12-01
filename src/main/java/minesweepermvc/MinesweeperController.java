@@ -169,13 +169,11 @@ public class MinesweeperController {
                         if (theModel.getState() == GameState.GAME_WON) {
                             // End the timer with game won
                             theModel.getGameTimer().endTimer(true);
-                            timerThread.shutdown();
                             displayAlert();
                         }
                         else if (theModel.getState() == GameState.GAME_LOST) {
                             // End the timer with game lost
                             theModel.getGameTimer().endTimer(false);
-                            timerThread.shutdown();
                             // When the game is lost, reveal each bomb one at a time
                             Runnable r = () -> {
                                 for (Cell[] row : cellModels) {
@@ -239,6 +237,8 @@ public class MinesweeperController {
      * program based on user input
      */
     private void displayAlert() {
+        // Shut down the bomb thread and the timer thread
+        timerThread.shutdown();
         // Create a play again button
         ButtonType playAgainBtn = new ButtonType("Play Again");
         // Create an alert with play again and exit as options
@@ -254,7 +254,10 @@ public class MinesweeperController {
         alert.showAndWait().ifPresent(response -> {
             // If the play again button is pressed, reset the board
             if (response.equals(playAgainBtn)) {
-                bombExecutor.shutdown();
+                // if the bomb executor thread has been started, shut it down
+                if (bombExecutor != null) {
+                    bombExecutor.shutdown();
+                }
                 resetGame();
             }
             // If exit is pressed, terminate the program

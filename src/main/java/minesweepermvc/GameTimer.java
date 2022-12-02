@@ -120,22 +120,4 @@ public class GameTimer {
         // Return the elapsed time converted to seconds
         return (int) (elapsedNanos / NANOS_TO_SECONDS);
     }
-
-    /**
-     * A getter method for the Simple Object Property elapsed time
-     *
-     * @return the time between the actual time and the start time as a simple object property
-     */
-    public SimpleObjectProperty<Integer> getSOPElapsedTime () {
-        // Calculate the elapsed time (the time between the actual time and the start time) in nanoSeconds
-        long elapsedNanos = System.nanoTime() - startTime;
-        // Cet the elapsed time converted to seconds
-        int elapsedNanosInt = (int) elapsedNanos / NANOS_TO_SECONDS;
-        // Create and return a simple object property set to the time
-        SimpleObjectProperty<Integer> simpleObjectPropertyTime = new SimpleObjectProperty<>();
-        simpleObjectPropertyTime.set(elapsedNanosInt);
-        return simpleObjectPropertyTime;
-
-    }
-
 }

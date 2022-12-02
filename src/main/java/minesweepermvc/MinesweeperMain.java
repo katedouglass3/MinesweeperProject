@@ -60,10 +60,8 @@ public class MinesweeperMain extends Application {
 
         // Create the scene and add styling in CSS
         Scene scene = new Scene(root);
-//        // Use CSS to style the instructions
-//        scene.getStylesheets().add(
-//                getClass().getResource("instructions.css").toExternalForm()
-//        );
+        // TODO try to get the CSS file to be read or delete this
+//         scene.getStylesheets().add(getClass().getResource("instructions.css").toExternalForm());
 
         // Set up our stage
         primaryStage.setTitle("Minesweeper Game");
@@ -73,8 +71,8 @@ public class MinesweeperMain extends Application {
         primaryStage.show();
 
 
-        // Print key in the console
-        theModel.displayBoard();
+         //Print key in the console
+         theModel.displayBoard();
     }
 
     /**

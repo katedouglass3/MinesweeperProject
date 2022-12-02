@@ -53,6 +53,12 @@ public class MinesweeperController {
     /** A double array of cells representing the board */
     private Cell[][] board;
 
+    /** A scheduled executor service for the timer thread */
+    private ScheduledExecutorService timerThread;
+
+    /** A scheduled executor service for displaying the bombs when the game is lost */
+    private ScheduledExecutorService bombExecutor;
+
     /**
      * The constructor for the controller class that passes in instances of theModel
      * and theView and calls initBindings and initEventHandlers
@@ -115,8 +121,6 @@ public class MinesweeperController {
                 }
             }
         }
-//        // Bind the timer label in the view to the elapsed time
-//        theView.getLabelTimer().textProperty().bind(theModel.getGameTimer().getSOPElapsedTime().asString());
     }
 
 
@@ -175,8 +179,8 @@ public class MinesweeperController {
                             // Start the timer
                             theModel.getGameTimer().startTimer();
                             // Display the timer on the view
-//                            ScheduledExecutorService executor = Executors.newScheduledThreadPool(1);
-//                            executor.scheduleAtFixedRate(() -> theView.setLabelTimer(), 0, 1, TimeUnit.SECONDS);
+                            timerThread = Executors.newScheduledThreadPool(1);
+                            timerThread.scheduleAtFixedRate(() -> theView.setLabelTimer(), 0, 1, TimeUnit.SECONDS);
                         }
                         // Call the left click method in Cell
                         cellModel.leftClick();
@@ -185,8 +189,6 @@ public class MinesweeperController {
                             theModel.autoExtendCells(finalI, finalJ);
                         // Update the game state
                         theModel.checkIfGameOver();
-
-                        // theView.setLabelTimer();
 
                         // If the game is won or lost, create an appropriate popup
                         if (theModel.getState() == GameState.GAME_WON) {
@@ -207,8 +209,8 @@ public class MinesweeperController {
                                             } }
                                     } };
                             // Reveal 4 bombs every second (1 bomb every 250 ms)
-                            ScheduledExecutorService executor = Executors.newScheduledThreadPool(1);
-                            executor.scheduleAtFixedRate(r, 0, 250, TimeUnit.MILLISECONDS);
+                            bombExecutor = Executors.newScheduledThreadPool(1);
+                            bombExecutor.scheduleAtFixedRate(r, 0, 250, TimeUnit.MILLISECONDS);
 
                             displayAlert();
                         }
@@ -236,7 +238,15 @@ public class MinesweeperController {
             }
         }
         // Create a tooltip for the instructions when the question mark is hovered over
-        Tooltip.install(theView.getButtonInfo(), new Tooltip("Instructions"));
+        String instructions = "Minesweeper Instructions:\n\nGoal: Flag all of the bombs in the minefield\n\nHow To Play: " +
+                "\n\t1.  Click anywhere on the board to start gameplay. " +
+                "\n\t2.  Left click to open a cell, revealing the number of bombs it is touching, but be cautious because it could be a bomb! " +
+                "\n\t3.  Right click to add a flag to cells you believe have bombs (right click again to remove the flag). At the top you can see how many flags are remaining! " +
+                "\n\t4.  At the top of the screen you can see the elapsed time on the timer, so you can compete with yourself and others! " +
+                "\n\t5.  You can also use the dropdowns to change the challenge level as well as the color scheme to your preference. " +
+                "\n\nGood luck finding the bombs!";
+
+        Tooltip.install(theView.getButtonInfo(), new Tooltip(instructions));
 
         // End the game and have the display bar pop up when the exit button is pressed
         theView.getButtonQuit().onMouseClickedProperty().setValue(event -> {
@@ -267,6 +277,10 @@ public class MinesweeperController {
      * program based on user input
      */
     private void displayAlert() {
+        // Shut down the bomb thread and the timer thread if it is not null
+        if (timerThread != null) {
+            timerThread.shutdown();
+        }
         // Create a play again button
         ButtonType playAgainBtn = new ButtonType("Play Again");
         // Create an alert with play again and exit as options
@@ -282,6 +296,10 @@ public class MinesweeperController {
         alert.showAndWait().ifPresent(response -> {
             // If the play again button is pressed, reset the board
             if (response.equals(playAgainBtn)) {
+                // if the bomb executor thread has been started, shut it down
+                if (bombExecutor != null) {
+                    bombExecutor.shutdown();
+                }
                 resetGame();
             }
             // If exit is pressed, terminate the program
@@ -305,8 +323,14 @@ public class MinesweeperController {
         theView.setModel(theModel);
         // Reset the flags remaining text
         theView.setLabelFlagsLeft();
+        // Reset the game timer text
+        theView.getLabelTimer().setText("0");
         // Set the controls for the new view
         initBindings();
         initEventHandlers();
+
+        // Display the new board
+        System.out.println();
+        theModel.displayBoard();
     }
 }

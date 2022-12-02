@@ -94,9 +94,7 @@ public class Cell extends Rectangle {
     /**
      * The colorMode selected by the user
      */
-    private ColorMode colorMode;
-
-    private SimpleObjectProperty<ColorMode> mode;
+    private SimpleObjectProperty<ColorMode> colorMode;
 
 //    /**
 //     * Colors to be used for the cell colors
@@ -144,8 +142,7 @@ public class Cell extends Rectangle {
         this.originalColor = new SimpleObjectProperty<>();
         this.displayValue = new SimpleObjectProperty<>("");
         this.imageValue = new SimpleObjectProperty<>();
-        this.colorMode = ColorMode.ORIGINAL;
-        this.mode = new SimpleObjectProperty<>(ColorMode.ORIGINAL);
+        this.colorMode = new SimpleObjectProperty<>(ColorMode.ORIGINAL);
     }
 
     /**
@@ -170,19 +167,14 @@ public class Cell extends Rectangle {
             // Open the cell
             isOpen = true;
             // Change the color
-            if (getOriginalColor().equals(colorMode.getLightUnopened())) {
-                this.currentColor.set(colorMode.getLightOpened());
+            if (getOriginalColor().equals(colorMode.getValue().getLightUnopened())) {
+                this.currentColor.set(colorMode.getValue().getLightOpened());
             } else {
-                this.currentColor.set(colorMode.getDarkOpened());
+                this.currentColor.set(colorMode.getValue().getDarkOpened());
             }
             // Set the visual to be displayed (either a number or a bomb)
             if (!isBomb) {
-                // Only display the number if it is not 0
-                if (!getHiddenValue().equals("0"))
-                {
-                    this.displayValue.setValue(this.hiddenValue);
-                }
-
+                this.displayValue.setValue(this.hiddenValue);
 //                if (this.hiddenValue.equals("0")) {
 //                    theModel.autoExtendCells(this.rowNumber, this.columnNumber);
 //                }
@@ -401,13 +393,23 @@ public class Cell extends Rectangle {
         return columnNumber;
     }
 
+
+    /**
+     * A getter method that returns the colorMode property selected
+     *
+     * @return - the current colorModeProperty
+     */
+    public SimpleObjectProperty<ColorMode> colorModeProperty() {
+        return colorMode;
+    }
+
     /**
      * A getter method that returns the colorMode selected
      *
      * @return - the colorMode selected for the theme by the user
      */
     public ColorMode getColorMode() {
-        return colorMode;
+        return colorMode.getValue();
     }
 
     /**
@@ -416,19 +418,7 @@ public class Cell extends Rectangle {
      * @param colorMode - the color theme that the user selects
      */
     public void setColorMode(ColorMode colorMode) {
-        this.colorMode = colorMode;
+        this.colorMode.set(colorMode);
     }
 
-    public ColorMode getMode() {
-        return mode.get();
-    }
-
-    public SimpleObjectProperty<ColorMode> modeProperty() {
-        return mode;
-    }
-
-    public void setMode(ColorMode mode) {
-        this.mode.set(mode);
-    }
 }
-

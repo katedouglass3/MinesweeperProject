@@ -22,6 +22,7 @@ package minesweepermvc;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
 import javafx.scene.layout.HBox;
@@ -165,12 +166,13 @@ public class MinesweeperView {
      * game in progress
      */
     public void setLabelTimer() {
-        this.labelTimer.setText("" + theModel.getGameTimer().getElapsedTime());
+        Platform.runLater(() -> this.labelTimer.setText("" + theModel.getGameTimer().getElapsedTime()));
     }
 
     /**
+     * A getter method for the label timer
      *
-     * @return
+     * @return the current label for the timer
      */
     public Label getLabelTimer() {
         return labelTimer;
@@ -199,6 +201,10 @@ public class MinesweeperView {
      */
     public void setLabelFlagsLeft() {
         this.labelFlagsLeft.setText("" + theModel.flagsRemaining());
+    }
+
+    public ChoiceBox<String> getChoiceColorMode() {
+        return choiceColorMode;
     }
 
     /**

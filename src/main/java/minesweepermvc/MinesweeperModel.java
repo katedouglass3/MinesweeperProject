@@ -318,7 +318,7 @@ public class MinesweeperModel {
         // If there are bombs that need to be regenerated, do so
         if (numBombsToBeReadded > 0){
             // For each bomb to be readded
-            for (int i = 0; i <= numBombsToBeReadded; i++){
+            for (int i = 0; i < numBombsToBeReadded; i++){
                 // Create a list of empty cells that bomb could be placed in
                 ArrayList<Cell> emptyCells = new ArrayList<>();
                 for (Cell[] cellRow : board) {
@@ -346,7 +346,7 @@ public class MinesweeperModel {
 
         // Display Board for testing
         System.out.println();
-        System.out.println();
+        System.out.println("bombs regenerated");
         displayBoard();
     }
 
@@ -411,8 +411,8 @@ public class MinesweeperModel {
         this.state = GameState.NEW_GAME;
         // Generate a new blank board
         generateBlankBoard();
-        // Generate bombs randomly
-        generateBombAtRandomPosition();
+//        // Generate bombs randomly
+//        generateBombAtRandomPosition();
         // Create the complete model
         createCompleteModel();
     }

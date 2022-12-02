@@ -174,7 +174,10 @@ public class Cell extends Rectangle {
             }
             // Set the visual to be displayed (either a number or a bomb)
             if (!isBomb) {
-                this.displayValue.setValue(this.hiddenValue);
+                if (!getHiddenValue().equals("0")) {
+                    this.displayValue.setValue(this.hiddenValue);
+                }
+
 //                if (this.hiddenValue.equals("0")) {
 //                    theModel.autoExtendCells(this.rowNumber, this.columnNumber);
 //                }

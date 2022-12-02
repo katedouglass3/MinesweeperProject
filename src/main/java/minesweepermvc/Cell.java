@@ -96,6 +96,8 @@ public class Cell extends Rectangle {
      */
     private ColorMode colorMode;
 
+    private SimpleObjectProperty<ColorMode> mode;
+
 //    /**
 //     * Colors to be used for the cell colors
 //     */
@@ -143,6 +145,7 @@ public class Cell extends Rectangle {
         this.displayValue = new SimpleObjectProperty<>("");
         this.imageValue = new SimpleObjectProperty<>();
         this.colorMode = ColorMode.ORIGINAL;
+        this.mode = new SimpleObjectProperty<>(ColorMode.ORIGINAL);
     }
 
     /**
@@ -174,7 +177,12 @@ public class Cell extends Rectangle {
             }
             // Set the visual to be displayed (either a number or a bomb)
             if (!isBomb) {
-                this.displayValue.setValue(this.hiddenValue);
+                // Only display the number if it is not 0
+                if (!getHiddenValue().equals("0"))
+                {
+                    this.displayValue.setValue(this.hiddenValue);
+                }
+
 //                if (this.hiddenValue.equals("0")) {
 //                    theModel.autoExtendCells(this.rowNumber, this.columnNumber);
 //                }
@@ -410,4 +418,17 @@ public class Cell extends Rectangle {
     public void setColorMode(ColorMode colorMode) {
         this.colorMode = colorMode;
     }
+
+    public ColorMode getMode() {
+        return mode.get();
+    }
+
+    public SimpleObjectProperty<ColorMode> modeProperty() {
+        return mode;
+    }
+
+    public void setMode(ColorMode mode) {
+        this.mode.set(mode);
+    }
 }
+

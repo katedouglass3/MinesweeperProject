@@ -110,6 +110,7 @@ public class MinesweeperController {
                         imageView.fitHeightProperty().bind(cellContainer.heightProperty());
                         imageView.fitWidthProperty().bind(cellContainer.widthProperty());
                     }
+
                 }
             }
         }

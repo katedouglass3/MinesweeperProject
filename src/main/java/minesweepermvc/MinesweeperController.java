@@ -31,6 +31,7 @@ import javafx.scene.input.MouseButton;
 import javafx.scene.layout.StackPane;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
+import javafx.util.Duration;
 
 import javax.swing.*;
 import java.util.concurrent.Executors;
@@ -241,12 +242,17 @@ public class MinesweeperController {
         String instructions = "Minesweeper Instructions:\n\nGoal: Flag all of the bombs in the minefield\n\nHow To Play: " +
                 "\n\t1.  Click anywhere on the board to start gameplay. " +
                 "\n\t2.  Left click to open a cell, revealing the number of bombs it is touching, but be cautious because it could be a bomb! " +
-                "\n\t3.  Right click to add a flag to cells you believe have bombs (right click again to remove the flag). At the top you can see how many flags are remaining! " +
+                "\n\t3.  Right click to add a flag to cells you believe have bombs (right click again to remove the flag). At the top you can see" +
+                "\n\t    how many flags are remaining! " +
                 "\n\t4.  At the top of the screen you can see the elapsed time on the timer, so you can compete with yourself and others! " +
                 "\n\t5.  You can also use the dropdowns to change the challenge level as well as the color scheme to your preference. " +
                 "\n\nGood luck finding the bombs!";
 
-        Tooltip.install(theView.getButtonInfo(), new Tooltip(instructions));
+        Tooltip tooltip = new Tooltip(instructions);
+        Tooltip.install(theView.getButtonInfo(), tooltip);
+        tooltip.setShowDuration(Duration.INDEFINITE);
+        tooltip.setShowDelay(Duration.ZERO);
+
 
         // End the game and have the display bar pop up when the exit button is pressed
         theView.getButtonQuit().onMouseClickedProperty().setValue(event -> {

@@ -237,8 +237,10 @@ public class MinesweeperController {
      * program based on user input
      */
     private void displayAlert() {
-        // Shut down the bomb thread and the timer thread
-        timerThread.shutdown();
+        // Shut down the bomb thread and the timer thread if it is not null
+        if (timerThread != null) {
+            timerThread.shutdown();
+        }
         // Create a play again button
         ButtonType playAgainBtn = new ButtonType("Play Again");
         // Create an alert with play again and exit as options

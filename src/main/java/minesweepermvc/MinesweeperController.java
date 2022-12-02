@@ -332,6 +332,8 @@ public class MinesweeperController {
         theView.setLabelFlagsLeft();
         // Reset the game timer text
         theView.getLabelTimer().setText("0");
+        // Reset color to drop down to natural
+        theView.getChoiceColorMode().setValue("Natural Mode");
         // Set the controls for the new view
         initBindings();
         initEventHandlers();

@@ -119,14 +119,6 @@ public class MinesweeperController {
 //        theView.getLabelTimer().textProperty().bind(theModel.getGameTimer().getSOPElapsedTime().asString());
     }
 
-    private ColorMode stringToColorMode(String str) {
-        if (str.equals("0"))
-            return ColorMode.ORIGINAL;
-        if (str.equals("1"))
-            return ColorMode.PINK;
-        else
-            return ColorMode.GRAYSCALE;
-    }
 
     /**
      * A method that handles left and right clicks for all cells and hovering over cells
@@ -137,16 +129,6 @@ public class MinesweeperController {
         // Create an instance of the model board
         Cell[][] cellModels = theModel.getBoard();
 
-        // https://www.tutorialspoint.com/example-to-set-action-listeners-behavior-to-a-choicebox-in-javafx
-        theView.getChoiceColorMode().getSelectionModel().selectedIndexProperty().addListener(
-                (ov, old_val, new_val) -> {
-                    for (int i = 0; i < cellContainers.length; i++) {
-                        for (int j = 0; j < cellContainers[i].length; j++) {
-                            cellModels[i][j].setColorMode(stringToColorMode(new_val.toString()));
-                        }
-                    }
-                });
-
         // Loop through every row of cells
         for (int i = 0; i < cellContainers.length; i++) {
             // Loop through every cell in each row
@@ -155,7 +137,12 @@ public class MinesweeperController {
                 StackPane cellContainer = cellContainers[i][j];
                 // Set the cell model to the cell in the correct row/column of the model
                 Cell cellModel = cellModels[i][j];
-
+                // Update the color mode
+                // https://www.tutorialspoint.com/example-to-set-action-listeners-behavior-to-a-choicebox-in-javafx
+                theView.getChoiceColorMode().getSelectionModel().selectedIndexProperty().addListener(
+                        (ov, old_val, new_val) -> {
+                            cellModel.setColorMode(numToColorMode(new_val));
+                        });
                 // Make sure the cell color is updated according to the color mode
                 cellModel.colorModeProperty().addListener(
                         (ov, old_val, new_val) -> {
@@ -257,6 +244,21 @@ public class MinesweeperController {
             displayAlert();
         });
 
+    }
+
+    /**
+     * A method to take an option index and return the ColorMode
+     * it corresponds to
+     * @param num - a Number 0, 1, or 2 representing the index of the ColorMode
+     * @return the ColorMode it corresponds to
+     */
+    private ColorMode numToColorMode(Number num) {
+        if (num.equals(0))
+            return ColorMode.ORIGINAL;
+        if (num.equals(1))
+            return ColorMode.PINK;
+        else
+            return ColorMode.GRAYSCALE;
     }
 
     /**

@@ -6,7 +6,7 @@ Lewisburg, PA
 Instructor: Prof. King  
 Semester: Fall 2022
 
-## Team Information
+## Team 4 Information
 Team Members: Clara Chaplin (Scrum Master), Vy Tran, Kate Douglass (Project Owner), Kona Glenn, & Marion Duval  
 
 Marion is a sophomore Cell Biology/Biochemistry major and Computer Science minor from Middleton, Massachusetts.  

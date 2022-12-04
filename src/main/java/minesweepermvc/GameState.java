@@ -1,4 +1,4 @@
-package minesweepermvc;/* *****************************************
+/* *****************************************
  * CSCI205 - Software Engineering and Design
  * Fall2022
  * Instructor: Prof. Brian King
@@ -17,9 +17,11 @@ package minesweepermvc;/* *****************************************
  * ****************************************
  */
 
+package minesweepermvc;
+
 /**
  * The different game states for our minesweeper app.
- * These include NEW_GAME, IN_PROGRESS, WIN, and GAME_OVER.
+ * These include NEW_GAME, IN_PROGRESS, GAME_WON, and GAME_LOST.
  */
 public enum GameState {
     NEW_GAME,

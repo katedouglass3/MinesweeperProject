@@ -6,12 +6,12 @@ Lewisburg, PA
 Instructor: Prof. King  
 Semester: Fall 2022
 
-## Team Information
+## Team 4 Information
 Team Members: Clara Chaplin (Scrum Master), Vy Tran, Kate Douglass (Project Owner), Kona Glenn, & Marion Duval  
 
 Marion is a sophomore Cell Biology/Biochemistry major and Computer Science minor from Middleton, Massachusetts.  
 Kate is a sophomore Computer Science and Engineering major from West Chester, Pennsylvania.  
-Clara is a sophomore Mathematics and Computer Science double major.   
+Clara is a sophomore Mathematics and Computer Science double major from Albany, NY.   
 Kona is a sophomore Computer Science and Engineering and Applied Math double major.  
 Vy is a sophomore Computer Science major.
 
@@ -25,7 +25,7 @@ recorded, and players can try and beat their previous fastest time. Once the gam
 see their final time and their fastest time, and can choose to play again.
 
 ## How to run it
-To run our Mindsweeper game, run MindsweeperMain.main(). Next, a medium-size board will appear
+To run our Minesweeper game, run MinesweeperMain.main(). Next, a medium-size board will appear
 on the screen. The user should click any cell to start the game. The number in a cell represents the number
 of neighboring bombs (vertically, horizontally, or diagonally). The goal is to flag any cells that contain
 a bomb by right-clicking, and left click on any cells that do not contain bombs to show the cell contents.
@@ -33,6 +33,6 @@ If the user successfully clicks all the non-bomb-containing cells without clicki
 
 ## Package Structure & Libraries
 
-External Libraries: JavaFX
+External Libraries: JavaFX Version 17
 
 ## Video URL

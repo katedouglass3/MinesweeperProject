@@ -1,7 +1,31 @@
+/* *****************************************
+ * CSCI205 - Software Engineering and Design
+ * Fall2022
+ * Instructor: Prof. Brian King
+ *
+ * Team: Team 4
+ * Date: 11/4/2022
+ * Time: 9:27 AM
+ *
+ * Project: csci205_final_project
+ * Package: minesweepermvc
+ * Class: ColorMode
+ *
+ * Description: The different color modes for our minesweeper app.
+ * These include ORIGINAL, PINK, and GRAYSCALE.
+ *
+ * ****************************************
+ */
+
 package minesweepermvc;
 
 import javafx.scene.paint.Color;
 
+/**
+ * An enumeration class that encapsulates the different
+ * possible color schemes for the cells in our minesweeper game.
+ * Each color scheme includes four colors.
+ */
 public enum ColorMode {
 
     /**

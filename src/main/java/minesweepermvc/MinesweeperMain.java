@@ -34,8 +34,10 @@ public class MinesweeperMain extends Application {
 
     /** An instance of MinesweeperModel */
     private MinesweeperModel theModel;
+
     /** An instance of MinesweeperView */
     private MinesweeperView theView;
+
     /** An instance of MinesweeperController */
     private MinesweeperController theController;
 

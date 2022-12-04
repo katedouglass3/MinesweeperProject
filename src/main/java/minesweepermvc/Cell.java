@@ -64,12 +64,12 @@ public class Cell extends Rectangle {
     /**
      * Flag image for the cell if isFlag is true
      */
-    private final Image flagImage = new Image("redFlag.png");
+    private Image flagImage;
 
     /**
      * Bomb image for the cell if isFlag is true
      */
-    private final Image bombImage = new Image("bomb.png");
+    private Image bombImage;
 
     /**
      * The color currently displayed in the cell
@@ -136,6 +136,7 @@ public class Cell extends Rectangle {
                     this.displayValue.setValue(this.hiddenValue);
                 }
             } else {
+                bombImage = new Image("bomb.png");
                 this.imageValue.setValue(bombImage);
             }
         }
@@ -153,6 +154,7 @@ public class Cell extends Rectangle {
             }
             // If the cell is blank, add a flag
             else {
+                flagImage = new Image("redFlag.png");
                 this.imageValue.setValue(flagImage);
             }
             // Toggle whether of not the cell has a flag

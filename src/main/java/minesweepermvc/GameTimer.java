@@ -30,7 +30,7 @@ import javafx.beans.property.SimpleObjectProperty;
  */
 public class GameTimer {
     /** A conversion factor for nanoseconds to seconds */
-    public static final int NANOS_TO_SECONDS = 1000000000;
+    private static final int NANOS_TO_SECONDS = 1000000000;
 
     /** An int representing the best time in seconds */
     private int bestTime;

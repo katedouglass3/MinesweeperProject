@@ -41,6 +41,8 @@ import javafx.scene.image.ImageView;
  */
 public class MinesweeperView {
 
+    private final double BOARD_WIDTH = 600.0;
+
     /** An instance of MinesweeperModel */
     private MinesweeperModel theModel;
 
@@ -68,6 +70,8 @@ public class MinesweeperView {
      * representing its value
      */
     private StackPane[][] cellContainers;
+
+    private String currentChallengeLevel = "Regular";
 
     /** A button the user can press to get the game's instructions */
     @FXML
@@ -207,13 +211,33 @@ public class MinesweeperView {
         return choiceColorMode;
     }
 
+    public ChoiceBox<String> getChoiceChallengeLevel() {
+        return choiceChallengeLevel;
+    }
+
+    public void setChoiceChallengeLevel(ChoiceBox<String> choiceChallengeLevel) {
+        this.choiceChallengeLevel = choiceChallengeLevel;
+    }
+
+    public String getCurrentChallengeLevel() {
+        return currentChallengeLevel;
+    }
+
+    public void setCurrentChallengeLevel(String currentChallengeLevel) {
+        this.currentChallengeLevel = currentChallengeLevel;
+    }
+
     /**
      * Called to initialize a controller after its root element has been completely processed
      */
     @FXML
     void initialize() {
+//        assert root != null : "fx:id=\"root\" was not injected: check your FXML file 'minesweepermvc.fxml'.";
+//        assert topPane != null : "fx:id=\"topPane\" was not injected: check your FXML file 'minesweepermvc.fxml'.";
+
         assert root != null : "fx:id=\"root\" was not injected: check your FXML file 'minesweepermvc.fxml'.";
         assert topPane != null : "fx:id=\"topPane\" was not injected: check your FXML file 'minesweepermvc.fxml'.";
+
         assert buttonInfo != null : "fx:id=\"buttonInfo\" was not injected: check your FXML file 'minesweepermvc.fxml'.";
         assert buttonQuit != null : "fx:id=\"buttonQuit\" was not injected: check your FXML file 'minesweepermvc.fxml'.";
         assert choiceChallengeLevel != null : "fx:id=\"choiceChallengeLevel\" was not injected: check your FXML file 'minesweepermvc.fxml'.";
@@ -253,7 +277,8 @@ public class MinesweeperView {
         cells = new Rectangle[theModel.getRowNumber()][theModel.getColumnNumber()];
         cellContainers = new StackPane[theModel.getRowNumber()][theModel.getColumnNumber()];
         // Set the size of each square
-        double size = 40;
+//        double size = 40;
+        double size = BOARD_WIDTH / theModel.getColumnNumber();
         for (int i = 0; i < theModel.getRowNumber(); i++) {
             for (int j = 0; j < theModel.getColumnNumber(); j++) {
                 Cell cellModel = theModel.getBoard()[i][j];

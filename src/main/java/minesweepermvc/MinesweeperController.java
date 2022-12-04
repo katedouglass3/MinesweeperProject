@@ -97,7 +97,6 @@ public class MinesweeperController {
                 // Add an ImageView to the cell container
                 cellContainer.getChildren().add(new ImageView());
 
-
                 // Loop through every child node in cell container
                 for (Node child : cellContainer.getChildren()) {
                     // If the child is a rectangle, update its background color whenever there is a change
@@ -111,8 +110,7 @@ public class MinesweeperController {
                         Text value = (Text) child;
                         value.textProperty().bind(cellModel.displayValueProperty());
                     }
-                    // TODO: finish commenting here
-                    // If the child is an ImageView, bind it ???
+                    // If the child is an ImageView, bind it to the cell's current image property
                     else if (child instanceof ImageView) {
                         ImageView imageView = (ImageView) child;
                         imageView.imageProperty().bind(cellModel.imageValueProperty());
@@ -125,9 +123,9 @@ public class MinesweeperController {
         }
     }
 
-
     /**
-     * A method that handles left and right clicks for all cells and hovering over cells
+     * A method that handles left and right clicks for all cells, hovering over cells,
+     * hovering over the instructions button, and any changes in choice box values
      */
     private void initEventHandlers() {
         // Create an instance of the view cell containers
@@ -143,7 +141,7 @@ public class MinesweeperController {
                 StackPane cellContainer = cellContainers[i][j];
                 // Set the cell model to the cell in the correct row/column of the model
                 Cell cellModel = cellModels[i][j];
-                // Update the color mode
+                // Update the color mode according to the user selection
                 // https://www.tutorialspoint.com/example-to-set-action-listeners-behavior-to-a-choicebox-in-javafx
                 theView.getChoiceColorMode().getSelectionModel().selectedIndexProperty().addListener(
                         (ov, old_val, new_val) -> {

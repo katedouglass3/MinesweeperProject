@@ -25,6 +25,7 @@ import javafx.beans.value.ObservableValue;
 import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Tooltip;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
@@ -261,6 +262,34 @@ public class MinesweeperController {
         theView.getButtonQuit().onMouseClickedProperty().setValue(event -> {
             theModel.setState(GameState.GAME_LOST);
             displayAlert();
+        });
+
+        // Update the view upon changes in game level
+        theView.getChoiceChallengeLevel().setOnAction(event -> {
+            ChoiceBox<String> choiceChallengeLevel = theView.getChoiceChallengeLevel();
+            String challengeLevel = choiceChallengeLevel.getValue();
+
+            System.out.println("Old: " + theView.getCurrentChallengeLevel());
+            System.out.println("New: " + challengeLevel);
+
+            // Only set up a new Board if the player chooses a new level that is different
+            // from what they are playing
+            if (!challengeLevel.equals(theView.getCurrentChallengeLevel())) {
+                theView.setCurrentChallengeLevel(challengeLevel);
+                if (challengeLevel == "Easy") {
+                    theModel = new MinesweeperModel(8, 10, 10);
+                }
+                else if (challengeLevel == "Regular") {
+                    theModel = new MinesweeperModel(14, 18, 40);
+                }
+                else if (challengeLevel == "Hard") {
+                    theModel = new MinesweeperModel(20, 24, 99);
+                }
+                if (timerThread != null) {
+                    timerThread.shutdown();
+                }
+                resetGame();
+            }
         });
 
     }

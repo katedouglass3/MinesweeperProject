@@ -75,6 +75,7 @@ public class MinesweeperMain extends Application {
 
          //Print key in the console
          theModel.displayBoard();
+
     }
 
     /**
@@ -84,7 +85,8 @@ public class MinesweeperMain extends Application {
      */
     // A separate function to initialize the model only
     public void initModel() {
-        theModel = new MinesweeperModel(10, 15, 20);
+//        theModel = new MinesweeperModel(10, 15, 20);
+        theModel = new MinesweeperModel(14, 18, 40);
         theModel.createCompleteModel();
     }
 

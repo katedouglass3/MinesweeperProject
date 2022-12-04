@@ -11,7 +11,7 @@
  * Package: minesweepermvc
  * Class: CellTest
  *
- * Description: A class to test our Cell class.
+ * Description: Initial test class for our Cell class.
  *
  * ****************************************
  */
@@ -25,7 +25,11 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 /**
- * A test class for the important methods of our Cell class.
+ * Our original test class for the important methods of our initial Cell class.
+ * This class helped us check that our leftClick and rightClick methods in Cell
+ * were correctly updating the cell color and boolean values. After we further
+ * developed the cell class, this test file was no longer useful and didn't work
+ * with rendering Images.
  */
 class CellTest {
 

@@ -11,7 +11,7 @@
  * Package: minesweepermvc
  * Class: MinesweeperModelTest
  *
- * Description: Tests our MinesweeperModel class
+ * Description: Initial tests for our MinesweeperModel class
  *
  * ****************************************
  */
@@ -24,7 +24,10 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 /**
- * A class to test important methods of the model
+ * Our original test class for the important methods of our initial model.
+ * This class helped us check that the game state was updated correctly in
+ * certain situations. After we further developed the Cell class, this test
+ * file was no longer useful and didn't work with rendering Images.
  */
 class MinesweeperModelTest {
 

@@ -26,7 +26,7 @@ import java.util.Random;
 /**
  * This is the "model" for our Minesweeper app. It creates
  * a board of a certain size that holds cells. It also creates the different
- * interface options availale to the user.
+ * interface options available to the user.
  */
 public class MinesweeperModel {
     /** An instance of the game timer */

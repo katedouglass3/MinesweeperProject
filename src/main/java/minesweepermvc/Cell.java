@@ -96,36 +96,6 @@ public class Cell extends Rectangle {
      */
     private SimpleObjectProperty<ColorMode> colorMode;
 
-//    /**
-//     * Colors to be used for the cell colors
-//     */
-//    public final Color lightGreen = Color.web("#9CD375");
-//    public final Color darkGreen = Color.web("#668A4D");
-//    public final Color lightBrown = Color.web("#D1BA50");
-//    public final Color darkBrown = Color.web("#9B7D0A");
-//    private MinesweeperModel theModel;
-
-
-//    /**
-//     * Constructor for a Cell instance with row, column, and model params
-//     *
-//     * @param row - the row that a cell is located in
-//     * @param col - the column that a cell is located in
-//     * @param theModel - the model that holds the cell
-//     */
-//    public Cell(int row, int col, MinesweeperModel theModel) {
-//        this.rowNumber = row;
-//        this.columnNumber = col;
-//        this.isBomb = false;
-//        this.isOpen = false;
-//        this.isFlag = false;
-//        this.currentColor = new SimpleObjectProperty<>();
-//        this.originalColor = new SimpleObjectProperty<>();
-//        this.displayValue = new SimpleObjectProperty<>("");
-//        this.imageValue = new SimpleObjectProperty<>();
-//        this.theModel = theModel;
-//    }
-
     /**
      * Constructor for a Cell instance with row and column params - for testing
      *
@@ -146,21 +116,9 @@ public class Cell extends Rectangle {
     }
 
     /**
-     * Constructor for a Cell instance without params
-     */
-    public Cell() {
-        this.isBomb = false;
-        this.isOpen = false;
-        this.isFlag = false;
-        this.currentColor = new SimpleObjectProperty<>();
-        this.originalColor = new SimpleObjectProperty<>();
-        this.displayValue = new SimpleObjectProperty<>("");
-        this.imageValue = new SimpleObjectProperty<>();
-    }
-
-    /**
      * When a cell is clicked, it becomes open. If it is not a bomb, the current color is
-     * set to dark green upon being opened. If it is a bomb, the color is set to dark brown.
+     * updated to its opened color according to the current color mode. If it is a bomb,
+     * the bomb image appears.
      */
     public void leftClick() {
         if (!isOpen && !isFlag) {
@@ -177,10 +135,6 @@ public class Cell extends Rectangle {
                 if (!getHiddenValue().equals("0")) {
                     this.displayValue.setValue(this.hiddenValue);
                 }
-
-//                if (this.hiddenValue.equals("0")) {
-//                    theModel.autoExtendCells(this.rowNumber, this.columnNumber);
-//                }
             } else {
                 this.imageValue.setValue(bombImage);
             }

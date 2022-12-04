@@ -1,5 +1,6 @@
 .tooltip {
     -fx-background-color: lightblue;
     -fx-border-color: black;
+    -fx-font-style: gray;
     -fx-text-fill: #454545;
 }

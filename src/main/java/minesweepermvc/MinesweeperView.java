@@ -160,7 +160,7 @@ public class MinesweeperView {
      * A setter method that sets the top[ pane by adding all the different features created
      * in initChoiceBoxes
      */
-    public void setTopPane() {
+    public void initTopPane() {
         setLabelFlagsLeft();
         initChoiceBoxes();
     }

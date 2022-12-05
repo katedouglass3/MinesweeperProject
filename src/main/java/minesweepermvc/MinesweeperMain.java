@@ -63,13 +63,12 @@ public class MinesweeperMain extends Application {
 
         // Create the scene and add styling in CSS
         Scene scene = new Scene(root);
-        // TODO try to get the CSS file to be read or delete this
         scene.getStylesheets().add(getClass().getResource("/instructions.css").toExternalForm());
 
         // Set up our stage
         primaryStage.setTitle("Minesweeper Game");
         primaryStage.setScene(scene);
-        primaryStage.setResizable(false);
+        primaryStage.setResizable(true);
         primaryStage.sizeToScene();
         primaryStage.show();
 

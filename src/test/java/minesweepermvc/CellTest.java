@@ -34,49 +34,50 @@ import static org.junit.jupiter.api.Assertions.*;
 class CellTest {
 
     /** A cell object to use for all tests. */
-    private Cell cell;
+    private Cell cell1;
+
+    /** A second cell to test on */
+    private Cell cell2;
 
     /**
-     * Initializes the cell to use before each tests.
+     * Initializes the cell to use before each test.
      */
     @BeforeEach
     void setUp() {
-        cell = new Cell(0, 0);
+        cell1 = new Cell(0, 0);
+        cell1.setColorMode(ColorMode.ORIGINAL);
+        // Start as light green
+        cell1.setOriginalColor(Color.web("#9CD375"));
+        cell1.setHiddenValue("1");
+
+        cell2 = new Cell(1, 0);
+        cell2.setColorMode(ColorMode.ORIGINAL);
+        // Start as dark green
+        cell2.setOriginalColor(Color.web("#668A4D"));
+        cell2.setHiddenValue("0");
     }
 
     /**
      * Makes sure that for a cell with no bomb, upon being clicked, the
-     * color is changed to dark green and the cell is marked as open.
+     * color is changed to light brown for a light green cell, and dark
+     * brown for a dark green cell, and that the display value is
+     * updated accordingly, and the cell is marked as open.
      */
     @Test
-    void click() {
-        assertFalse(cell.isOpen());
-        cell.leftClick();
-        assertEquals(Color.web("#668A4D"), cell.getCurrentColor());
-        assertTrue(cell.isOpen());
-    }
+    void leftClick() {
+        assertFalse(cell1.isOpen());
+        cell1.leftClick();
+        // Since the cell started as light green, it should now be light brown
+        assertEquals(Color.web("#D1BA50"), cell1.getCurrentColor());
+        assertTrue(cell1.isOpen());
+        assertEquals(cell1.getDisplayValue(), "1");
 
-    /**
-     * Makes sure that for a cell with a bomb, upon being clicked, the
-     * color is set to dark brown and the cell is marked as open.
-     */
-    @Test
-    void clickForBomb() {
-        cell.setBomb(true);
-        cell.leftClick();
-        assertEquals(Color.web("#9B7D0A"), cell.getCurrentColor());
-        assertTrue(cell.isOpen());
-    }
-
-    /**
-     * Makes sure that for a cell that hasn't been opened yet, right-clicking
-     * turns the cell red, and the cell is marked as having a flag.
-     */
-    @Test
-    void rightClick() {
-        cell.rightClick();
-        assertTrue(cell.isFlag());
-        assertEquals(Color.RED, cell.getCurrentColor());
+        cell2.leftClick();
+        assertTrue(cell2.isOpen());
+        // Dark green opens to dark brown
+        assertEquals(Color.web("#9B7D0A"), cell2.getCurrentColor());
+        // Since the hidden value is 0, there should be no text displayed
+        assertEquals(cell2.getDisplayValue(), "");
     }
 
     /**
@@ -85,9 +86,8 @@ class CellTest {
      */
     @Test
     void rightClickOnOpen() {
-        cell.setOpen(true);
-        cell.rightClick();
-        assertFalse(cell.isFlag());
-        assertNotEquals(Color.RED, cell.getCurrentColor());
+        cell1.setOpen(true);
+        cell1.rightClick();
+        assertFalse(cell1.isFlag());
     }
 }

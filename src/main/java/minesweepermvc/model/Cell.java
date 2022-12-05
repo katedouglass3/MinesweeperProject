@@ -17,7 +17,7 @@
  * ****************************************
  */
 
-package minesweepermvc;
+package minesweepermvc.model;
 
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.scene.image.Image;

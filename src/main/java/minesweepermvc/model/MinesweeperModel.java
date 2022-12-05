@@ -18,7 +18,7 @@
  * ****************************************
  */
 
-package minesweepermvc;
+package minesweepermvc.model;
 
 import java.util.ArrayList;
 import java.util.Random;

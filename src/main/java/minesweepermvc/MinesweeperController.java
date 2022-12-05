@@ -20,8 +20,6 @@
 
 package minesweepermvc;
 
-import javafx.application.Platform;
-import javafx.beans.value.ObservableValue;
 import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
@@ -33,8 +31,11 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
+import minesweepermvc.model.Cell;
+import minesweepermvc.model.ColorMode;
+import minesweepermvc.model.GameState;
+import minesweepermvc.model.MinesweeperModel;
 
-import javax.swing.*;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;

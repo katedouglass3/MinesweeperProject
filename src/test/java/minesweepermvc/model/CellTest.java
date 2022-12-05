@@ -16,7 +16,7 @@
  * ****************************************
  */
 
-package minesweepermvc;
+package minesweepermvc.model;
 
 import javafx.scene.paint.Color;
 import org.junit.jupiter.api.BeforeEach;

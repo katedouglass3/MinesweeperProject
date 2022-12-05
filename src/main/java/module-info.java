@@ -8,4 +8,6 @@ module csci205_final_project {
 
     exports minesweepermvc;
     opens minesweepermvc to javafx.fxml;
+    exports minesweepermvc.model;
+    opens minesweepermvc.model to javafx.fxml;
 }

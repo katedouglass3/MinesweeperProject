@@ -34,6 +34,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
+import minesweepermvc.model.Cell;
+import minesweepermvc.model.MinesweeperModel;
 
 /**
  * This is the "view" in the MVC design for our Minesweeper app. The view class

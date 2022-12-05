@@ -1,5 +1,6 @@
-package minesweepermvc;
+package minesweepermvc.model;
 
+import minesweepermvc.model.GameTimer;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

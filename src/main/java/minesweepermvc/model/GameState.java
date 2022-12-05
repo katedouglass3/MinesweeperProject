@@ -17,7 +17,7 @@
  * ****************************************
  */
 
-package minesweepermvc;
+package minesweepermvc.model;
 
 /**
  * The different game states for our minesweeper app.

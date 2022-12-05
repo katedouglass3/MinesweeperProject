@@ -17,7 +17,7 @@
  * ****************************************
  */
 
-package minesweepermvc;
+package minesweepermvc.model;
 
 import javafx.scene.paint.Color;
 

@@ -42,8 +42,10 @@ import minesweepermvc.model.MinesweeperModel;
  * initializes all nodes for the scene graph to display for a good GUI design
  */
 public class MinesweeperView {
-
-    private final double BOARD_WIDTH = 600.0;
+    /** The LCM of the column sizes */
+    public static final int BOARD_WIDTH = 720;
+    /** The LCM of the row sizes */
+    public static final int BOARD_HEIGHT = 560;
 
     /** An instance of MinesweeperModel */
     private MinesweeperModel theModel;
@@ -280,11 +282,12 @@ public class MinesweeperView {
         cellContainers = new StackPane[theModel.getRowNumber()][theModel.getColumnNumber()];
         // Set the size of each square
 //        double size = 40;
-        double size = BOARD_WIDTH / theModel.getColumnNumber();
+        double width = BOARD_WIDTH / theModel.getColumnNumber();
+        double height = BOARD_HEIGHT / theModel.getRowNumber();
         for (int i = 0; i < theModel.getRowNumber(); i++) {
             for (int j = 0; j < theModel.getColumnNumber(); j++) {
                 Cell cellModel = theModel.getBoard()[i][j];
-                Rectangle cellView = new Rectangle(i * size, j * size, size, size);
+                Rectangle cellView = new Rectangle(i * width, j * height, width, height);
                 // Set the color of each cell based on its position
                 if ((i + j) % 2 == 0) {
                     cellModel.setCurrentColor(cellModel.getColorMode().getLightUnopened());

@@ -26,12 +26,29 @@ see their final time and their fastest time, and can choose to play again.
 
 ## How to run it
 To run our Minesweeper game, run MinesweeperMain.main(). Next, a medium-size board will appear
-on the screen. The user should click any cell to start the game. The number in a cell represents the number
-of neighboring bombs (vertically, horizontally, or diagonally). The goal is to flag any cells that contain
-a bomb by right-clicking, and left click on any cells that do not contain bombs to show the cell contents.
-If the user successfully clicks all the non-bomb-containing cells without clicking any with bombs, they win!
+on the screen. The user can then choose between different game board sizes on one drop down and 
+different color modes on another drop down. Then, the user should click any cell to start the game.
+The number in a cell represents the number of neighboring bombs (vertically, horizontally, or diagonally).
+The goal is to flag any cells that contain a bomb by right-clicking, and left click on any cells that do not 
+contain bombs to show the cell contents. If the user successfully clicks all the non-bomb-containing cells without
+clicking any with bombs, they win!
+
+Whenever a user wins, clicks on a bomb, or clicks quit, a pop-up appears, displaying the time they took to complete
+their last game along with their best time. The user can then click play again to reset the board or click quit to
+exit the app.
 
 ## Package Structure & Libraries
+Within the first level of our csci205_final_project folder, we have our README.md, our java folder, our resources
+folder, and our test folder. All the .git and .gradle files are also found on this level. Finally, we have the 
+design folder holding the pdfs of all of our diagrams and our docs folder holding our scrum report,
+design manual, user manual, and our PowerPoint presentation.
+
+Within the java folder, we have a minsweepermvc folder that holds all of our classes. There is a model folder within
+the minesweepermvc folder that holds our MinesweeperModel, along with our Cell class, GameTimer class, GameState enum, 
+and ColorMode enum. We also have our MinesweeperMain class, MinesweeperController class, and our MinesweeperView class
+within the minesweepermvc folder. Within the test folder, we have tests for our Cell class, our MinesweeperModel class, 
+and our GameTimer class. Within the resources folder, we have images of a bomb, a clock, and a red flag, along with our
+FXML files for the board and for the top pane. Finally, we have an instructions.css file to design our instructions pop-up.
 
 External Libraries: JavaFX Version 17
 

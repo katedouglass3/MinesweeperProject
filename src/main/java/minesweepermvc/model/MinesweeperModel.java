@@ -13,7 +13,7 @@
  *
  * Description: This is the "model" for our Minesweeper app. It creates
  * a board of a certain size that holds cells. It also creates the different
- * interface options availale to the user.
+ * interface options available to the user.
  *
  * ****************************************
  */
@@ -292,8 +292,6 @@ public class MinesweeperModel {
      * @param column - the column of the cell clicked on
      */
     public void regenerateAdjacentBombs(int row, int column){
-        ArrayList<Integer> rows = new ArrayList<>();
-        ArrayList<Integer> columns = new ArrayList<>();
         int numBombsToBeReadded = 0;
         int[] adjacentRange = rangeOfNeighbors(row, column);  // returns an array with upperMost, bottomMost, leftMost, and rightMostPos
 

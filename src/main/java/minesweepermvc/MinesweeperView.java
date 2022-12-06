@@ -213,9 +213,6 @@ public class MinesweeperView {
      */
     @FXML
     void initialize() {
-//        assert root != null : "fx:id=\"root\" was not injected: check your FXML file 'minesweepermvc.fxml'.";
-//        assert topPane != null : "fx:id=\"topPane\" was not injected: check your FXML file 'minesweepermvc.fxml'.";
-
         assert root != null : "fx:id=\"root\" was not injected: check your FXML file 'minesweepermvc.fxml'.";
         assert topPane != null : "fx:id=\"topPane\" was not injected: check your FXML file 'minesweepermvc.fxml'.";
 
@@ -267,8 +264,8 @@ public class MinesweeperView {
                 Rectangle cellView = new Rectangle(i * width, j * height, width, height);
                 // Set the color of each cell based on its position
                 if ((i + j) % 2 == 0) {
-                    cellModel.setCurrentColor(cellModel.getColorMode().getLIGHT_UNPOENED());
-                    cellModel.setOriginalColor(cellModel.getColorMode().getLIGHT_UNPOENED());
+                    cellModel.setCurrentColor(cellModel.getColorMode().getLIGHT_UNOPENED());
+                    cellModel.setOriginalColor(cellModel.getColorMode().getLIGHT_UNOPENED());
                 }
                 else {
                     cellModel.setCurrentColor(cellModel.getColorMode().getDARK_UNOPENED());

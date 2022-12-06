@@ -125,7 +125,7 @@ public class Cell extends Rectangle {
             // Open the cell
             isOpen = true;
             // Change the color
-            if (getOriginalColor().equals(colorMode.getValue().getLIGHT_UNPOENED())) {
+            if (getOriginalColor().equals(colorMode.getValue().getLIGHT_UNOPENED())) {
                 this.currentColor.set(colorMode.getValue().getLIGHT_OPENED());
             } else {
                 this.currentColor.set(colorMode.getValue().getDARK_OPENED());

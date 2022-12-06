@@ -46,7 +46,7 @@ public enum ColorMode {
     /**
      * The four different colors needed for each color scheme
      */
-    private final Color LIGHT_UNPOENED;
+    private final Color LIGHT_UNOPENED;
     private final Color DARK_UNOPENED;
     private final Color LIGHT_OPENED;
     private final Color DARK_OPENED;
@@ -61,14 +61,10 @@ public enum ColorMode {
      * @param darkOpened - the color of the darker cells after being opened
      */
     ColorMode(Color lightUnopened, Color darkUnopened, Color lightOpened, Color darkOpened) {
-        this.LIGHT_UNPOENED = lightUnopened;
+        this.LIGHT_UNOPENED = lightUnopened;
         this.DARK_UNOPENED = darkUnopened;
         this.LIGHT_OPENED = lightOpened;
         this.DARK_OPENED = darkOpened;
-    }
-
-    public Color getLIGHT_UNPOENED() {
-        return LIGHT_UNPOENED;
     }
 
     public Color getDARK_UNOPENED() {
@@ -82,4 +78,6 @@ public enum ColorMode {
     public Color getDARK_OPENED() {
         return DARK_OPENED;
     }
+
+    public Color getLIGHT_UNOPENED() {return LIGHT_UNOPENED;}
 }

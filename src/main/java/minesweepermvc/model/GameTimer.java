@@ -21,7 +21,6 @@
 
 package minesweepermvc.model;
 
-import javafx.beans.property.SimpleObjectProperty;
 
 /**
  * This class controls the timing mechanism of the minesweeper app.
@@ -85,7 +84,7 @@ public class GameTimer {
 
     /**
      * A getter method for bestTime
-     * @returna string holding the overall best time or dashes if no games have been won
+     * @return a string holding the overall best time or dashes if no games have been won
      */
     public String getBestTime() {
         // If no games have been won, display dashes

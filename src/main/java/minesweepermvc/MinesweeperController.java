@@ -149,9 +149,9 @@ public class MinesweeperController {
                 // Make sure the cell color is updated according to the color mode
                 cellModel.colorModeProperty().addListener(
                         (ov, old_val, new_val) -> {
-                            if (cellModel.getCurrentColor().equals(old_val.getLIGHT_UNPOENED())) {
-                                cellModel.setCurrentColor(new_val.getLIGHT_UNPOENED());
-                                cellModel.setOriginalColor(new_val.getLIGHT_UNPOENED());
+                            if (cellModel.getCurrentColor().equals(old_val.getLIGHT_UNOPENED())) {
+                                cellModel.setCurrentColor(new_val.getLIGHT_UNOPENED());
+                                cellModel.setOriginalColor(new_val.getLIGHT_UNOPENED());
                             }
                             else if (cellModel.getCurrentColor().equals(old_val.getDARK_UNOPENED())) {
                                 cellModel.setCurrentColor(new_val.getDARK_UNOPENED());

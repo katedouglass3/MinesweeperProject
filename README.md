@@ -43,7 +43,7 @@ folder, and our test folder. All the .git and .gradle files are also found on th
 design folder holding the pdfs of all of our diagrams and our docs folder holding our scrum report,
 design manual, user manual, and our PowerPoint presentation.
 
-Within the java folder, we have a minsweepermvc folder that holds all of our classes. There is a model folder within
+Within the java folder, we have a minesweepermvc folder that holds all of our classes. There is a model folder within
 the minesweepermvc folder that holds our MinesweeperModel, along with our Cell class, GameTimer class, GameState enum, 
 and ColorMode enum. We also have our MinesweeperMain class, MinesweeperController class, and our MinesweeperView class
 within the minesweepermvc folder. Within the test folder, we have tests for our Cell class, our MinesweeperModel class, 

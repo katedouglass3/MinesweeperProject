@@ -67,17 +67,37 @@ public enum ColorMode {
         this.DARK_OPENED = darkOpened;
     }
 
+    /**
+     * A getter method that returns the dark unopened color of the cell
+     *
+     * @return the dark unopened color of the cell
+     */
     public Color getDARK_UNOPENED() {
         return DARK_UNOPENED;
     }
 
+    /**
+     * A getter method that returns the light opened color of the cell
+     *
+     * @return the light opened color of the cell
+     */
     public Color getLIGHT_OPENED() {
         return LIGHT_OPENED;
     }
 
+    /**
+     * A getter method that returns the dark opened color of the cell
+     *
+     * @return the dark opened color of the cell
+     */
     public Color getDARK_OPENED() {
         return DARK_OPENED;
     }
 
+    /**
+     * A getter method that returns the light unopened color of the cell
+     *
+     * @return the light unopened color of the cell
+     */
     public Color getLIGHT_UNOPENED() {return LIGHT_UNOPENED;}
 }

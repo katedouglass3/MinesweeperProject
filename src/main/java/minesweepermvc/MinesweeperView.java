@@ -64,6 +64,9 @@ public class MinesweeperView {
      */
     private StackPane[][] cellContainers;
 
+    /**
+     * A string that diplays the current level of difficulty selected
+     */
     private String currentChallengeLevel = "Regular";
 
     /** A button the user can press to get the game's instructions */
@@ -192,18 +195,38 @@ public class MinesweeperView {
         this.labelFlagsLeft.setText("" + theModel.flagsRemaining());
     }
 
+    /**
+     * A getter method that returns the user choice in the dropdown for color mode
+     *
+     * @return the ChoiceBox<String> of the user color mode choice
+     */
     public ChoiceBox<String> getChoiceColorMode() {
         return choiceColorMode;
     }
 
+    /**
+     * A getter method that returns the user choice in the dropdown for difficulty level
+     *
+     * @return the ChoiceBox<String> of the user difficulty level choice
+     */
     public ChoiceBox<String> getChoiceChallengeLevel() {
         return choiceChallengeLevel;
     }
 
+    /**
+     * A getter method that returns the current difficulty level
+     *
+     * @return the String of the current difficulty level
+     */
     public String getCurrentChallengeLevel() {
         return currentChallengeLevel;
     }
 
+    /**
+     * A setter method that sets the difficulty level to be what the user selected
+     *
+     * @param currentChallengeLevel - the user selected difficulty level
+     */
     public void setCurrentChallengeLevel(String currentChallengeLevel) {
         this.currentChallengeLevel = currentChallengeLevel;
     }

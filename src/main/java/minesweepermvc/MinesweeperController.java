@@ -149,18 +149,18 @@ public class MinesweeperController {
                 // Make sure the cell color is updated according to the color mode
                 cellModel.colorModeProperty().addListener(
                         (ov, old_val, new_val) -> {
-                            if (cellModel.getCurrentColor().equals(old_val.getLightUnopened())) {
-                                cellModel.setCurrentColor(new_val.getLightUnopened());
-                                cellModel.setOriginalColor(new_val.getLightUnopened());
+                            if (cellModel.getCurrentColor().equals(old_val.getLIGHT_UNPOENED())) {
+                                cellModel.setCurrentColor(new_val.getLIGHT_UNPOENED());
+                                cellModel.setOriginalColor(new_val.getLIGHT_UNPOENED());
                             }
-                            else if (cellModel.getCurrentColor().equals(old_val.getDarkUnopened())) {
-                                cellModel.setCurrentColor(new_val.getDarkUnopened());
-                                cellModel.setOriginalColor(new_val.getDarkUnopened());
+                            else if (cellModel.getCurrentColor().equals(old_val.getDARK_UNOPENED())) {
+                                cellModel.setCurrentColor(new_val.getDARK_UNOPENED());
+                                cellModel.setOriginalColor(new_val.getDARK_UNOPENED());
                             }
-                            else if (cellModel.getCurrentColor().equals(old_val.getLightOpened()))
-                                cellModel.setCurrentColor(new_val.getLightOpened());
-                            else if (cellModel.getCurrentColor().equals(old_val.getDarkOpened()))
-                                cellModel.setCurrentColor(new_val.getDarkOpened());
+                            else if (cellModel.getCurrentColor().equals(old_val.getLIGHT_OPENED()))
+                                cellModel.setCurrentColor(new_val.getLIGHT_OPENED());
+                            else if (cellModel.getCurrentColor().equals(old_val.getDARK_OPENED()))
+                                cellModel.setCurrentColor(new_val.getDARK_OPENED());
                         });
 
                 // When a cell is clicked

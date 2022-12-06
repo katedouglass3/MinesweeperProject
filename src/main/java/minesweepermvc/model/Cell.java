@@ -125,10 +125,10 @@ public class Cell extends Rectangle {
             // Open the cell
             isOpen = true;
             // Change the color
-            if (getOriginalColor().equals(colorMode.getValue().getLightUnopened())) {
-                this.currentColor.set(colorMode.getValue().getLightOpened());
+            if (getOriginalColor().equals(colorMode.getValue().getLIGHT_UNPOENED())) {
+                this.currentColor.set(colorMode.getValue().getLIGHT_OPENED());
             } else {
-                this.currentColor.set(colorMode.getValue().getDarkOpened());
+                this.currentColor.set(colorMode.getValue().getDARK_OPENED());
             }
             // Set the visual to be displayed (either a number or a bomb)
             if (!isBomb) {

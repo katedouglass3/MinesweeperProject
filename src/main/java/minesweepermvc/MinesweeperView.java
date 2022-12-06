@@ -19,9 +19,6 @@
 
 package minesweepermvc;
 
-import java.net.URL;
-import java.util.ResourceBundle;
-
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
@@ -270,12 +267,12 @@ public class MinesweeperView {
                 Rectangle cellView = new Rectangle(i * width, j * height, width, height);
                 // Set the color of each cell based on its position
                 if ((i + j) % 2 == 0) {
-                    cellModel.setCurrentColor(cellModel.getColorMode().getLightUnopened());
-                    cellModel.setOriginalColor(cellModel.getColorMode().getLightUnopened());
+                    cellModel.setCurrentColor(cellModel.getColorMode().getLIGHT_UNPOENED());
+                    cellModel.setOriginalColor(cellModel.getColorMode().getLIGHT_UNPOENED());
                 }
                 else {
-                    cellModel.setCurrentColor(cellModel.getColorMode().getDarkUnopened());
-                    cellModel.setOriginalColor(cellModel.getColorMode().getDarkUnopened());
+                    cellModel.setCurrentColor(cellModel.getColorMode().getDARK_UNOPENED());
+                    cellModel.setOriginalColor(cellModel.getColorMode().getDARK_UNOPENED());
                 }
 
                 // Color each Rectangle and add it to the array of Rectangles

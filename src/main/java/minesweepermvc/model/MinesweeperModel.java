@@ -401,8 +401,6 @@ public class MinesweeperModel {
         this.state = GameState.NEW_GAME;
         // Generate a new blank board
         generateBlankBoard();
-//        // Generate bombs randomly
-//        generateBombAtRandomPosition();
         // Create the complete model
         createCompleteModel();
     }

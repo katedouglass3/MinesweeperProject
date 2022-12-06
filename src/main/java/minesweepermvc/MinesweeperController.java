@@ -53,9 +53,6 @@ public class MinesweeperController {
     /** The model that contains the data and logic for our application */
     private MinesweeperModel theModel;
 
-    /** A double array of cells representing the board */
-    private Cell[][] board;
-
     /** A scheduled executor service for the timer thread */
     private ScheduledExecutorService timerThread;
 

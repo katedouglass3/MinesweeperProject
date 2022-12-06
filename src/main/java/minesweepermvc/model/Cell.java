@@ -208,15 +208,6 @@ public class Cell extends Rectangle {
     }
 
     /**
-     * A setter method that sets a cell to be marked with a flag or not
-     *
-     * @param flag - a boolean for if the cell should be marked with a flag or not
-     */
-    public void setFlag(boolean flag) {
-        isFlag = flag;
-    }
-
-    /**
      * A getter method that returns the hidden value of the cell, not shown until the cell is clicked on
      *
      * @return - the hidden value of the cell
@@ -271,15 +262,6 @@ public class Cell extends Rectangle {
     }
 
     /**
-     * A getter method that returns the SimpleObjectProperty<Color> of the original cell color
-     *
-     * @return - the SimpleObjectProperty<Color> of the original cell color
-     */
-    public SimpleObjectProperty<Color> originalColorProperty() {
-        return originalColor;
-    }
-
-    /**
      * A setter method that sets the original color of the cell to the correct original color
      * based on the theme
      *
@@ -307,14 +289,6 @@ public class Cell extends Rectangle {
         return displayValue;
     }
 
-    /**
-     * A setter method that sets the text to be displayed in the cell
-     *
-     * @param displayValue - the text to be displayed in the cell
-     */
-    public void setDisplayValue(String displayValue) {
-        this.displayValue.set(displayValue);
-    }
 
     /**
      * A getter method that returns the image that is displayed in the cell

@@ -77,14 +77,6 @@ public class MinesweeperModel {
         return columnNumber;
     }
 
-    /**
-     * A getter method that returns the number of bombs in the board
-     *
-     * @return - the int for the number of bombs in the board
-     */
-    public int getBombNumber() {
-        return bombNumber;
-    }
 
     /**
      * A getter method that returns the state that the game is in

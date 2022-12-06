@@ -50,14 +50,6 @@ public class MinesweeperView {
     /** An instance of MinesweeperModel */
     private MinesweeperModel theModel;
 
-    /** FXML instance of ResourceBundle */
-    @FXML
-    private ResourceBundle resources;
-
-    /** FXML instance of URL */
-    @FXML
-    private URL location;
-
     /** FXML instance of VBox */
     @FXML
     private VBox root;
@@ -140,14 +132,6 @@ public class MinesweeperView {
         return topPane;
     }
 
-    /**
-     * A getter method that returns a double array of Rectangles (cells)
-     *
-     * @return - a double array of Rectangles (cells)
-     */
-    public Rectangle[][] getCells() {
-        return cells;
-    }
 
     /**
      * A setter method that sets theModel instance variable to the MinesweeperModel instance
@@ -217,10 +201,6 @@ public class MinesweeperView {
 
     public ChoiceBox<String> getChoiceChallengeLevel() {
         return choiceChallengeLevel;
-    }
-
-    public void setChoiceChallengeLevel(ChoiceBox<String> choiceChallengeLevel) {
-        this.choiceChallengeLevel = choiceChallengeLevel;
     }
 
     public String getCurrentChallengeLevel() {

@@ -13,7 +13,7 @@ plugins{
     id 'org.openjfx.javafxplugin' version '0.0.13'
 }
 
-group 'org.minesweeper'
+group 'minesweepermvc'
 version '0.1-SNAPSHOT'
 
 repositories {
@@ -45,7 +45,7 @@ dependencies {
 
 application {
     mainModule = "csci205_final_project"
-    mainClassName = "org.minesweeper.Main"
+    mainClassName = "minesweepermvc.Main"
 
     if (project.hasProperty("mainClass")) {
         getMainClass().set(project.getProperty("mainClass"))

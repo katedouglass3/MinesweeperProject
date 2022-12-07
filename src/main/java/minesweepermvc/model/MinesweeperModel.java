@@ -77,7 +77,6 @@ public class MinesweeperModel {
         return columnNumber;
     }
 
-
     /**
      * A getter method that returns the state that the game is in
      *
@@ -254,7 +253,6 @@ public class MinesweeperModel {
                 if (!cell.isOpen() && !cell.isBomb()) {
                     allCellsOpened = false;
                 }
-                // TODO: do we still need this since it is set at the beginning?
                 // If any cell is opened, this is not a new game anymore
                 if (cell.isOpen() && state.equals(GameState.NEW_GAME)) {
                     state = GameState.IN_PROGRESS;
@@ -414,14 +412,4 @@ public class MinesweeperModel {
         return gameTimer;
     }
 
-    /**
-     * A main method to set up our model
-     *
-     * @param args - the command line prompts
-     */
-    public static void main(String[] args) {
-        MinesweeperModel model = new MinesweeperModel(6, 6, 8);
-        model.generateBombAtRandomPosition();
-        model.displayBoard();
-    }
 }

@@ -289,16 +289,6 @@ public class Cell extends Rectangle {
         return displayValue;
     }
 
-
-    /**
-     * A getter method that returns the image that is displayed in the cell
-     *
-     * @return - the image that is displayed in the cell
-     */
-    public Image getImageValue() {
-        return imageValue.get();
-    }
-
     /**
      * A getter method that returns the SimpleObjectProperty<Image> that is displayed in the cell
      *

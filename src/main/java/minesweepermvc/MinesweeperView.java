@@ -278,7 +278,6 @@ public class MinesweeperView {
         cells = new Rectangle[theModel.getRowNumber()][theModel.getColumnNumber()];
         cellContainers = new StackPane[theModel.getRowNumber()][theModel.getColumnNumber()];
         // Set the size of each square
-//        double size = 40;
         double width = BOARD_WIDTH / theModel.getColumnNumber();
         double height = BOARD_HEIGHT / theModel.getRowNumber();
         for (int i = 0; i < theModel.getRowNumber(); i++) {

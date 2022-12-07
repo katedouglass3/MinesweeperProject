@@ -78,7 +78,6 @@ public class MinesweeperController {
      * A method that creates bindings between the model cells and the view cells
      */
     private void initBindings() {
-        // TODO: Update the color and value displayed on a cell whenever it is clicked
 
         // Create an instance of the view cell containers
         StackPane[][] cellContainers = theView.getCellContainers();
@@ -267,9 +266,6 @@ public class MinesweeperController {
         theView.getChoiceChallengeLevel().setOnAction(event -> {
             ChoiceBox<String> choiceChallengeLevel = theView.getChoiceChallengeLevel();
             String challengeLevel = choiceChallengeLevel.getValue();
-
-            System.out.println("Old: " + theView.getCurrentChallengeLevel());
-            System.out.println("New: " + challengeLevel);
 
             // Only set up a new Board if the player chooses a new level that is different
             // from what they are playing

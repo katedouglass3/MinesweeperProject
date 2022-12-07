@@ -53,3 +53,4 @@ FXML files for the board and for the top pane. Finally, we have an instructions.
 External Libraries: JavaFX Version 17
 
 ## Video URL
+A link to our video on mediaspace: https://mediaspace.bucknell.edu/media/Team+4+CSCI205+Project+Video/1_iqxzzopt.

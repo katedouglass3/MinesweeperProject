@@ -6,8 +6,8 @@ Lewisburg, PA
 Instructor: Prof. King  
 Semester: Fall 2022
 
-## Team 4 Information
-Team Members: Clara Chaplin (Scrum Master), Vy Tran, Kate Douglass (Project Owner), Kona Glenn, & Marion Duval  
+## Team 04 Information
+Team Members: Clara Chaplin (Scrum Master), Vy Tran (Developer), Kate Douglass (Project Owner), Kona Glenn (Developer), & Marion Duval (Developer)  
 
 Marion is a sophomore Cell Biology/Biochemistry major and Computer Science minor from Middleton, Massachusetts.  
 Kate is a sophomore Computer Science and Engineering major from West Chester, Pennsylvania.  
@@ -30,7 +30,7 @@ on the screen. The user can then choose between different game board sizes on on
 different color modes on another drop down. Then, the user should click any cell to start the game.
 The number in a cell represents the number of neighboring bombs (vertically, horizontally, or diagonally).
 The goal is to flag any cells that contain a bomb by right-clicking, and left click on any cells that do not 
-contain bombs to show the cell contents. If the user successfully clicks all the non-bomb-containing cells without
+have a bomb to display the value of the cell. If the user successfully clicks all the bomb-free cells without
 clicking any with bombs, they win!
 
 Whenever a user wins, clicks on a bomb, or clicks quit, a pop-up appears, displaying the time they took to complete

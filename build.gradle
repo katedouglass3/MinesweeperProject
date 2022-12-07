@@ -45,7 +45,7 @@ dependencies {
 
 application {
     mainModule = "csci205_final_project"
-    mainClassName = "minesweepermvc.Main"
+    mainClassName = "minesweepermvc.MinesweeperMain"
 
     if (project.hasProperty("mainClass")) {
         getMainClass().set(project.getProperty("mainClass"))
